@@ -4,6 +4,9 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * This is test class for Card class
+ */
 public class CardTest
 {
     /**
@@ -28,7 +31,7 @@ public class CardTest
     @Test
     public void Card3() {
         Card card0 = new Card(0, 3); // cardValue = 0 should create card with cardValue being 13.
-        assertEquals(13, card0.getValue());
+        assertEquals(13, card0.getNumber());
     }
 
     /**
@@ -50,7 +53,7 @@ public class CardTest
     public void getValue()
     {
         Card card1 = new Card(1, 0);
-        assertEquals(1, card1.getValue());
+        assertEquals(1, card1.getNumber());
     }
 
     /**
@@ -72,7 +75,7 @@ public class CardTest
     public void getValueString()
     {
         Card card3 = new Card(1, 0);
-        assertEquals("Ace", card3.getValueString());
+        assertEquals("Ace", card3.getNumberString());
     }
 
     /**
