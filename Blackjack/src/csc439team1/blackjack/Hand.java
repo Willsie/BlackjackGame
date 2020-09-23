@@ -44,13 +44,13 @@ public class Hand extends Deck
         int total = 0;
         for (Card card : cards)
         {
-            if (card.getValue() != 1 && card.getValue() < 11)
+            if (card.getNumber() != 1 && card.getNumber() < 11)
             {
-                total += card.getValue();
-            } else if ((card.getValue() == 1) && (total < 11))
+                total += card.getNumber();
+            } else if ((card.getNumber() == 1) && (total < 11))
             {
                 total += 11;
-            } else if (card.getValue() == 1 && total > 10)
+            } else if (card.getNumber() == 1 && total > 10)
             {
                 total += 1;
             } else
@@ -68,23 +68,23 @@ public class Hand extends Deck
         int total = 0;
         for (Card card : cards)
         {
-            if (card.getValue() > 1 && card.getValue() < 11 && acesCounter > 2)
+            if (card.getNumber() > 1 && card.getNumber() < 11 && acesCounter > 2)
             {
-                nonAces += card.getValue();
+                nonAces += card.getNumber();
                 total = nonAces + 11 + acesCounter;
-            } else if (card.getValue() > 1 && card.getValue() < 11 && acesCounter == 0)
+            } else if (card.getNumber() > 1 && card.getNumber() < 11 && acesCounter == 0)
             {
-                nonAces += card.getValue();
+                nonAces += card.getNumber();
                 total = nonAces;
-            } else if (card.getValue() > 1 && card.getValue() < 11 && acesCounter == 1)
+            } else if (card.getNumber() > 1 && card.getNumber() < 11 && acesCounter == 1)
             {
-                nonAces += card.getValue();
+                nonAces += card.getNumber();
                 total = nonAces > 10 ? nonAces + 1 : nonAces + 11;
-            } else if (card.getValue() > 1 && card.getValue() < 11 && acesCounter == 2)
+            } else if (card.getNumber() > 1 && card.getNumber() < 11 && acesCounter == 2)
             {
-                nonAces += card.getValue();
+                nonAces += card.getNumber();
                 total = nonAces > 9 ? nonAces + 2 : nonAces + 12;
-            } else if (card.getValue() == 1)
+            } else if (card.getNumber() == 1)
             {
                 acesCounter++;
                 if (acesCounter > 1) total++;
