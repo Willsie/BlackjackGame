@@ -4,6 +4,9 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * This is test class for Card class
+ */
 public class CardTest
 {
     /**
