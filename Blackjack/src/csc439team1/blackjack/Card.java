@@ -1,5 +1,8 @@
 package csc439team1.blackjack;
 
+/**
+ * This is a unique card that has 2 private variables: int suit and int value
+ */
 public class Card
 {
     /**

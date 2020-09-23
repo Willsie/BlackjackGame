@@ -31,6 +31,10 @@ public class CardTest
         assertEquals(13, card0.getValue());
     }
 
+    /**
+     * Test getSuit() by creating card0 with cardValue 1 and cardSuit 0
+     * expected 0
+     */
     @Test
     public void getSuit()
     {
@@ -38,6 +42,10 @@ public class CardTest
         assertEquals(0, card0.getSuit());
     }
 
+    /**
+     * Test getValue() by creating card1 with cardValue 1 and cardSuit 0
+     * expected 1
+     */
     @Test
     public void getValue()
     {
@@ -45,6 +53,10 @@ public class CardTest
         assertEquals(1, card1.getValue());
     }
 
+    /**
+     * Test getSuitString() by creating card2 with cardValue 1 and cardSuit 0
+     * expected "CLUB"
+     */
     @Test
     public void getSuitString()
     {
@@ -52,6 +64,10 @@ public class CardTest
         assertEquals("CLUB", card2.getSuitString());
     }
 
+    /**
+     * Test getValueString() by creating card3 with cardValue 1 and cardSuit 0
+     * expected "Ace"
+     */
     @Test
     public void getValueString()
     {
@@ -59,6 +75,10 @@ public class CardTest
         assertEquals("Ace", card3.getValueString());
     }
 
+    /**
+     * Test toString() by creating card4 with cardValue 1 and cardSuit 0
+     * expected "Ace of CLUB"
+     */
     @Test
     public void testToString()
     {
@@ -66,6 +86,10 @@ public class CardTest
         assertEquals("Ace of CLUB", card4.toString());
     }
 
+    /**
+     * Test equals() by creating card5 and card6 (both has cardValue 1 and cardSuit 0)
+     * If both cards are equal, it should pass the test case
+     */
     @Test
     public void testEquals()
     {
