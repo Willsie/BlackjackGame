@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 public class CardTest
 {
     /**
-     * Tests constructor's argument checking. Should catch IllegalArgumentException if cardNumber is greater than 13 or less than 1, or if cardSuit is less than 0 or greater than 3.
+     * Tests constructor's argument checking. Should catch IllegalArgumentException if cardValue is greater than 13 or less than 1, or if cardSuit is less than 0 or greater than 3.
      */
     @Test (expected = IllegalArgumentException.class) // tests both arguments being illegal
     public void Card() {
@@ -20,22 +20,22 @@ public class CardTest
     public void Card1() {
         Card card0 = new Card(5,5);
     }
-    @Test (expected = IllegalArgumentException.class) // cardNumber being illegal
+    @Test (expected = IllegalArgumentException.class) // cardValue being illegal
     public void Card2() {
         Card card0 = new Card(-1,2);
     }
-
     /**
-     * Test constructor statement for assigning cardNumber 13 to card obj. when 0 is given as cardNumber
+     * Test constructor statement for assigning cardValue 13 to card obj. when 0 is given as cardValue. Changed as
+     * card being 0 has been removed.TS
      */
     @Test
     public void Card3() {
-        Card card0 = new Card(1, 3); // cardNumber = 0 should create card with cardNumber being 13.
-        assertEquals(1, card0.getNumber());
+        Card card0 = new Card(13, 3); // cardValue = 0 should create card with cardValue being 13.
+        assertEquals(13, card0.getNumber());
     }
 
     /**
-     * Test getSuit() by creating card0 with cardNumber 1 and cardSuit 0
+     * Test getSuit() by creating card0 with cardValue 1 and cardSuit 0
      * expected 0
      */
     @Test
@@ -46,117 +46,103 @@ public class CardTest
     }
 
     /**
-     * Test getNumber() by creating card1 with cardNumber 1 and cardSuit 0
+     * Test getValue() by creating card1 with cardValue 1 and cardSuit 0
      * expected 1
      */
     @Test
-    public void getNumber()
+    public void getValue()
     {
         Card card1 = new Card(1, 0);
         assertEquals(1, card1.getNumber());
     }
 
     /**
-     * Test getSuitStringClub() by creating card2 with cardNumber 1 and cardSuit 0
+     * Test getSuitString() by creating card2 with cardValue 1 and cardSuit 0
      * expected "CLUB"
      */
     @Test
-    public void getSuitStringClub()
+    public void getSuitString()
     {
         Card card2 = new Card(1, 0);
         assertEquals("CLUB", card2.getSuitString());
     }
-
     /**
-     * Test getSuitStringHeart() by creating card2 with cardNumber 1 and cardSuit 0
-     * expected "HEARTH"
+     * Test which ensures cardSuit of 2 produces SPADE
      */
     @Test
-    public void getSuitStringHeart()
+    public void testSuitSPADE()
     {
-        Card card2 = new Card(1, 1);
-        assertEquals("HEART", card2.getSuitString());
+        Card testCard1 = new Card(2, 2);
+        assertEquals("SPADE", testCard1.getSuitString());
+    }
+    /**
+     * Test which ensures cardSuit of 1 produces HEART
+     */
+    @Test
+    public void testSuitHEART()
+    {
+        Card testCard3 = new Card(1, 1);
+        assertEquals("HEART", testCard3.getSuitString());
+    }
+    /**
+     * Test which ensures cardSuit of 3 produces DIAMOND
+     */
+    @Test
+    public void testSuitDiamond()
+    {
+        Card testCard4 = new Card(1, 3);
+        assertEquals("DIAMOND", testCard4.getSuitString());
     }
 
     /**
-     * Test getSuitStringSpade() by creating card2 with cardNumber 1 and cardSuit 2
-     * expected "DIAMOND"
-     */
-    @Test
-    public void getSuitStringSpade()
-    {
-        Card card2 = new Card(1, 2);
-        assertEquals("SPADE", card2.getSuitString());
-    }
-
-    /**
-     * Test getSuitStringDiamond() by creating card2 with cardNumber 1 and cardSuit 2
-     * expected "DIAMOND"
-     */
-    @Test
-    public void getSuitStringDiamond()
-    {
-        Card card2 = new Card(1, 3);
-        assertEquals("DIAMOND", card2.getSuitString());
-    }
-
-    /**
-     * Test getNumberStringAce() by creating card3 with cardNumber 1 and cardSuit 0
+     * Test getValueString() by creating card3 with cardValue 1 and cardSuit 0
      * expected "Ace"
      */
     @Test
-    public void getNumberStringAce()
+    public void getValueString()
     {
         Card card3 = new Card(1, 0);
         assertEquals("Ace", card3.getNumberString());
     }
 
     /**
-     * Test getNumberStringJack() by creating card3 with cardNumber 1 and cardSuit 11
-     * expected "Jack"
+     * Tests that entering 11 as value produces Jack.
      */
     @Test
-    public void getNumberStringJack()
+    public void getValueString2()
     {
-        Card card3 = new Card(11, 0);
-        assertEquals("Jack", card3.getNumberString());
+        Card testCard6 = new Card(11, 3);
+        assertEquals("Jack", testCard6.getNumberString());
     }
-
     /**
-     * Test getNumberStringQueen() by creating card3 with cardNumber 1 and cardSuit 12
-     * expected "Queen"
+     * Tests that entering 12 as value produces Queen.
      */
     @Test
-    public void getNumberStringQueen()
+    public void getValueString3()
     {
-        Card card3 = new Card(12, 0);
-        assertEquals("Queen", card3.getNumberString());
+        Card testCard6 = new Card(12, 3);
+        assertEquals("Queen", testCard6.getNumberString());
     }
-
     /**
-     * Test getNumberString() by creating card3 with cardNumber 1 and cardSuit 13
-     * expected "King"
+     * Tests that entering 13 as value produces King.
      */
     @Test
-    public void getNumberStringKing()
+    public void getValueString4()
     {
-        Card card3 = new Card(13, 0);
-        assertEquals("King", card3.getNumberString());
+        Card testCard = new Card(13, 1);
+        assertEquals("King", testCard.getNumberString());
     }
-
-     /**
-     * Test getNumberStringTwo() by creating card3 with cardNumber 1 and cardSuit 13
-     * expected "King"
-     */
-    @Test
-    public void getNumberStringTwo()
-    {
-        Card card3 = new Card(2, 0);
-        assertEquals("2", card3.getNumberString());
-    }
-
     /**
-     * Test toString() by creating card4 with cardNumber 1 and cardSuit 0
+     * Tests that entering 3 as value produces string of 3.
+     */
+    @Test
+    public void getValueString5()
+    {
+        Card testCard = new Card(3, 1);
+        assertEquals("3", testCard.getNumberString());
+    }
+    /**
+     * Test toString() by creating card4 with cardValue 1 and cardSuit 0
      * expected "Ace of CLUB"
      */
     @Test
@@ -167,7 +153,7 @@ public class CardTest
     }
 
     /**
-     * Test equals() by creating card5 and card6 (both has cardNumber 1 and cardSuit 0)
+     * Test equals() by creating card5 and card6 (both has cardValue 1 and cardSuit 0)
      * If both cards are equal, it should pass the test case
      */
     @Test
@@ -179,14 +165,13 @@ public class CardTest
     }
 
     /**
-     * Test equals() by creating card5 and card6 (both has cardNumber 1 and cardSuit 0)
-     * If both cards are equal, it should pass the test case
+     * Test to verify override of equals if clause that compares
+     * object to self.
      */
     @Test
-    public void testEquals1()
+    public void testIsSelf()
     {
-        Card card7 = new Card(1, 0);
-        Card card8 = card7;
-        assertTrue(card7.equals(card8));
+        Card self = new Card(1, 3);
+        assertTrue(self.equals(self));
     }
 }
