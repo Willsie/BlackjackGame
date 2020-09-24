@@ -176,18 +176,6 @@ public class CardTest
     {
         Card card7 = new Card(1, 0);
         Card card8 = card7;
-        assertTrue(card7.equals(card8));
-    }
-
-    /**
-     * Test to verify override of equals if clause that compares
-     * object to other type of object or null
-     */
-    @Test
-    public void testNotCard()
-    {
-        Card card11 = new Card(5, 1);
-        Deck deck11 = new Deck();
-        assertFalse(card11.equals(deck11));
+        assertTrue(card8.equals(card7));
     }
 }

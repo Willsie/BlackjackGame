@@ -120,12 +120,6 @@ public class Card
             return true;
         }
 
-        // Check if otherCard is an instance of Card or not, can also be check when comparing card object to null
-        if (!(otherCard instanceof Card))
-        {
-            return false;
-        }
-
         // cast otherCard to Card so to compare data members
         Card otherCardCopy = (Card) otherCard;
 
