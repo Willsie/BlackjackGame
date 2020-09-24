@@ -120,14 +120,16 @@ public class Card
             return true;
         }
 
-        /* Check if other is an instance of Card or not
-          "null instanceof [type]" also returns false */
+        // Check if otherCard is an instance of Card or not, can also be check when comparing card object to null
         if (!(otherCard instanceof Card))
         {
             return false;
         }
 
+        // cast otherCard to Card so to compare data members
+        Card otherCardCopy = (Card) otherCard;
+
         // Compare the data members (suit and number) and return accordingly
-        return (this.suit == otherCard.suit && this.number == otherCard.number);
+        return (this.suit == otherCardCopy.suit && this.number == otherCardCopy.number);
     }
 }

@@ -58,10 +58,10 @@
 </td>
 <td class="coverageStat">
   <span class="percent">
-    92.3%
+    96.3%
   </span>
   <span class="absValue">
-    (24/ 26)
+    (26/ 27)
   </span>
 </td>
 </tr>
@@ -93,7 +93,7 @@
 <i>19</i>&nbsp;     * constructor for Card object that takes 2 parameters: int cardnumber, and int cardSuit
 <i>20</i>&nbsp;     *
 <i>21</i>&nbsp;     * @param cardnumber the number of the card ranges from 1 to 13 (1 is ACE, 11 is JACK, 12 is QUEEN, 13 is KING)
-<i>22</i>&nbsp;     * @param cardSuit  the suit of the card (0 is CLUBS, 1 is HEARTS, 2 is SPADES, 3 is DIAMONDS)
+<i>22</i>&nbsp;     * @param cardSuit   the suit of the card (0 is CLUBS, 1 is HEARTS, 2 is SPADES, 3 is DIAMONDS)
 <i>23</i>&nbsp;     * @throws IllegalArgumentException if the parameter cardSuit is smaller than 0 or greater than 3 or
 <i>24</i>&nbsp;     *                                  if the parameter cardnumber is smaller than 1 or greater than 13
 <i>25</i>&nbsp;     */
@@ -136,76 +136,81 @@
 <i>62</i>&nbsp;    {
 <b class="fc"><i>63</i>&nbsp;        switch (suit)</b>
 <i>64</i>&nbsp;        {
-<i>65</i>&nbsp;            case 0:
-<b class="fc"><i>66</i>&nbsp;                return &quot;CLUB&quot;;</b>
-<i>67</i>&nbsp;            case 1:
-<b class="fc"><i>68</i>&nbsp;                return &quot;HEART&quot;;</b>
-<i>69</i>&nbsp;            case 2:
-<b class="fc"><i>70</i>&nbsp;                return &quot;SPADE&quot;;</b>
-<i>71</i>&nbsp;            case 3:
-<b class="fc"><i>72</i>&nbsp;                return &quot;DIAMOND&quot;;</b>
-<i>73</i>&nbsp;            default:
-<b class="nc"><i>74</i>&nbsp;                return &quot;&quot;;</b>
-<i>75</i>&nbsp;        }
-<i>76</i>&nbsp;    }
-<i>77</i>&nbsp;
-<i>78</i>&nbsp;    /**
-<i>79</i>&nbsp;     * get method that will return the string representation of the card&#39;s number
-<i>80</i>&nbsp;     *
-<i>81</i>&nbsp;     * @return a string representation of the card number such as &quot;Ace&quot;, &quot;2&quot;, &quot;3&quot;, ...,&quot;10&quot;, &quot;Jack&quot;, &quot;Queen&quot;, and &quot;King&quot;
-<i>82</i>&nbsp;     */
-<i>83</i>&nbsp;    public String getNumberString()
-<i>84</i>&nbsp;    {
-<b class="fc"><i>85</i>&nbsp;        switch (number)</b>
-<i>86</i>&nbsp;        {
-<i>87</i>&nbsp;            case 1:
-<b class="fc"><i>88</i>&nbsp;                return &quot;Ace&quot;;   //return &quot;Ace&quot; if the card&#39;s number is 1</b>
-<i>89</i>&nbsp;            case 11:
-<b class="fc"><i>90</i>&nbsp;                return &quot;Jack&quot;;  //return &quot;Jack&quot; if the card&#39;s number is 11</b>
-<i>91</i>&nbsp;            case 12:
-<b class="fc"><i>92</i>&nbsp;                return &quot;Queen&quot;; //return &quot;Queen&quot; if the card&#39;s number is 12</b>
-<i>93</i>&nbsp;            case 13:
-<b class="fc"><i>94</i>&nbsp;                return &quot;King&quot;;  //return &quot;King&quot; if the card&#39;s number is 13</b>
-<i>95</i>&nbsp;            default:
-<b class="fc"><i>96</i>&nbsp;                return String.valueOf(number); //else return the number of the card</b>
-<i>97</i>&nbsp;        }
-<i>98</i>&nbsp;    }
-<i>99</i>&nbsp;
-<i>100</i>&nbsp;    /**
-<i>101</i>&nbsp;     * Overriding toString() method and will return the number of the card + &quot; of &quot; + the suit of the card (ex: Ace of SPADE)
-<i>102</i>&nbsp;     *
-<i>103</i>&nbsp;     * @return string representation of the card
-<i>104</i>&nbsp;     */
-<i>105</i>&nbsp;    @Override
-<i>106</i>&nbsp;    public String toString()
-<i>107</i>&nbsp;    {
-<b class="fc"><i>108</i>&nbsp;        return getNumberString() + &quot; of &quot; + getSuitString();</b>
-<i>109</i>&nbsp;    }
-<i>110</i>&nbsp;
-<i>111</i>&nbsp;    /**
-<i>112</i>&nbsp;     * equals(Card other) is the a method that compares 2 card objects for their properties
-<i>113</i>&nbsp;     *
-<i>114</i>&nbsp;     * @param otherCard is the card that we are comparing with the original card
-<i>115</i>&nbsp;     * @return true if both cards has the same numbers and suits; otherwise, return false
-<i>116</i>&nbsp;     */
-<i>117</i>&nbsp;    public boolean equals(Card otherCard)
-<i>118</i>&nbsp;    {
-<i>119</i>&nbsp;        // If the object is compared with itself then return true (has the same reference)
-<b class="fc"><i>120</i>&nbsp;        if (otherCard == this)</b>
-<i>121</i>&nbsp;        {
-<b class="nc"><i>122</i>&nbsp;            return true;</b>
-<i>123</i>&nbsp;        }
-<i>124</i>&nbsp;
-<i>125</i>&nbsp;        // Compare the data members (suit and number) and return accordingly
-<b class="fc"><i>126</i>&nbsp;        return Integer.compare(this.suit, otherCard.suit) == 0 &amp;&amp; Integer.compare(this.number, otherCard.number) == 0;</b>
-<i>127</i>&nbsp;    }
-<i>128</i>&nbsp;}
+<i>65</i>&nbsp;            case 1:
+<b class="fc"><i>66</i>&nbsp;                return &quot;HEART&quot;;</b>
+<i>67</i>&nbsp;            case 2:
+<b class="fc"><i>68</i>&nbsp;                return &quot;SPADE&quot;;</b>
+<i>69</i>&nbsp;            case 3:
+<b class="fc"><i>70</i>&nbsp;                return &quot;DIAMOND&quot;;</b>
+<i>71</i>&nbsp;            default:
+<b class="fc"><i>72</i>&nbsp;                return &quot;CLUB&quot;;</b>
+<i>73</i>&nbsp;        }
+<i>74</i>&nbsp;    }
+<i>75</i>&nbsp;
+<i>76</i>&nbsp;    /**
+<i>77</i>&nbsp;     * get method that will return the string representation of the card&#39;s number
+<i>78</i>&nbsp;     *
+<i>79</i>&nbsp;     * @return a string representation of the card number such as &quot;Ace&quot;, &quot;2&quot;, &quot;3&quot;, ...,&quot;10&quot;, &quot;Jack&quot;, &quot;Queen&quot;, and &quot;King&quot;
+<i>80</i>&nbsp;     */
+<i>81</i>&nbsp;    public String getNumberString()
+<i>82</i>&nbsp;    {
+<b class="fc"><i>83</i>&nbsp;        switch (number)</b>
+<i>84</i>&nbsp;        {
+<i>85</i>&nbsp;            case 1:
+<b class="fc"><i>86</i>&nbsp;                return &quot;Ace&quot;;   //return &quot;Ace&quot; if the card&#39;s number is 1</b>
+<i>87</i>&nbsp;            case 11:
+<b class="fc"><i>88</i>&nbsp;                return &quot;Jack&quot;;  //return &quot;Jack&quot; if the card&#39;s number is 11</b>
+<i>89</i>&nbsp;            case 12:
+<b class="fc"><i>90</i>&nbsp;                return &quot;Queen&quot;; //return &quot;Queen&quot; if the card&#39;s number is 12</b>
+<i>91</i>&nbsp;            case 13:
+<b class="fc"><i>92</i>&nbsp;                return &quot;King&quot;;  //return &quot;King&quot; if the card&#39;s number is 13</b>
+<i>93</i>&nbsp;            default:
+<b class="fc"><i>94</i>&nbsp;                return String.valueOf(number); //else return the number of the card</b>
+<i>95</i>&nbsp;        }
+<i>96</i>&nbsp;    }
+<i>97</i>&nbsp;
+<i>98</i>&nbsp;    /**
+<i>99</i>&nbsp;     * Overriding toString() method and will return the number of the card + &quot; of &quot; + the suit of the card (ex: Ace of SPADE)
+<i>100</i>&nbsp;     *
+<i>101</i>&nbsp;     * @return string representation of the card
+<i>102</i>&nbsp;     */
+<i>103</i>&nbsp;    @Override
+<i>104</i>&nbsp;    public String toString()
+<i>105</i>&nbsp;    {
+<b class="fc"><i>106</i>&nbsp;        return getNumberString() + &quot; of &quot; + getSuitString();</b>
+<i>107</i>&nbsp;    }
+<i>108</i>&nbsp;
+<i>109</i>&nbsp;    /**
+<i>110</i>&nbsp;     * equals(Card other) is the a method that compares 2 card objects for their properties
+<i>111</i>&nbsp;     *
+<i>112</i>&nbsp;     * @param otherCard is the card that we are comparing with the original card
+<i>113</i>&nbsp;     * @return true if both cards has the same numbers and suits; otherwise, return false
+<i>114</i>&nbsp;     */
+<i>115</i>&nbsp;    public boolean equals(Card otherCard)
+<i>116</i>&nbsp;    {
+<i>117</i>&nbsp;        // If the object is compared with itself then return true (has the same reference)
+<b class="fc"><i>118</i>&nbsp;        if (otherCard == this)</b>
+<i>119</i>&nbsp;        {
+<b class="fc"><i>120</i>&nbsp;            return true;</b>
+<i>121</i>&nbsp;        }
+<i>122</i>&nbsp;
+<i>123</i>&nbsp;        /* Check if other is an instance of Card or not
+<i>124</i>&nbsp;          &quot;null instanceof [type]&quot; also returns false */
+<b class="fc"><i>125</i>&nbsp;        if (!(otherCard instanceof Card))</b>
+<i>126</i>&nbsp;        {
+<b class="nc"><i>127</i>&nbsp;            return false;</b>
+<i>128</i>&nbsp;        }
+<i>129</i>&nbsp;
+<i>130</i>&nbsp;        // Compare the data members (suit and number) and return accordingly
+<b class="fc"><i>131</i>&nbsp;        return (this.suit == otherCard.suit &amp;&amp; this.number == otherCard.number);</b>
+<i>132</i>&nbsp;    }
+<i>133</i>&nbsp;}
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2020-09-23 19:00</div>
+    <div style="float:right;">generated on 2020-09-23 21:45</div>
 </div>
 </body>
 </html>

@@ -7,7 +7,9 @@ import java.util.*;
  */
 public class Deck
 {
-
+    /**
+     * deck is an ArrayList<Card> (an ArrayList containing Card objects)
+     */
     private ArrayList<Card> deck = new ArrayList<Card>(); //Initialize deck as ArrayList<Card>
 
     /**
@@ -40,7 +42,6 @@ public class Deck
             return (deck.size() != 0 ? deck.remove(random) : null); //remove and return random from deck
         }
     }
-
 
     /**
      * toString() returns string representation of the current deck (ex: Ace of CLUB, 2 of SPADE,......)

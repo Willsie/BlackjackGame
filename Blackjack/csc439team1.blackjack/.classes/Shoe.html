@@ -53,7 +53,7 @@
     0%
   </span>
   <span class="absValue">
-    (0/ 8)
+    (0/ 3)
   </span>
 </td>
 <td class="coverageStat">
@@ -61,7 +61,7 @@
     0%
   </span>
   <span class="absValue">
-    (0/ 23)
+    (0/ 8)
   </span>
 </td>
 </tr>
@@ -78,82 +78,60 @@
 <i>4</i>&nbsp;
 <i>5</i>&nbsp;public class Shoe
 <i>6</i>&nbsp;{
-<i>7</i>&nbsp;
-<i>8</i>&nbsp;    private ArrayList&lt;Card&gt; shoe;
-<i>9</i>&nbsp;
-<i>10</i>&nbsp;      public Shoe(int numberOfDecks)
-<b class="nc"><i>11</i>&nbsp;    {</b>
-<b class="nc"><i>12</i>&nbsp;        shoe = new ArrayList&lt;Card&gt;();</b>
-<i>13</i>&nbsp;
-<i>14</i>&nbsp;        //loop 4 times, each loop will generate a shoeValue ranges from 0 to 3
-<b class="nc"><i>15</i>&nbsp;        for (int shoeValue = 0; shoeValue &lt;= 3; shoeValue++)</b>
-<i>16</i>&nbsp;        {
-<i>17</i>&nbsp;            //loop n times (n is the number of deck(s) inserted by player
-<i>18</i>&nbsp;            //each loop will generate a cardValue ranges from 1 to 13
-<b class="nc"><i>19</i>&nbsp;            for (int cardValue = 1; cardValue &lt;= numberOfDecks * 13; cardValue++)</b>
-<i>20</i>&nbsp;            {
-<b class="nc"><i>21</i>&nbsp;                shoe.add(new Card(cardValue % 13, shoeValue));</b>
-<i>22</i>&nbsp;            }
-<i>23</i>&nbsp;        }
-<i>24</i>&nbsp;    }
-<i>25</i>&nbsp;
-<i>26</i>&nbsp;    public Card deal()
+<i>7</i>&nbsp;    private ArrayList&lt;Deck&gt; shoe;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;    public Shoe(int numberOfDecks)
+<b class="nc"><i>10</i>&nbsp;    {</b>
+<b class="nc"><i>11</i>&nbsp;        shoe = new ArrayList&lt;Deck&gt;();</b>
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;        //loop n times, n is the numberOfDecks that was taken from user input
+<b class="nc"><i>14</i>&nbsp;        for (int totalDecks = 0; totalDecks &lt; numberOfDecks; totalDecks++)</b>
+<i>15</i>&nbsp;        {
+<b class="nc"><i>16</i>&nbsp;            shoe.add(new Deck());</b>
+<i>17</i>&nbsp;        }
+<i>18</i>&nbsp;    }
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;    public int numDeck()
+<i>21</i>&nbsp;    {
+<b class="nc"><i>22</i>&nbsp;        return shoe.size();</b>
+<i>23</i>&nbsp;    }
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;    /*
+<i>26</i>&nbsp;    public Card pick()
 <i>27</i>&nbsp;    {
-<b class="nc"><i>28</i>&nbsp;        return (shoe.size() != 0 ? shoe.remove(0) : null); //remove and return first card from shoe (main shoe not player shoe)</b>
-<i>29</i>&nbsp;    }
-<i>30</i>&nbsp;
-<i>31</i>&nbsp;    public String toString()
-<i>32</i>&nbsp;    {
-<b class="nc"><i>33</i>&nbsp;        String stringshoe = &quot;&quot;;</b>
-<i>34</i>&nbsp;
-<i>35</i>&nbsp;        //loop for each card in current shoe
-<b class="nc"><i>36</i>&nbsp;        for (Card card : shoe)</b>
-<i>37</i>&nbsp;        {
-<b class="nc"><i>38</i>&nbsp;            stringshoe += card.toString() + &quot;\n&quot;; //add current card.toString() to stringshoe</b>
-<b class="nc"><i>39</i>&nbsp;        }</b>
-<b class="nc"><i>40</i>&nbsp;        return stringshoe;</b>
-<i>41</i>&nbsp;    }
-<i>42</i>&nbsp;
-<i>43</i>&nbsp;    public int size()
-<i>44</i>&nbsp;    {
-<b class="nc"><i>45</i>&nbsp;        return shoe.size(); //return the size of the shoe</b>
-<i>46</i>&nbsp;    }
-<i>47</i>&nbsp;
-<i>48</i>&nbsp;    public void shuffle()
-<i>49</i>&nbsp;    {
-<b class="nc"><i>50</i>&nbsp;        Collections.shuffle(shoe); //shuffle the current shoe</b>
-<i>51</i>&nbsp;    }
-<i>52</i>&nbsp;
-<i>53</i>&nbsp;    public boolean isEmpty()
-<i>54</i>&nbsp;    {
-<b class="nc"><i>55</i>&nbsp;        return (shoe.size() == 0);  //returns true if no card in the shoe; otherwise return false</b>
-<i>56</i>&nbsp;    }
-<i>57</i>&nbsp;
-<i>58</i>&nbsp;    public void reset()
-<i>59</i>&nbsp;    {
-<i>60</i>&nbsp;        //loop for each card in current shoe
-<b class="nc"><i>61</i>&nbsp;        for (Card card : shoe)</b>
-<i>62</i>&nbsp;        {
-<b class="nc"><i>63</i>&nbsp;            shoe.remove(card);  //remove current card</b>
-<b class="nc"><i>64</i>&nbsp;            deal();             //add new card (replacing the removed card)</b>
-<b class="nc"><i>65</i>&nbsp;        }</b>
-<i>66</i>&nbsp;    }
-<i>67</i>&nbsp;
-<i>68</i>&nbsp;    public static void main(String[] args)
-<i>69</i>&nbsp;    {
-<b class="nc"><i>70</i>&nbsp;        Shoe shoe1 = new Shoe(6);</b>
-<b class="nc"><i>71</i>&nbsp;        System.out.println(shoe1.toString());</b>
-<b class="nc"><i>72</i>&nbsp;        System.out.println(&quot;The size of the shoe is: &quot; + shoe1.size() + &quot;\n&quot;);</b>
-<b class="nc"><i>73</i>&nbsp;        shoe1.shuffle();</b>
-<b class="nc"><i>74</i>&nbsp;        System.out.println(shoe1.toString());</b>
-<i>75</i>&nbsp;    }
-<i>76</i>&nbsp;}
+<i>28</i>&nbsp;        int randomDeck = (Math.random() &lt; 0.5 ? 0 : 1);
+<i>29</i>&nbsp;        if ((shoe.get(randomDeck)).size() == 0)
+<i>30</i>&nbsp;        {
+<i>31</i>&nbsp;            shoe.remove(randomDeck);
+<i>32</i>&nbsp;            return (shoe.size() != 0 ? (shoe.get(randomDeck)).pick() : null); //remove and return first card from shoe (main shoe not player shoe)
+<i>33</i>&nbsp;        }
+<i>34</i>&nbsp;    }
+<i>35</i>&nbsp;    */
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;
+<i>38</i>&nbsp;        /*
+<i>39</i>&nbsp;        public int size ()
+<i>40</i>&nbsp;        {
+<i>41</i>&nbsp;            for (Deck deck )
+<i>42</i>&nbsp;            return shoe.size(); //return the size of the shoe
+<i>43</i>&nbsp;        }
+<i>44</i>&nbsp;        */
+<i>45</i>&nbsp;
+<i>46</i>&nbsp;    public static void main(String[] args)
+<i>47</i>&nbsp;    {
+<b class="nc"><i>48</i>&nbsp;        Shoe shoe1 = new Shoe(6);</b>
+<b class="nc"><i>49</i>&nbsp;        System.out.println(shoe1.toString());</b>
+<i>50</i>&nbsp;        //System.out.println(&quot;The size of the shoe is: &quot; + shoe1.size() + &quot;\n&quot;);
+<b class="nc"><i>51</i>&nbsp;        System.out.println(shoe1.toString());</b>
+<i>52</i>&nbsp;    }
+<i>53</i>&nbsp;
+<i>54</i>&nbsp;}
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2020-09-23 19:00</div>
+    <div style="float:right;">generated on 2020-09-23 21:45</div>
 </div>
 </body>
 </html>

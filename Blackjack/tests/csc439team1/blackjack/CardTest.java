@@ -1,6 +1,9 @@
 package csc439team1.blackjack;
 
+import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.Objects;
 
 import static org.junit.Assert.*;
 
@@ -57,11 +60,11 @@ public class CardTest
     }
 
     /**
-     * Test getSuitString() by creating card2 with cardNumber 1 and cardSuit 0
+     * Test getSuitCLUB() by creating card2 with cardNumber 1 and cardSuit 0
      * expected "CLUB"
      */
     @Test
-    public void getSuitString()
+    public void getSuitCLUB()
     {
         Card card2 = new Card(1, 0);
         assertEquals("CLUB", card2.getSuitString());
@@ -174,5 +177,17 @@ public class CardTest
         Card card7 = new Card(1, 0);
         Card card8 = card7;
         assertTrue(card7.equals(card8));
+    }
+
+    /**
+     * Test to verify override of equals if clause that compares
+     * object to other type of object or null
+     */
+    @Test
+    public void testNotCard()
+    {
+        Card card11 = new Card(5, 1);
+        Deck deck11 = new Deck();
+        assertFalse(card11.equals(deck11));
     }
 }
