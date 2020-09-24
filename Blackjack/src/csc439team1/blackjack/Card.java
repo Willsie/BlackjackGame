@@ -19,13 +19,12 @@ public class Card
      * constructor for Card object that takes 2 parameters: int cardnumber, and int cardSuit
      *
      * @param cardnumber the number of the card ranges from 1 to 13 (1 is ACE, 11 is JACK, 12 is QUEEN, 13 is KING)
-     * @param cardSuit  the suit of the card (0 is CLUBS, 1 is HEARTS, 2 is SPADES, 3 is DIAMONDS)
+     * @param cardSuit   the suit of the card (0 is CLUBS, 1 is HEARTS, 2 is SPADES, 3 is DIAMONDS)
      * @throws IllegalArgumentException if the parameter cardSuit is smaller than 0 or greater than 3 or
      *                                  if the parameter cardnumber is smaller than 1 or greater than 13
      */
     public Card(int cardnumber, int cardSuit)
     {
-
         if (cardSuit > 3 || cardSuit < 0)       //if cardSuit > 3 or cardSuit <0, throws IllegalArgumentException
             throw new IllegalArgumentException("Illegal card suit:" + cardSuit);
         else if (cardnumber > 13 || cardnumber < 1)    //if cardnumber > 13 or cardnumber < 1, throws IllegalArgumentException
@@ -63,8 +62,6 @@ public class Card
     {
         switch (suit)
         {
-            case 0:
-                return "CLUB";
             case 1:
                 return "HEART";
             case 2:
@@ -72,7 +69,7 @@ public class Card
             case 3:
                 return "DIAMOND";
             default:
-                return "";
+                return "CLUB";
         }
     }
 
@@ -130,10 +127,7 @@ public class Card
             return false;
         }
 
-        // typecast otherCard to Card so that we can compare data members
-        Card originalCard = (Card) otherCard;
-
         // Compare the data members (suit and number) and return accordingly
-        return Integer.compare(this.suit, otherCard.suit) == 0 && Integer.compare(this.number, otherCard.number) == 0;
+        return (this.suit == otherCard.suit && this.number == otherCard.number);
     }
 }

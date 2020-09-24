@@ -1,5 +1,5 @@
-package csc439team1.blackjack;
-/*
+/*package csc439team1.blackjack;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -33,7 +33,7 @@ public class Hand extends Deck
         int totalAces = 0;
         for (Card card : cards)
         {
-            if (card.getSuitString() == "ACE") totalAces++;
+            if (card.getSuitString().equals("ACE")) totalAces++;
         }
         return totalAces;
     }
@@ -147,5 +147,5 @@ public class Hand extends Deck
             System.out.printf("%-30s", "You total from this round is: " + getTotalValue());
         }
     }
-}*/
-
+}
+*/
