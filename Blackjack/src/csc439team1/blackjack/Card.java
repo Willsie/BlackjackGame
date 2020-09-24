@@ -25,7 +25,6 @@ public class Card
      */
     public Card(int cardnumber, int cardSuit)
     {
-        if (cardnumber == 0) cardnumber = 13;    //if cardnumber is 0, set cardnumber to 13
         if (cardSuit > 3 || cardSuit < 0)       //if cardSuit > 3 or cardSuit <0, throws IllegalArgumentException
             throw new IllegalArgumentException("Illegal card suit:" + cardSuit);
         else if (cardnumber > 13 || cardnumber < 1)    //if cardnumber > 13 or cardnumber < 1, throws IllegalArgumentException
@@ -123,17 +122,7 @@ public class Card
             return true;
         }
 
-        /* Check if other is an instance of Card or not
-          "null instanceof [type]" also returns false */
-        if (!(otherCard instanceof Card))
-        {
-            return false;
-        }
-
-        // typecast otherCard to Card so that we can compare data members
-        Card originalCard = (Card) otherCard;
-
         // Compare the data members (suit and number) and return accordingly
-        return Integer.compare(this.suit, otherCard.suit) == 0 && Integer.compare(this.number, otherCard.number) == 0;
+        return this.suit == otherCard.suit && Integer.compare(this.number, otherCard.number) == 0;
     }
 }

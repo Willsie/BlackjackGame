@@ -2,34 +2,54 @@ package csc439team1.blackjack;
 
 import java.util.*;
 
+/**
+ * Deck class is a collection of Card objects
+ */
 public class Deck
 {
 
-    private ArrayList<Card> deck;
+    private ArrayList<Card> deck = new ArrayList<Card>(); //Initialize deck as ArrayList<Card>
 
+    /**
+     * Deck() is a constructor for Deck object that consists of 52 Card objects
+     */
     public Deck()
     {
-        deck = new ArrayList<Card>();
-
         //loop 4 times, each loop will generate a deckValue ranges from 0 to 3
         for (int deckValue = 0; deckValue <= 3; deckValue++)
         {
             //loop 13 times, each loop will generate a cardValue ranges from 1 to 13
             for (int cardValue = 1; cardValue <= 13; cardValue++)
             {
-                deck.add(new Card(cardValue, deckValue));
+                deck.add(new Card(cardValue, deckValue));   //add a card to the deck
             }
         }
     }
 
-    public Card deal()
+    /**
+     * pick() will remove and return one random card from cureent deck
+     *
+     * @return a single card removed from the current deck
+     */
+    public Card pick()
     {
-        return (deck.size() != 0 ? deck.remove(0) : null); //remove and return first card from deck (main deck not player deck)
+        if (deck.size() <= 0) throw new IllegalArgumentException();
+        else
+        {
+            int random = (int) (Math.random() * 13);    //generate random number from 0 to 12
+            return (deck.size() != 0 ? deck.remove(random) : null); //remove and return random from deck
+        }
     }
 
+
+    /**
+     * toString() returns string representation of the current deck (ex: Ace of CLUB, 2 of SPADE,......)
+     *
+     * @return string representation of all cards available in the Deck
+     */
     public String toString()
     {
-        String stringDeck = "";
+        String stringDeck = ""; //initialize stringDeck
 
         //loop for each card in current deck
         for (Card card : deck)
@@ -39,37 +59,13 @@ public class Deck
         return stringDeck;
     }
 
+    /**
+     * size() is the size of the current deck
+     *
+     * @return size of the amount of total cards left in the deck (int type)
+     */
     public int size()
     {
         return deck.size(); //return the size of the deck
-    }
-
-    public void shuffle()
-    {
-        Collections.shuffle(deck); //shuffle the current deck
-    }
-
-    public boolean isEmpty()
-    {
-        return (deck.size() == 0);  //returns true if no card in the deck; otherwise return false
-    }
-
-    public void reset()
-    {
-        //loop for each card in current deck
-        for (Card card : deck)
-        {
-            deck.remove(card);  //remove current card
-            deal();             //add new card (replacing the removed card)
-        }
-    }
-
-    public static void main(String[] args)
-    {
-        Deck deck1 = new Deck();
-        System.out.println(deck1.toString());
-        System.out.println(deck1.size());
-        deck1.shuffle();
-        System.out.println(deck1.toString());
     }
 }

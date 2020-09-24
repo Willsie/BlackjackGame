@@ -110,16 +110,16 @@ public class Hand extends Deck
         Deck deck = new Deck();         //creates a Deck object named deck
         Hand hand = new Hand();         //creates a Hand object named hand
         System.out.println("Blackjack round is starting...dealing 2 cards, good luck! \n");
-        deck.shuffle(); //shuffle all cards in the current deck
 
-        hand.addCard(deck.deal());  //add one card to the player's deck (initial card)
+
+        hand.addCard(deck.pick());  //add one card to the player's deck (initial card)
 
         //do...while loop that will let the user choose hit or stand
         //the loop will exit and displays messages when: it is a blackjack, busted (total is more than 21), or player enter "s" to stand
         //displays the current cards, current total, final cards, and the final total count
         do
         {
-            hand.addCard(deck.deal()); //add one card to the player's deck (after first initial card or each time the player hit)
+            hand.addCard(deck.pick()); //add one card to the player's deck (after first initial card or each time the player hit)
             if (isBusted())
             {
                 System.out.println("Your cards are: " + cards.toString());
