@@ -1,7 +1,7 @@
 package csc439team1.blackjack;
 
 /**
- * This is a unique card that has 2 private variables: int suit and int value
+ * This is a unique card that has 2 private variables: int suit and int number
  */
 public class Card
 {
@@ -11,26 +11,25 @@ public class Card
     private final int suit;
 
     /**
-     * The card's value ranges from 1 to 13 (for example: 1 is ACE and 13 is KING; however ACE can also be 11 depending on the play)
+     * The card's number ranges from 1 to 13 (for example: 1 is ACE and 13 is KING; however ACE can also be 11 depending on the play)
      */
-    private final int value;
+    private final int number;
 
     /**
-     * constructor for Card object that takes 2 parameters: int cardValue, and int cardSuit
+     * constructor for Card object that takes 2 parameters: int cardnumber, and int cardSuit
      *
-     * @param cardValue the value of the card ranges from 1 to 13 (1 is ACE, 11 is JACK, 12 is QUEEN, 13 is KING)
-     * @param cardSuit  the suit of the card (0 is CLUBS, 1 is HEARTS, 2 is SPADES, 3 is DIAMONDS)
+     * @param cardnumber the number of the card ranges from 1 to 13 (1 is ACE, 11 is JACK, 12 is QUEEN, 13 is KING)
+     * @param cardSuit   the suit of the card (0 is CLUBS, 1 is HEARTS, 2 is SPADES, 3 is DIAMONDS)
      * @throws IllegalArgumentException if the parameter cardSuit is smaller than 0 or greater than 3 or
-     *                                  if the parameter cardValue is smaller than 1 or greater than 13
+     *                                  if the parameter cardnumber is smaller than 1 or greater than 13
      */
-    public Card(int cardValue, int cardSuit)
+    public Card(int cardnumber, int cardSuit)
     {
-        if (cardValue == 0) cardValue = 13;    //if cardValue is 0, set cardValue to 13
         if (cardSuit > 3 || cardSuit < 0)       //if cardSuit > 3 or cardSuit <0, throws IllegalArgumentException
             throw new IllegalArgumentException("Illegal card suit:" + cardSuit);
-        else if (cardValue > 13 || cardValue < 1)    //if cardValue > 13 or cardValue < 1, throws IllegalArgumentException
-            throw new IllegalArgumentException("Illegal card value:" + cardValue);
-        value = cardValue;
+        else if (cardnumber > 13 || cardnumber < 1)    //if cardnumber > 13 or cardnumber < 1, throws IllegalArgumentException
+            throw new IllegalArgumentException("Illegal card number:" + cardnumber);
+        number = cardnumber;
         suit = cardSuit;
     }
 
@@ -45,13 +44,13 @@ public class Card
     }
 
     /**
-     * get method that will return the value of the card
+     * get method that will return the number of the card
      *
-     * @return value of the card (int type)
+     * @return number of the card (int type)
      */
-    public int getValue()
+    public int getNumber()
     {
-        return this.value;
+        return this.number;
     }
 
     /**
@@ -63,8 +62,6 @@ public class Card
     {
         switch (suit)
         {
-            case 0:
-                return "CLUB";
             case 1:
                 return "HEART";
             case 2:
@@ -72,48 +69,48 @@ public class Card
             case 3:
                 return "DIAMOND";
             default:
-                return "";
+                return "CLUB";
         }
     }
 
     /**
-     * get method that will return the string representation of the card's value
+     * get method that will return the string representation of the card's number
      *
-     * @return a string representation of the card value such as "Ace", "2", "3", ...,"10", "Jack", "Queen", and "King"
+     * @return a string representation of the card number such as "Ace", "2", "3", ...,"10", "Jack", "Queen", and "King"
      */
-    public String getValueString()
+    public String getNumberString()
     {
-        switch (value)
+        switch (number)
         {
             case 1:
-                return "Ace";   //return "Ace" if the card's value is 1
+                return "Ace";   //return "Ace" if the card's number is 1
             case 11:
-                return "Jack";  //return "Jack" if the card's value is 11
+                return "Jack";  //return "Jack" if the card's number is 11
             case 12:
-                return "Queen"; //return "Queen" if the card's value is 12
+                return "Queen"; //return "Queen" if the card's number is 12
             case 13:
-                return "King";  //return "King" if the card's value is 13
+                return "King";  //return "King" if the card's number is 13
             default:
-                return String.valueOf(value); //else return the value of the card
+                return String.valueOf(number); //else return the number of the card
         }
     }
 
     /**
-     * Overriding toString() method and will return the value of the card + " of " + the suit of the card (ex: Ace of SPADE)
+     * Overriding toString() method and will return the number of the card + " of " + the suit of the card (ex: Ace of SPADE)
      *
      * @return string representation of the card
      */
     @Override
     public String toString()
     {
-        return getValueString() + " of " + getSuitString();
+        return getNumberString() + " of " + getSuitString();
     }
 
     /**
      * equals(Card other) is the a method that compares 2 card objects for their properties
      *
      * @param otherCard is the card that we are comparing with the original card
-     * @return true if both cards has the same values and suits; otherwise, return false
+     * @return true if both cards has the same numbers and suits; otherwise, return false
      */
     public boolean equals(Card otherCard)
     {
@@ -123,17 +120,10 @@ public class Card
             return true;
         }
 
-        /* Check if other is an instance of Card or not
-          "null instanceof [type]" also returns false */
-        if (!(otherCard instanceof Card))
-        {
-            return false;
-        }
+        // cast otherCard to Card so to compare data members
+        Card otherCardCopy = (Card) otherCard;
 
-        // typecast otherCard to Card so that we can compare data members
-        Card originalCard = (Card) otherCard;
-
-        // Compare the data members (suit and value) and return accordingly
-        return Integer.compare(this.suit, otherCard.suit) == 0 && Integer.compare(this.value, otherCard.value) == 0;
+        // Compare the data members (suit and number) and return accordingly
+        return (this.suit == otherCardCopy.suit && this.number == otherCardCopy.number);
     }
 }
