@@ -29,7 +29,7 @@ public class Deck
     }
 
     /**
-     * pick() will remove and return one random card from cureent deck
+     * pick() will remove and return one random card from current deck
      *
      * @return a single card removed from the current deck
      */
@@ -38,7 +38,7 @@ public class Deck
         if (deck.size() <= 0) throw new IllegalArgumentException();
         else
         {
-            int random = (int) (Math.random() * deck.size());    //generate random number from 0 to 12
+            int random = (int) (Math.random() * deck.size());    //generate random number from 0 to the current size of the deck
             return (deck.size() != 0 ? deck.remove(random) : null); //remove and return random from deck
         }
     }
