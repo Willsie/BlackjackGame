@@ -14,6 +14,16 @@ public class DeckTest
         System.out.println(deck0.toString());
     }
 
+    @Test (expected = IllegalArgumentException.class)
+    public void pick1() {
+        Deck deck1 = new Deck();
+        for(int i = 0; i <= 51; i++){
+            deck1.pick();
+        }
+        deck1.pick();
+    }
+
+
     @Test
     public void testToString()
     {

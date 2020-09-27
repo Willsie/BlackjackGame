@@ -38,7 +38,7 @@ public class Deck
         if (deck.size() <= 0) throw new IllegalArgumentException();
         else
         {
-            int random = (int) (Math.random() * 13);    //generate random number from 0 to 12
+            int random = (int) (Math.random() * deck.size());    //generate random number from 0 to 12
             return (deck.size() != 0 ? deck.remove(random) : null); //remove and return random from deck
         }
     }
