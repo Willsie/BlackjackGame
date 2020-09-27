@@ -30,9 +30,10 @@ public class Shoe
     public int numDeck()
     {
         int totalDeck = 0;  //Initialize total deck to 0
-        for(Deck deck : shoe){  //For each loop that will iterate every deck in the shoe
-            if(deck.size() == 0) shoe.remove(deck); //if the current deck size is 0, remove current deck from shoe
-            else totalDeck ++;  //increase the total deck by one
+        for (Deck deck : shoe)
+        {  //For each loop that will iterate every deck in the shoe
+            if (deck.size() == 0) shoe.remove(deck); //if the current deck size is 0, remove current deck from shoe
+            else totalDeck++;  //increase the total deck by one
         }
         return totalDeck;   //return the total number of deck(s) in the shoe
     }
@@ -56,7 +57,8 @@ public class Shoe
     public int size()
     {
         int totalCards = 0;
-        for(Deck deck: shoe){
+        for (Deck deck : shoe)
+        {
             totalCards += deck.size();
         }
         return totalCards; //return the total card(s) in the shoe

@@ -173,7 +173,6 @@ public class Hand extends Deck
                 System.out.printf("%s%s\n", "Your final cards are: ", cards.toString());
                 System.out.printf("%s%s\n", "You total from this round is: ", getTotalValue());
             }
-
         }
     }
 }
