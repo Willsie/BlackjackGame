@@ -50,14 +50,14 @@ public class Deck
      */
     public String toString()
     {
-        String stringDeck = ""; //initialize stringDeck
+        StringBuilder stringDeck = new StringBuilder(); //initialize stringDeck
 
         //loop for each card in current deck
         for (Card card : deck)
         {
-            stringDeck += card.toString() + "\n"; //add current card.toString() to stringDeck
+            stringDeck.append(card.toString()).append("\n"); //add current card.toString() to stringDeck
         }
-        return stringDeck;
+        return stringDeck.toString();
     }
 
     /**

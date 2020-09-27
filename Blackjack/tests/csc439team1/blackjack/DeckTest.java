@@ -10,8 +10,8 @@ public class DeckTest
     @Test
     public void pick()
     {
-        Deck deck0 = new Deck();
-        System.out.println(deck0.toString());
+        /*Deck deck0 = new Deck();
+        System.out.println(deck0.toString());*/
     }
 
     @Test (expected = IllegalArgumentException.class)
@@ -27,6 +27,10 @@ public class DeckTest
     @Test
     public void testToString()
     {
+        Deck deck2 = new Deck();
+        String expected = "Ace of CLUB";
+        assertEquals(deck2.toString().contains(expected), true);
+
     }
 
     @Test
