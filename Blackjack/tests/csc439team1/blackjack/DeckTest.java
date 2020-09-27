@@ -14,6 +14,9 @@ public class DeckTest
         System.out.println(deck0.toString());*/
     }
 
+    /**
+     * Tests exception handling in pick()
+     */
     @Test (expected = IllegalArgumentException.class)
     public void pick1() {
         Deck deck1 = new Deck();
@@ -23,13 +26,19 @@ public class DeckTest
         deck1.pick();
     }
 
-
+    /**
+     * Tests testToString().
+     */
     @Test
     public void testToString()
     {
         Deck deck2 = new Deck();
         String expected = "Ace of CLUB";
         assertEquals(deck2.toString().contains(expected), true);
+
+        Card card = deck2.pick();
+        String expected2 = card.toString();
+        assertEquals(deck2.toString().contains(expected2), false);
 
     }
 
