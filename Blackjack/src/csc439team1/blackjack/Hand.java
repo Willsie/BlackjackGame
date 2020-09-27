@@ -1,5 +1,5 @@
-package csc439team1.blackjack;
-/*
+/*package csc439team1.blackjack;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -33,7 +33,7 @@ public class Hand extends Deck
         int totalAces = 0;
         for (Card card : cards)
         {
-            if (card.getSuitString() == "ACE") totalAces++;
+            if (card.getSuitString().equals("ACE")) totalAces++;
         }
         return totalAces;
     }
@@ -44,13 +44,13 @@ public class Hand extends Deck
         int total = 0;
         for (Card card : cards)
         {
-            if (card.getValue() != 1 && card.getValue() < 11)
+            if (card.getNumber() != 1 && card.getNumber() < 11)
             {
-                total += card.getValue();
-            } else if ((card.getValue() == 1) && (total < 11))
+                total += card.getNumber();
+            } else if ((card.getNumber() == 1) && (total < 11))
             {
                 total += 11;
-            } else if (card.getValue() == 1 && total > 10)
+            } else if (card.getNumber() == 1 && total > 10)
             {
                 total += 1;
             } else
@@ -68,23 +68,23 @@ public class Hand extends Deck
         int total = 0;
         for (Card card : cards)
         {
-            if (card.getValue() > 1 && card.getValue() < 11 && acesCounter > 2)
+            if (card.getNumber() > 1 && card.getNumber() < 11 && acesCounter > 2)
             {
-                nonAces += card.getValue();
+                nonAces += card.getNumber();
                 total = nonAces + 11 + acesCounter;
-            } else if (card.getValue() > 1 && card.getValue() < 11 && acesCounter == 0)
+            } else if (card.getNumber() > 1 && card.getNumber() < 11 && acesCounter == 0)
             {
-                nonAces += card.getValue();
+                nonAces += card.getNumber();
                 total = nonAces;
-            } else if (card.getValue() > 1 && card.getValue() < 11 && acesCounter == 1)
+            } else if (card.getNumber() > 1 && card.getNumber() < 11 && acesCounter == 1)
             {
-                nonAces += card.getValue();
+                nonAces += card.getNumber();
                 total = nonAces > 10 ? nonAces + 1 : nonAces + 11;
-            } else if (card.getValue() > 1 && card.getValue() < 11 && acesCounter == 2)
+            } else if (card.getNumber() > 1 && card.getNumber() < 11 && acesCounter == 2)
             {
-                nonAces += card.getValue();
+                nonAces += card.getNumber();
                 total = nonAces > 9 ? nonAces + 2 : nonAces + 12;
-            } else if (card.getValue() == 1)
+            } else if (card.getNumber() == 1)
             {
                 acesCounter++;
                 if (acesCounter > 1) total++;
@@ -110,16 +110,16 @@ public class Hand extends Deck
         Deck deck = new Deck();         //creates a Deck object named deck
         Hand hand = new Hand();         //creates a Hand object named hand
         System.out.println("Blackjack round is starting...dealing 2 cards, good luck! \n");
-        deck.shuffle(); //shuffle all cards in the current deck
 
-        hand.addCard(deck.deal());  //add one card to the player's deck (initial card)
+
+        hand.addCard(deck.pick());  //add one card to the player's deck (initial card)
 
         //do...while loop that will let the user choose hit or stand
         //the loop will exit and displays messages when: it is a blackjack, busted (total is more than 21), or player enter "s" to stand
         //displays the current cards, current total, final cards, and the final total count
         do
         {
-            hand.addCard(deck.deal()); //add one card to the player's deck (after first initial card or each time the player hit)
+            hand.addCard(deck.pick()); //add one card to the player's deck (after first initial card or each time the player hit)
             if (isBusted())
             {
                 System.out.println("Your cards are: " + cards.toString());
@@ -147,5 +147,5 @@ public class Hand extends Deck
             System.out.printf("%-30s", "You total from this round is: " + getTotalValue());
         }
     }
-}*/
-
+}
+*/
