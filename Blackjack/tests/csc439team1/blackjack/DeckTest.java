@@ -34,11 +34,11 @@ public class DeckTest
     {
         Deck deck2 = new Deck();
         String expected = "Ace of CLUB";
-        assertEquals(deck2.toString().contains(expected), true);
+        assertTrue(deck2.toString().contains(expected));
 
         Card card = deck2.pick();
         String expected2 = card.toString();
-        assertEquals(deck2.toString().contains(expected2), false);
+        assertFalse(deck2.toString().contains(expected2));
 
     }
 
