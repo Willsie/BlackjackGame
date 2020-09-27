@@ -174,4 +174,10 @@ public class CardTest
         Card self = new Card(1, 3);
         assertTrue(self.equals(self));
     }
+//Empty test, merge with master, then delete. Should force project to adopt-openjdk14 and solve issues.
+    @Test
+    public void shellTest()
+    {
+
+    }
 }
