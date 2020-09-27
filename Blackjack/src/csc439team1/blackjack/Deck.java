@@ -39,7 +39,7 @@ public class Deck
         else
         {
             int random = (int) (Math.random() * deck.size());       //generate random number from 0 to current size of the deck
-            return (deck.size() != 0 ? deck.remove(random) : null); //remove and return random from deck
+            return deck.remove(random); //remove and return random card from deck
         }
     }
 

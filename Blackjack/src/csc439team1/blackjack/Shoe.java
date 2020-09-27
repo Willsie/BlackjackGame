@@ -37,9 +37,8 @@ public class Shoe
         return totalDeck;   //return the total number of deck(s) in the shoe
     }
 
-
     /**
-     * This is a method that will pick one random card from the current shoe
+     * This is the method that will pick one random card from the current shoe
      *
      * @return a random card by calling Deck.pick()
      */
@@ -50,7 +49,7 @@ public class Shoe
     }
 
     /**
-     * This is a method that will count the total card(s) in the shoe
+     * This is the method that will count the total card(s) in the shoe
      *
      * @return the total card(s) in the shoe
      */
@@ -79,16 +78,4 @@ public class Shoe
         }
         return stringShoe;
     }
-    
-    public static void main(String[] args)
-    {
-        Shoe shoe1 = new Shoe(1);
-        System.out.println(shoe1.toString());
-        System.out.println("The size of the shoe is: " + shoe1.size() + "\n");
-        System.out.println("The cards in the shoe are: \n" + shoe1.toString());
-        System.out.println(shoe1.pick());
-        System.out.println("The size of the shoe is: " + shoe1.size() + "\n");
-        System.out.println("The cards in the shoe are: \n" + shoe1.toString());
-    }
-
 }
