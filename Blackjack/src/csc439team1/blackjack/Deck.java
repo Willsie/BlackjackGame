@@ -70,4 +70,3 @@ public class Deck
         return deck.size(); //return the size of the deck
     }
 }
-
