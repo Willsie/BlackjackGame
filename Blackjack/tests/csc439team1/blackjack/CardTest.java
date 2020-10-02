@@ -15,24 +15,30 @@ public class CardTest
     /**
      * Tests constructor's argument checking. Should catch IllegalArgumentException if cardNumber is greater than 13 or less than 1, or if cardSuit is less than 0 or greater than 3.
      */
-    @Test (expected = IllegalArgumentException.class) // tests both arguments being illegal
-    public void Card() {
-        Card card0 = new Card(-1,-1);
+    @Test(expected = IllegalArgumentException.class) // tests both arguments being illegal
+    public void Card()
+    {
+        Card card0 = new Card(-1, -1);
     }
-    @Test (expected = IllegalArgumentException.class) // cardSuit being illegal
-    public void Card1() {
-        Card card0 = new Card(5,5);
+
+    @Test(expected = IllegalArgumentException.class) // cardSuit being illegal
+    public void Card1()
+    {
+        Card card0 = new Card(5, 5);
     }
-    @Test (expected = IllegalArgumentException.class) // cardNumber being illegal
-    public void Card2() {
-        Card card0 = new Card(-1,2);
+
+    @Test(expected = IllegalArgumentException.class) // cardNumber being illegal
+    public void Card2()
+    {
+        Card card0 = new Card(-1, 2);
     }
-    
+
     /**
      * Test constructor statement for assigning cardNumber to 13
      */
     @Test
-    public void Card3() {
+    public void Card3()
+    {
         Card card0 = new Card(13, 3); // cardNumber = 0 should create card with cardNumber being 13.
         assertEquals(13, card0.getNumber());
     }
@@ -69,6 +75,7 @@ public class CardTest
         Card card2 = new Card(1, 0);
         assertEquals("CLUB", card2.getSuitString());
     }
+
     /**
      * Test which ensures cardSuit of 2 produces SPADE
      */
@@ -78,6 +85,7 @@ public class CardTest
         Card testCard1 = new Card(2, 2);
         assertEquals("SPADE", testCard1.getSuitString());
     }
+
     /**
      * Test which ensures cardSuit of 1 produces HEART
      */
@@ -87,6 +95,7 @@ public class CardTest
         Card testCard3 = new Card(1, 1);
         assertEquals("HEART", testCard3.getSuitString());
     }
+
     /**
      * Test which ensures cardSuit of 3 produces DIAMOND
      */
@@ -117,6 +126,7 @@ public class CardTest
         Card testCard6 = new Card(11, 3);
         assertEquals("Jack", testCard6.getNumberString());
     }
+
     /**
      * Tests that entering 12 as Number produces Queen.
      */
@@ -126,6 +136,7 @@ public class CardTest
         Card testCard6 = new Card(12, 3);
         assertEquals("Queen", testCard6.getNumberString());
     }
+
     /**
      * Tests that entering 13 as Number produces King.
      */
@@ -135,6 +146,7 @@ public class CardTest
         Card testCard = new Card(13, 1);
         assertEquals("King", testCard.getNumberString());
     }
+
     /**
      * Tests that entering 3 as Number produces string of 3.
      */
@@ -144,6 +156,7 @@ public class CardTest
         Card testCard = new Card(3, 1);
         assertEquals("3", testCard.getNumberString());
     }
+
     /**
      * Test toString() by creating card4 with cardNumber 1 and cardSuit 0
      * expected "Ace of CLUB"

@@ -10,7 +10,7 @@ public class Deck
     /**
      * deck is an ArrayList<Card> (an ArrayList containing Card objects)
      */
-    private ArrayList<Card> deck = new ArrayList<Card>(); //Initialize deck as ArrayList<Card>
+    private ArrayList<Card> deck = new ArrayList<>(); //Initialize deck as ArrayList<Card>
 
     /**
      * Deck() is a constructor for Deck object that consists of 52 Card objects
@@ -29,7 +29,9 @@ public class Deck
     }
 
     /**
+
      * pick() will remove and return one random card from current deck
+     * pick() will remove and return one random card from curent deck
      *
      * @return a single card removed from the current deck
      */
@@ -40,6 +42,8 @@ public class Deck
         {
             int random = (int) (Math.random() * deck.size());    //generate random number from 0 to the current size of the deck
             return (deck.size() != 0 ? deck.remove(random) : null); //remove and return random from deck
+            int random = (int) (Math.random() * deck.size());       //generate random number from 0 to current size of the deck
+            return deck.remove(random); //remove and return random card from deck
         }
     }
 
