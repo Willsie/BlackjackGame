@@ -1,4 +1,4 @@
-/*package csc439team1.blackjack;
+package csc439team1.blackjack;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -9,7 +9,7 @@ public class Hand extends Deck
 
     public Hand()
     {
-        cards = new ArrayList<Card>();
+        cards = new ArrayList<>();
     }
 
     public void addCard(Card anotherCard)
@@ -99,31 +99,37 @@ public class Hand extends Deck
         return total;
     }
 
+    //The getCards method should return the collection of cards currently in the hand.
+    //create getCards() methods here.....to be completed
+
+    //The size method should return the number of cards currently in the hand.
+    //create getTotalCards() methods here.....to be completed
+
     @SuppressWarnings("static-access")
     public static void main(String[] args)
     {
         String hit = "";    //initialize hit that will later takes a user input (expecting either "h" or "s")
         Scanner input = new Scanner(System.in);
-        System.out.println("Enter the total deck of cards for the shoe: ");
+        System.out.print("Enter the total deck of cards for the shoe: ");
         int numberOfDecks = input.nextInt();
         Shoe shoe = new Shoe(numberOfDecks);         //creates a Deck object named deck
-        Deck deck = new Deck();         //creates a Deck object named deck
-        Hand hand = new Hand();         //creates a Hand object named hand
+        Hand playerHand = new Hand();         //creates a Hand object named playerHand
+        Hand houseHand = new Hand();
         System.out.println("Blackjack round is starting...dealing 2 cards, good luck! \n");
-
-
-        hand.addCard(deck.pick());  //add one card to the player's deck (initial card)
+        playerHand.addCard(shoe.pick());  //add one card to the player's hand (initial card)
+        //houseHand.addCard(shoe.pick());  //add first card to the dealer's hand (initial card)
+        //houseHand.addCard(shoe.pick());  //add second card to the dealer's hand (initial card)
 
         //do...while loop that will let the user choose hit or stand
-        //the loop will exit and displays messages when: it is a blackjack, busted (total is more than 21), or player enter "s" to stand
+        //the loop will exit and displays messages when: player hit blackjack or busted (total is more than 21), or player enter "s" to stand
         //displays the current cards, current total, final cards, and the final total count
         do
         {
-            hand.addCard(deck.pick()); //add one card to the player's deck (after first initial card or each time the player hit)
+            playerHand.addCard(shoe.pick()); //add one card to the player's deck (after first initial card or each time the player hit)
             if (isBusted())
             {
                 System.out.println("Your cards are: " + cards.toString());
-                System.out.println("Total: " + hand.getTotalValue());
+                System.out.println("Total: " + playerHand.getTotalValue());
                 System.out.println("BUSTED!  YOU LOSE!");
                 break;
             }
@@ -134,18 +140,39 @@ public class Hand extends Deck
                 break;
             }
             System.out.println("Your cards are: " + cards.toString());
-            System.out.println("Total: " + hand.getTotalValue());
+            System.out.println("Total: " + playerHand.getTotalValue());
             System.out.print("Enter \"h\" to hit or \"s\" to stand: ");
-            hit = input.nextLine();
-            System.out.println("");
-
-        } while (hit.equals("h") && !isBusted() && !hasBlackjack());
+            hit = input.next();
+        } while (shoe.size() > 0 && hit.equals("h"));
 
         if (hit.equals("s") && !isBusted())
         {
-            System.out.printf("%-28s%s%s\n", "Your final cards are", ": ", cards.toString());
-            System.out.printf("%-30s", "You total from this round is: " + getTotalValue());
+            if (playerHand.getTotalValue() < houseHand.getTotalValue())
+            {
+                System.out.printf("%s%s\n", "Your final cards are      :", cards.toString());
+                //System.out.printf("%s%s\n", "The dealer final cards are:", cards.toString());
+                System.out.printf("%s%2d\n", "Your total is  : ", playerHand.getTotalValue());
+                //System.out.printf("%s%2d\n", "Dealer total is: ", houseHand.getTotalValue());
+                System.out.printf("%s\n", "YOU LOST !!!");
+            } else if (playerHand.getTotalValue() > houseHand.getTotalValue())
+            {
+                System.out.printf("%s%s\n", "Your final cards are      :", cards.toString());
+                //System.out.printf("%s%s\n", "The dealer final cards are:", cards.toString());
+                System.out.printf("%s%2d\n", "Your total is  : ", playerHand.getTotalValue());
+                //System.out.printf("%s%2d\n", "Dealer total is: ", houseHand.getTotalValue());
+                System.out.printf("%s\n", "YOU WON !!!");
+            } else if (playerHand.getTotalValue() == houseHand.getTotalValue())
+            {
+                System.out.printf("%s%s\n", "Your final cards are      :", cards.toString());
+                //System.out.printf("%s%s\n", "The dealer final cards are:", cards.toString());
+                System.out.printf("%s%2d\n", "Your total is  : ", playerHand.getTotalValue());
+                //System.out.printf("%s%2d\n", "Dealer total is: ", houseHand.getTotalValue());
+                System.out.printf("%s\n", "DRAW !!!");
+            } else
+            {
+                System.out.printf("%s%s\n", "Your final cards are: ", cards.toString());
+                System.out.printf("%s%s\n", "You total from this round is: ", getTotalValue());
+            }
         }
     }
 }
-*/
