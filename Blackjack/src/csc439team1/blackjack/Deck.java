@@ -38,12 +38,12 @@ public class Deck
         if (deck.size() <= 0) throw new IllegalArgumentException();
         else
         {
-            int random = (int) (Math.random() * deck.size());       //generate random number from 0 to current size of the deck
+            int random = (int) (Math.random() * deck.size());   //generate random number from 0 to current size of the deck
             return deck.remove(random); //remove and return random card from deck
         }
     }
 
-    /**
+     /**
      * toString() returns string representation of the current deck (ex: Ace of CLUB, 2 of SPADE,......)
      *
      * @return string representation of all cards available in the Deck
