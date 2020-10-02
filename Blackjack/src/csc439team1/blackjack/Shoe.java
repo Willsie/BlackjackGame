@@ -2,9 +2,17 @@ package csc439team1.blackjack;
 
 import java.util.*;
 
+/**
+ * Shoe class contains the collections of deck objects
+ *
+ * has a private variable ArrayList<Deck> shoe
+ */
 public class Shoe
 {
-    private ArrayList<Deck> shoe;   //declare an array list of deck called "shoe"
+    /**
+     * an array list of deck called "shoe"
+     */
+    private ArrayList<Deck> shoe;
 
     /**
      * This is Shoe constructor that takes number of deck(s)
@@ -71,13 +79,12 @@ public class Shoe
      */
     public String toString()
     {
-        String stringShoe = ""; //initialize stringShoe
+        StringBuilder shoeString = new StringBuilder(); //creates empty string builder, default capacity 16
 
-        //loop for each deck in current shoe
-        for (Deck deck : shoe)
+        for (Deck deck : shoe)  //loop for each deck in current shoe
         {
-            stringShoe += deck.toString(); //add current deck.toString() to stringShoe
+            shoeString.append(deck.toString() + "\n"); //add current deck.toString() to shoeString
         }
-        return stringShoe;
+        return shoeString.toString();
     }
 }

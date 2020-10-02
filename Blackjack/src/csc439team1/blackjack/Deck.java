@@ -48,16 +48,16 @@ public class Deck
      *
      * @return string representation of all cards available in the Deck
      */
+    @Override
     public String toString()
     {
-        String stringDeck = ""; //initialize stringDeck
+        StringBuilder deckString = new StringBuilder(); //creates empty string builder, default capacity 16
 
-        //loop for each card in current deck
-        for (Card card : deck)
+        for (Card card : deck)      //loop for each card in current deck
         {
-            stringDeck += card.toString() + "\n"; //add current card.toString() to stringDeck
+            deckString.append(card.toString() + "\n"); //add current card.toString() to cardString
         }
-        return stringDeck;
+        return deckString.toString();
     }
 
     /**
@@ -70,3 +70,4 @@ public class Deck
         return deck.size(); //return the size of the deck
     }
 }
+
