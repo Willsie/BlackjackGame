@@ -1,7 +1,6 @@
 package csc439team1.blackjack;
 
 import org.junit.Test;
-
 import static org.junit.Assert.*;
 
 public class DeckTest
@@ -13,7 +12,7 @@ public class DeckTest
     public void pick()
     {
         Deck deck0 = new Deck();
-        for (int i = 0; i <= 4; i++)
+        for(int i = 0; i <= 4; i++)
         {
             deck0.pick();
         }
