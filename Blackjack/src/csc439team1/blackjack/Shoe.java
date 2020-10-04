@@ -4,11 +4,10 @@ import java.util.*;
 
 /**
  * Shoe class contains the collections of deck objects
- *
+ * <p>
  * has a private variable ArrayList<Deck> shoe
  */
-public class Shoe
-{
+public class Shoe {
     /**
      * an array list of deck called "shoe"
      */
@@ -24,8 +23,7 @@ public class Shoe
         shoe = new ArrayList<>();   //initialize shoe as new array list
 
         //loop n times, n is the numberOfDecks that was taken from user input
-        for (int totalDecks = 0; totalDecks < numberOfDecks; totalDecks++)
-        {
+        for (int totalDecks = 0; totalDecks < numberOfDecks; totalDecks++) {
             shoe.add(new Deck());   //add new deck to the shoe
         }
     }
@@ -35,11 +33,9 @@ public class Shoe
      *
      * @return the total number of deck(s) in the shoe
      */
-    public int numDeck()
-    {
+    public int numDeck() {
         int totalDeck = 0;  //Initialize total deck to 0
-        for (Deck deck : shoe)
-        {  //For each loop that will iterate every deck in the shoe
+        for (Deck deck : shoe) {  //For each loop that will iterate every deck in the shoe
             if (deck.size() == 0) shoe.remove(deck); //if the current deck size is 0, remove current deck from shoe
             else totalDeck++;  //increase the total deck by one
         }
@@ -51,8 +47,7 @@ public class Shoe
      *
      * @return a random card by calling Deck.pick()
      */
-    public Card pick()
-    {
+    public Card pick() {
         int randomDeck = (int) (Math.random() * numDeck()); //initialize a random number between 0 to the total number of deck(s) available in the shoe
         return (shoe.size() != 0 ? (shoe.get(randomDeck)).pick() : null); //return a random card by calling the Deck.pick()
     }
@@ -62,11 +57,9 @@ public class Shoe
      *
      * @return the total card(s) in the shoe
      */
-    public int size()
-    {
+    public int size() {
         int totalCards = 0;
-        for (Deck deck : shoe)
-        {
+        for (Deck deck : shoe) {
             totalCards += deck.size();
         }
         return totalCards; //return the total card(s) in the shoe
@@ -77,8 +70,7 @@ public class Shoe
      *
      * @return string representation of all cards available in the current shoe
      */
-    public String toString()
-    {
+    public String toString() {
         StringBuilder shoeString = new StringBuilder(); //creates empty string builder, default capacity 16
 
         for (Deck deck : shoe)  //loop for each deck in current shoe
