@@ -72,19 +72,4 @@ public class Shoe
         return totalCards; //return the total card(s) in the shoe
     }
 
-    /**
-     * This is the method that will return string representation of the current shoe (ex: Ace of CLUB, 2 of SPADE,......)
-     *
-     * @return tring representation of all cards available in the current shoe
-     */
-    public String toString()
-    {
-        StringBuilder shoeString = new StringBuilder(); //creates empty string builder, default capacity 16
-
-        for (Deck deck : shoe)  //loop for each deck in current shoe
-        {
-            shoeString.append(deck.toString() + "\n"); //add current deck.toString() to shoeString
-        }
-        return shoeString.toString();
-    }
 }

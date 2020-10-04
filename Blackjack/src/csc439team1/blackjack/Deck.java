@@ -43,23 +43,6 @@ public class Deck
         }
     }
 
-     /**
-     * toString() returns string representation of the current deck (ex: Ace of CLUB, 2 of SPADE,......)
-     *
-     * @return string representation of all cards available in the Deck
-     */
-    @Override
-    public String toString()
-    {
-        StringBuilder deckString = new StringBuilder(); //creates empty string builder, default capacity 16
-
-        for (Card card : deck)      //loop for each card in current deck
-        {
-            deckString.append(card.toString() + "\n"); //add current card.toString() to cardString
-        }
-        return deckString.toString();
-    }
-
     /**
      * size() is the size of the current deck
      *
