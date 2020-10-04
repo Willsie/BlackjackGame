@@ -53,7 +53,7 @@
     0%
   </span>
   <span class="absValue">
-    (0/ 3)
+    (0/ 5)
   </span>
 </td>
 <td class="coverageStat">
@@ -61,7 +61,7 @@
     0%
   </span>
   <span class="absValue">
-    (0/ 8)
+    (0/ 22)
   </span>
 </td>
 </tr>
@@ -78,60 +78,89 @@
 <i>4</i>&nbsp;
 <i>5</i>&nbsp;public class Shoe
 <i>6</i>&nbsp;{
-<i>7</i>&nbsp;    private ArrayList&lt;Deck&gt; shoe;
+<i>7</i>&nbsp;    private ArrayList&lt;Deck&gt; shoe;   //declare an array list of deck called &quot;shoe&quot;
 <i>8</i>&nbsp;
-<i>9</i>&nbsp;    public Shoe(int numberOfDecks)
-<b class="nc"><i>10</i>&nbsp;    {</b>
-<b class="nc"><i>11</i>&nbsp;        shoe = new ArrayList&lt;Deck&gt;();</b>
-<i>12</i>&nbsp;
-<i>13</i>&nbsp;        //loop n times, n is the numberOfDecks that was taken from user input
-<b class="nc"><i>14</i>&nbsp;        for (int totalDecks = 0; totalDecks &lt; numberOfDecks; totalDecks++)</b>
-<i>15</i>&nbsp;        {
-<b class="nc"><i>16</i>&nbsp;            shoe.add(new Deck());</b>
-<i>17</i>&nbsp;        }
-<i>18</i>&nbsp;    }
-<i>19</i>&nbsp;
-<i>20</i>&nbsp;    public int numDeck()
-<i>21</i>&nbsp;    {
-<b class="nc"><i>22</i>&nbsp;        return shoe.size();</b>
+<i>9</i>&nbsp;    /**
+<i>10</i>&nbsp;     * This is Shoe constructor that takes number of deck(s)
+<i>11</i>&nbsp;     *
+<i>12</i>&nbsp;     * @param numberOfDecks the number of deck(s) taken from user input
+<i>13</i>&nbsp;     */
+<i>14</i>&nbsp;    public Shoe(int numberOfDecks)  //Shoe constructor that takes number of deck(s)
+<b class="nc"><i>15</i>&nbsp;    {</b>
+<b class="nc"><i>16</i>&nbsp;        shoe = new ArrayList&lt;&gt;();   //initialize shoe as new array list</b>
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;        //loop n times, n is the numberOfDecks that was taken from user input
+<b class="nc"><i>19</i>&nbsp;        for (int totalDecks = 0; totalDecks &lt; numberOfDecks; totalDecks++)</b>
+<i>20</i>&nbsp;        {
+<b class="nc"><i>21</i>&nbsp;            shoe.add(new Deck());   //add new deck to the shoe</b>
+<i>22</i>&nbsp;        }
 <i>23</i>&nbsp;    }
 <i>24</i>&nbsp;
-<i>25</i>&nbsp;    /*
-<i>26</i>&nbsp;    public Card pick()
-<i>27</i>&nbsp;    {
-<i>28</i>&nbsp;        int randomDeck = (Math.random() &lt; 0.5 ? 0 : 1);
-<i>29</i>&nbsp;        if ((shoe.get(randomDeck)).size() == 0)
-<i>30</i>&nbsp;        {
-<i>31</i>&nbsp;            shoe.remove(randomDeck);
-<i>32</i>&nbsp;            return (shoe.size() != 0 ? (shoe.get(randomDeck)).pick() : null); //remove and return first card from shoe (main shoe not player shoe)
-<i>33</i>&nbsp;        }
-<i>34</i>&nbsp;    }
-<i>35</i>&nbsp;    */
-<i>36</i>&nbsp;
-<i>37</i>&nbsp;
-<i>38</i>&nbsp;        /*
-<i>39</i>&nbsp;        public int size ()
-<i>40</i>&nbsp;        {
-<i>41</i>&nbsp;            for (Deck deck )
-<i>42</i>&nbsp;            return shoe.size(); //return the size of the shoe
-<i>43</i>&nbsp;        }
-<i>44</i>&nbsp;        */
-<i>45</i>&nbsp;
-<i>46</i>&nbsp;    public static void main(String[] args)
+<i>25</i>&nbsp;    /**
+<i>26</i>&nbsp;     * This is the method that will count the number of available deck(s) in the shoe
+<i>27</i>&nbsp;     *
+<i>28</i>&nbsp;     * @return the total number of deck(s) in the shoe
+<i>29</i>&nbsp;     */
+<i>30</i>&nbsp;    public int numDeck()
+<i>31</i>&nbsp;    {
+<b class="nc"><i>32</i>&nbsp;        int totalDeck = 0;  //Initialize total deck to 0</b>
+<b class="nc"><i>33</i>&nbsp;        for (Deck deck : shoe)</b>
+<i>34</i>&nbsp;        {  //For each loop that will iterate every deck in the shoe
+<b class="nc"><i>35</i>&nbsp;            if (deck.size() == 0) shoe.remove(deck); //if the current deck size is 0, remove current deck from shoe</b>
+<b class="nc"><i>36</i>&nbsp;            else totalDeck++;  //increase the total deck by one</b>
+<b class="nc"><i>37</i>&nbsp;        }</b>
+<b class="nc"><i>38</i>&nbsp;        return totalDeck;   //return the total number of deck(s) in the shoe</b>
+<i>39</i>&nbsp;    }
+<i>40</i>&nbsp;
+<i>41</i>&nbsp;    /**
+<i>42</i>&nbsp;     * This is the method that will pick one random card from the current shoe
+<i>43</i>&nbsp;     *
+<i>44</i>&nbsp;     * @return a random card by calling Deck.pick()
+<i>45</i>&nbsp;     */
+<i>46</i>&nbsp;    public Card pick()
 <i>47</i>&nbsp;    {
-<b class="nc"><i>48</i>&nbsp;        Shoe shoe1 = new Shoe(6);</b>
-<b class="nc"><i>49</i>&nbsp;        System.out.println(shoe1.toString());</b>
-<i>50</i>&nbsp;        //System.out.println(&quot;The size of the shoe is: &quot; + shoe1.size() + &quot;\n&quot;);
-<b class="nc"><i>51</i>&nbsp;        System.out.println(shoe1.toString());</b>
-<i>52</i>&nbsp;    }
-<i>53</i>&nbsp;
-<i>54</i>&nbsp;}
+<b class="nc"><i>48</i>&nbsp;        int randomDeck = (int) (Math.random() * numDeck()); //initialize a random number between 0 to the total number of deck(s) available in the shoe</b>
+<b class="nc"><i>49</i>&nbsp;        return (shoe.size() != 0 ? (shoe.get(randomDeck)).pick() : null); //return a random card by calling the Deck.pick()</b>
+<i>50</i>&nbsp;    }
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;    /**
+<i>53</i>&nbsp;     * This is the method that will count the total card(s) in the shoe
+<i>54</i>&nbsp;     *
+<i>55</i>&nbsp;     * @return the total card(s) in the shoe
+<i>56</i>&nbsp;     */
+<i>57</i>&nbsp;    public int size()
+<i>58</i>&nbsp;    {
+<b class="nc"><i>59</i>&nbsp;        int totalCards = 0;</b>
+<b class="nc"><i>60</i>&nbsp;        for (Deck deck : shoe)</b>
+<i>61</i>&nbsp;        {
+<b class="nc"><i>62</i>&nbsp;            totalCards += deck.size();</b>
+<b class="nc"><i>63</i>&nbsp;        }</b>
+<b class="nc"><i>64</i>&nbsp;        return totalCards; //return the total card(s) in the shoe</b>
+<i>65</i>&nbsp;    }
+<i>66</i>&nbsp;
+<i>67</i>&nbsp;    /**
+<i>68</i>&nbsp;     * This is the method that will return string representation of the current shoe (ex: Ace of CLUB, 2 of SPADE,......)
+<i>69</i>&nbsp;     *
+<i>70</i>&nbsp;     * @return tring representation of all cards available in the current shoe
+<i>71</i>&nbsp;     */
+<i>72</i>&nbsp;    public String toString()
+<i>73</i>&nbsp;    {
+<b class="nc"><i>74</i>&nbsp;        String stringShoe = &quot;&quot;; //initialize stringShoe</b>
+<i>75</i>&nbsp;
+<i>76</i>&nbsp;        //loop for each deck in current shoe
+<b class="nc"><i>77</i>&nbsp;        for (Deck deck : shoe)</b>
+<i>78</i>&nbsp;        {
+<b class="nc"><i>79</i>&nbsp;            stringShoe += deck.toString(); //add current deck.toString() to stringShoe</b>
+<b class="nc"><i>80</i>&nbsp;        }</b>
+<b class="nc"><i>81</i>&nbsp;        return stringShoe;</b>
+<i>82</i>&nbsp;    }
+<i>83</i>&nbsp;}
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2020-09-23 21:45</div>
+    <div style="float:right;">generated on 2020-09-29 12:41</div>
 </div>
 </body>
 </html>

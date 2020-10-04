@@ -29,8 +29,6 @@ public class Deck
     }
 
     /**
-
-     * pick() will remove and return one random card from current deck
      * pick() will remove and return one random card from curent deck
      *
      * @return a single card removed from the current deck
@@ -40,26 +38,26 @@ public class Deck
         if (deck.size() <= 0) throw new IllegalArgumentException();
         else
         {
-            int random = (int) (Math.random() * deck.size());    //generate random number from 0 to the current size of the deck
-            return (deck.size() != 0 ? deck.remove(random) : null); //remove and return random from deck
+            int random = (int) (Math.random() * deck.size());   //generate random number from 0 to current size of the deck
+            return deck.remove(random); //remove and return random card from deck
         }
     }
 
-    /**
+     /**
      * toString() returns string representation of the current deck (ex: Ace of CLUB, 2 of SPADE,......)
      *
      * @return string representation of all cards available in the Deck
      */
+    @Override
     public String toString()
     {
-        StringBuilder stringDeck = new StringBuilder(); //initialize stringDeck
+        StringBuilder deckString = new StringBuilder(); //creates empty string builder, default capacity 16
 
-        //loop for each card in current deck
-        for (Card card : deck)
+        for (Card card : deck)      //loop for each card in current deck
         {
-            stringDeck.append(card.toString()).append("\n"); //add current card.toString() to stringDeck
+            deckString.append(card.toString() + "\n"); //add current card.toString() to cardString
         }
-        return stringDeck.toString();
+        return deckString.toString();
     }
 
     /**
