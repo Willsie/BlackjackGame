@@ -67,7 +67,7 @@ public class Shoe
     /**
      * This is the method that will return string representation of the current shoe (ex: Ace of CLUB, 2 of SPADE,......)
      *
-     * @return tring representation of all cards available in the current shoe
+     * @return string representation of all cards available in the current shoe
      */
     public String toString()
     {
