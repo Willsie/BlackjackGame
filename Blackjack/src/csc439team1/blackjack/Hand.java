@@ -51,35 +51,34 @@ public class Hand
      */
     public int getTotalValue()
     {
-        int nonAces = 0, acesCounter = 0, total = 0; //initialize nonAces, acesCounter, and total to 0
-        for (Card card : cardsOnHand) //loop each unique card in current Hand
+        int acesCounter = 0, total = 0;
+        for (Card currentCard: cardsOnHand)
         {
-            if (card.getNumber() > 1 && card.getNumber() < 11 && acesCounter > 2)
-            {
-                nonAces += card.getNumber();
-                total = nonAces + 11 + acesCounter;
-            } else if (card.getNumber() > 1 && card.getNumber() < 11 && acesCounter == 0)
-            {
-                nonAces += card.getNumber();
-                total = nonAces;
-            } else if (card.getNumber() > 1 && card.getNumber() < 11 && acesCounter == 1)
-            {
-                nonAces += card.getNumber();
-                total = nonAces > 10 ? nonAces + 1 : nonAces + 11;
-            } else if (card.getNumber() > 1 && card.getNumber() < 11 && acesCounter == 2)
-            {
-                nonAces += card.getNumber();
-                total = nonAces > 9 ? nonAces + 2 : nonAces + 12;
-            } else if (card.getNumber() == 1)
+            if (currentCard.getNumber() < 2)
             {
                 acesCounter++;
-                if (acesCounter > 1) total++;
-                else if (acesCounter == 1 && nonAces <= 10) total += 11;
-                else total++;
-            } else
+            }
+            else
             {
-                nonAces += 10;
-                total += 10;
+                if (currentCard.getNumber() < 10)
+                {
+                    total = total + currentCard.getNumber();
+                }
+                else
+                {
+                    total = total + 10;
+                }
+            }
+        }
+        if (acesCounter > 0)
+        {
+            if ((acesCounter - 1 + 11) + total <= 21)
+            {
+                total = total + (acesCounter -1 + 11);
+            }
+            else
+            {
+                total = total + acesCounter;
             }
         }
         return total;
