@@ -4,11 +4,10 @@ import java.util.*;
 
 /**
  * Shoe class contains the collections of deck objects
- *
+ * <p>
  * has a private variable ArrayList<Deck> shoe
  */
-public class Shoe
-{
+public class Shoe {
     /**
      * an array list of deck called "shoe"
      */
@@ -19,29 +18,37 @@ public class Shoe
      *
      * @param numberOfDecks the number of deck(s) taken from user input
      */
-    public Shoe(int numberOfDecks)  //Shoe constructor that takes number of deck(s)
+    public Shoe(int numberOfDecks) throws IllegalArgumentException  //Shoe constructor that takes number of deck(s)
     {
-        shoe = new ArrayList<>();   //initialize shoe as new array list
+        if (numberOfDecks <= 0) {
+            throw new IllegalArgumentException("Number of decks must be positive.");
+        } else {
+            shoe = new ArrayList<>();   //initialize shoe as new array list
 
-        //loop n times, n is the numberOfDecks that was taken from user input
-        for (int totalDecks = 0; totalDecks < numberOfDecks; totalDecks++)
-        {
-            shoe.add(new Deck());   //add new deck to the shoe
+            //loop n times, n is the numberOfDecks that was taken from user input
+            for (int totalDecks = 0; totalDecks < numberOfDecks; totalDecks++) {
+                shoe.add(new Deck());   //add new deck to the shoe
+            }
+
         }
+
     }
 
     /**
-     * This is the method that will count the number of available deck(s) in the shoe
+     * This is the method that will count the number of available deck(s) in the shoe. If a deck in the shoe is empty, it is removed by the iterator.
      *
      * @return the total number of deck(s) in the shoe
      */
-    public int numDeck()
-    {
+    public int numDeck() {
         int totalDeck = 0;  //Initialize total deck to 0
-        for (Deck deck : shoe)
-        {  //For each loop that will iterate every deck in the shoe
-            if (deck.size() == 0) shoe.remove(deck); //if the current deck size is 0, remove current deck from shoe
-            else totalDeck++;  //increase the total deck by one
+        Iterator<Deck> iter = shoe.iterator();
+        while(iter.hasNext()){
+            Deck deck = iter.next();
+            if (deck.size() == 0) {
+                iter.remove();
+            } else {
+                totalDeck++;
+            }
         }
         return totalDeck;   //return the total number of deck(s) in the shoe
     }
@@ -51,8 +58,7 @@ public class Shoe
      *
      * @return a random card by calling Deck.pick()
      */
-    public Card pick()
-    {
+    public Card pick() {
         int randomDeck = (int) (Math.random() * numDeck()); //initialize a random number between 0 to the total number of deck(s) available in the shoe
         return (shoe.size() != 0 ? (shoe.get(randomDeck)).pick() : null); //return a random card by calling the Deck.pick()
     }
@@ -62,11 +68,9 @@ public class Shoe
      *
      * @return the total card(s) in the shoe
      */
-    public int size()
-    {
+    public int size() {
         int totalCards = 0;
-        for (Deck deck : shoe)
-        {
+        for (Deck deck : shoe) {
             totalCards += deck.size();
         }
         return totalCards; //return the total card(s) in the shoe

@@ -28,18 +28,5 @@ public class DeckTest {
         }
         deck1.pick();
     }
-
-    /**
-     * Tests testToString(). First test: toString should contain the expected string. Second test: card removed at random. Deck's toString should then not contain the card's toString value.
-     */
-    @Test
-    public void testToString() {
-        Deck deck2 = new Deck();
-        String expected = "Ace of CLUB";
-        assertTrue(deck2.toString().contains(expected));
-
-        Card card = deck2.pick();
-        String expected2 = card.toString();
-        assertFalse(deck2.toString().contains(expected2));
-    }
 }
+

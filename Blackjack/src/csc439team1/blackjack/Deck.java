@@ -33,7 +33,7 @@ public class Deck
      *
      * @return a single card removed from the current deck
      */
-    public Card pick()
+    public Card pick() throws IllegalArgumentException
     {
         if (deck.size() <= 0) throw new IllegalArgumentException();
         else
