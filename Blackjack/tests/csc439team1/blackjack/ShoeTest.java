@@ -38,4 +38,14 @@ public class ShoeTest {
         Shoe testShoe = new Shoe(15);
         assertEquals(15, testShoe.numDeck());
     }
+
+    /**
+     * testSize checks to see if size method is correctly returning the number of cards
+     * in the shoe, by creating a shoe with 1 deck and checking that the total is 52 cards.
+     */
+    @Test
+    public void testSize() {
+        Shoe testShoe = new Shoe(1);
+        assertEquals(52, testShoe.size());
+    }
 }
