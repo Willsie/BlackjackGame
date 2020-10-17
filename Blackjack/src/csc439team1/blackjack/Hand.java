@@ -44,47 +44,6 @@ public class Hand
     }
 
     /**
-     * this is a method to calculate the total value of all cards in the current Hand
-     * the ACEs value will be adjusted according to the play
-     *
-     * @return the total value of all cards in the current Hand
-     */
-    public int getTotalValue()
-    {
-        int acesCounter = 0, total = 0;
-        for (Card currentCard: cardsOnHand)
-        {
-            if (currentCard.getNumber() < 2)
-            {
-                acesCounter++;
-            }
-            else
-            {
-                if (currentCard.getNumber() < 10)
-                {
-                    total = total + currentCard.getNumber();
-                }
-                else
-                {
-                    total = total + 10;
-                }
-            }
-        }
-        if (acesCounter > 0)
-        {
-            if ((acesCounter - 1 + 11) + total <= 21)
-            {
-                total = total + (acesCounter -1 + 11);
-            }
-            else
-            {
-                total = total + acesCounter;
-            }
-        }
-        return total;
-    }
-
-    /**
      * the getCards method returns the combination of all cards in the current Hand.
      *
      * @return an array list of card objects in the current Hand
