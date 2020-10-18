@@ -7,15 +7,22 @@ import java.util.ArrayList;
 import static org.junit.Assert.*;
 
 public class HandTest {
+
+    /**
+     * Test case for size, creates an empty hand and ensures size is 0.
+     */
     @Test
     public void testSize(){
         Hand testHand = new Hand();
-        Card testCard = new Card(1, 1);
-        testHand.addCard(testCard);
-        testHand.addCard(testCard);
-        assertTrue(testHand.size() == 2);
+
+        assertTrue(testHand.size() == 0);
 
     }
+
+    /**
+     * testAddCard uses a shoe and has two hands pick from the shoe, with one being larger and tests that is actually
+     * the case.
+     */
     @Test
     public void testAddCard() {
         Shoe tesShoe = new Shoe(1);
@@ -29,6 +36,12 @@ public class HandTest {
         }
         assertTrue(testHand.size() < testHand2.size());
     }
+
+    /**
+     * testGetCards creates an Arraylist of cards and a hand, manually creates cards, and adds them to both objects
+     * in the same order. The assert equals verifies that the cards returned by getCards method match the other Card
+     * arraylist, therefore being the correct hand of cards.
+     */
     @Test
     public void testGetCards(){
         ArrayList<Card> controlArray = new ArrayList<>();
