@@ -56,6 +56,7 @@ public class HandTest {
         controlArray.add(testCard2);
         controlArray.add(testCard3);
         assertEquals(controlArray, testHand.getCards());
+
     }
 }
 /*
