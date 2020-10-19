@@ -58,22 +58,3 @@ public class HandTest {
         assertEquals(controlArray, testHand.getCards());
     }
 }
-/*
-These tests resulted in %100 code coverage with out really testing methods from hand
-@Test
-    public void allTest() {
-        Shoe testShoe = new Shoe(3);
-        Hand testHand = new Hand();
-        testHand.addCard(testShoe.pick());
-        testHand.addCard(testShoe.pick());
-        testHand.addCard(testShoe.pick());
-        int a = testHand.size();
-        assertNotSame(testHand, testShoe);
-    }
-    @Test
-    public void testAroo(){
-        Hand testHand = new Hand();
-        ArrayList<Card> controlArray = new ArrayList<>();
-        assertEquals(controlArray, testHand.getCards());
-    }
- */
