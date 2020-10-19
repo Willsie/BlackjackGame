@@ -3,6 +3,9 @@ package csc439team1.blackjack;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/**
+ * This is the test class for Shoe class
+ */
 public class ShoeTest {
     /**
      * Test to confirm entering a number less than 1 in the shoe constructor throws an IllegalArgument exception.

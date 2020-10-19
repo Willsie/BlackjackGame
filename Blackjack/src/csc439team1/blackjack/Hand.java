@@ -5,7 +5,6 @@ import java.util.ArrayList;
 /**
  * Hand class is a collection of cards who are being played after being picked from the shoe / deck
  *
- * has one private variable ArrayList<Card> cards
  */
 public class Hand
 {
