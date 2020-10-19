@@ -1,7 +1,6 @@
 package csc439team1.blackjack;
 
 import org.junit.Test;
-
 import static org.junit.Assert.*;
 
 public class ShoeTest {
@@ -21,7 +20,6 @@ public class ShoeTest {
         Shoe testShoe = new Shoe(3);
         Card testCard = testShoe.pick();
         assertTrue(testCard instanceof Card);
-
     }
 
     /**
