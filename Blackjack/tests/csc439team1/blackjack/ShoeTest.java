@@ -6,6 +6,14 @@ import static org.junit.Assert.*;
 
 public class ShoeTest {
     /**
+     * Test to confirm entering a number less than 1 in the shoe constructor throws an IllegalArgument exception.
+     */
+    @Test (expected = IllegalArgumentException.class)
+    public void testConstructor(){
+        Shoe testShoe = new Shoe(0);
+    }
+
+    /**
      * Test case which checks to make sure that a card is returned by the pick method.
      */
     @Test
@@ -28,6 +36,18 @@ public class ShoeTest {
             testShoe.pick();
         }
         assertEquals(1,testShoe.numDeck());
+    }
+
+    /**
+     * Test to verify that an IllegalStateException is throw should gameplay result in an empty shoe.
+     */
+    @Test (expected = IllegalStateException.class)
+    public void testPickThrow() {
+        Shoe testShoe = new Shoe(1);
+        for (int a = 0; a < 53; a++)
+        {
+            testShoe.pick();
+        }
     }
 
     /**
