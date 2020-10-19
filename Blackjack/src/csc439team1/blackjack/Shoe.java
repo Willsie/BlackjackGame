@@ -5,7 +5,6 @@ import java.util.*;
 /**
  * Shoe class contains the collections of deck objects
  *
- * has a private variable ArrayList<Deck> shoe
  */
 public class Shoe
 {

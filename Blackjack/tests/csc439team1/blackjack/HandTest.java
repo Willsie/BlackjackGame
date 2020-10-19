@@ -6,6 +6,9 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
+/**
+ * This is the test class for Hand class
+ */
 public class HandTest {
 
     /**
