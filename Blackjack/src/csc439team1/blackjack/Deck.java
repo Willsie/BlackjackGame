@@ -35,12 +35,8 @@ public class Deck
      */
     public Card pick()
     {
-        if (deck.size() <= 0) throw new IllegalArgumentException();
-        else
-        {
-            int random = (int) (Math.random() * deck.size());   //generate random number from 0 to current size of the deck
-            return deck.remove(random); //remove and return random card from deck
-        }
+        int random = (int) (Math.random() * deck.size());   //generate random number from 0 to current size of the deck
+        return deck.remove(random); //remove and return random card from deck
     }
 
     /**
