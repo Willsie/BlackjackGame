@@ -1,9 +1,11 @@
 package csc439team1.blackjack;
 
 import org.junit.Test;
-
 import static org.junit.Assert.*;
 
+/**
+ * This is the test class for Shoe class
+ */
 public class ShoeTest {
     /**
      * Test to confirm entering a number less than 1 in the shoe constructor throws an IllegalArgument exception.
@@ -21,7 +23,6 @@ public class ShoeTest {
         Shoe testShoe = new Shoe(3);
         Card testCard = testShoe.pick();
         assertTrue(testCard instanceof Card);
-
     }
 
     /**
@@ -68,4 +69,4 @@ public class ShoeTest {
         Shoe testShoe = new Shoe(1);
         assertEquals(52, testShoe.size());
     }
-}
+ }

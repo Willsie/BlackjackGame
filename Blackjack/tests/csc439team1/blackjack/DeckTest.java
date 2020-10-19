@@ -3,6 +3,9 @@ package csc439team1.blackjack;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/**
+ * This is the test class for Deck class
+ */
 public class DeckTest
 {
     /**

@@ -112,7 +112,8 @@ public class Card
      * @param otherCard is the card that we are comparing with the original card
      * @return true if both cards has the same numbers and suits; otherwise, return false
      */
-    public boolean equals(Card otherCard)
+    @Override
+    public boolean equals(Object otherCard)
     {
         // If the object is compared with itself then return true (has the same reference)
         if (otherCard == this)

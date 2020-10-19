@@ -6,6 +6,9 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
+/**
+ * This is the test class for Hand class
+ */
 public class HandTest {
 
     /**
@@ -14,9 +17,7 @@ public class HandTest {
     @Test
     public void testSize(){
         Hand testHand = new Hand();
-
         assertTrue(testHand.size() == 0);
-
     }
 
     /**

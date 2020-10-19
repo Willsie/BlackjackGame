@@ -1,12 +1,10 @@
 package csc439team1.blackjack;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Hand class is a collection of cards who are being played after being picked from the shoe / deck
  *
- * has one private variable ArrayList<Card> cards
  */
 public class Hand
 {
@@ -20,8 +18,8 @@ public class Hand
      */
     public Hand()
     {
-        this.cardsOnHand = new ArrayList<>();
-    }   //constructor for Hand method
+        this.cardsOnHand = new ArrayList<>(); //constructor for Hand method
+    }
 
     /**
      * this is a method to add card to the current Hand
@@ -30,7 +28,6 @@ public class Hand
      */
     public void addCard(Card anotherCard)
     {
-
         cardsOnHand.add(anotherCard);
     }
 
@@ -49,7 +46,6 @@ public class Hand
      *
      * @return an array list of card objects in the current Hand
      */
-
     public ArrayList<Card> getCards()
     {
        return cardsOnHand;
