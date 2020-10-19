@@ -14,9 +14,7 @@ public class HandTest {
     @Test
     public void testSize(){
         Hand testHand = new Hand();
-
         assertTrue(testHand.size() == 0);
-
     }
 
     /**
@@ -56,6 +54,5 @@ public class HandTest {
         controlArray.add(testCard2);
         controlArray.add(testCard3);
         assertEquals(controlArray, testHand.getCards());
-
     }
 }

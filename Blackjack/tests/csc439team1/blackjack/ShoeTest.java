@@ -66,4 +66,4 @@ public class ShoeTest {
         Shoe testShoe = new Shoe(1);
         assertEquals(52, testShoe.size());
     }
-}
+ }
