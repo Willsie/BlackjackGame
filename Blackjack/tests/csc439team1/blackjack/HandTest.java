@@ -8,6 +8,9 @@ import static org.junit.Assert.*;
 
 /**
  * This is the test class for Hand class
+ * @author Trevor Sears
+ * @author Will Sie
+ * @author Conner Martin
  */
 public class HandTest {
 
