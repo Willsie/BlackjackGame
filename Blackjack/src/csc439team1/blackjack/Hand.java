@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 /**
  * Hand class is a collection of cards who are being played after being picked from the shoe / deck
- *
+ * @author Trevor Sears
+ * @author Will Sie
+ * @author Conner Martin
  */
 public class Hand
 {
