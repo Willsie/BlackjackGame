@@ -58,10 +58,10 @@
 </td>
 <td class="coverageStat">
   <span class="percent">
-    96.3%
+    100%
   </span>
   <span class="absValue">
-    (26/ 27)
+    (26/ 26)
   </span>
 </td>
 </tr>
@@ -194,23 +194,19 @@
 <b class="fc"><i>120</i>&nbsp;            return true;</b>
 <i>121</i>&nbsp;        }
 <i>122</i>&nbsp;
-<i>123</i>&nbsp;        /* Check if other is an instance of Card or not
-<i>124</i>&nbsp;          &quot;null instanceof [type]&quot; also returns false */
-<b class="fc"><i>125</i>&nbsp;        if (!(otherCard instanceof Card))</b>
-<i>126</i>&nbsp;        {
-<b class="nc"><i>127</i>&nbsp;            return false;</b>
-<i>128</i>&nbsp;        }
-<i>129</i>&nbsp;
-<i>130</i>&nbsp;        // Compare the data members (suit and number) and return accordingly
-<b class="fc"><i>131</i>&nbsp;        return (this.suit == otherCard.suit &amp;&amp; this.number == otherCard.number);</b>
-<i>132</i>&nbsp;    }
-<i>133</i>&nbsp;}
+<i>123</i>&nbsp;        // cast otherCard to Card so to compare data members
+<b class="fc"><i>124</i>&nbsp;        Card otherCardCopy = (Card) otherCard;</b>
+<i>125</i>&nbsp;
+<i>126</i>&nbsp;        // Compare the data members (suit and number) and return accordingly
+<b class="fc"><i>127</i>&nbsp;        return (this.suit == otherCardCopy.suit &amp;&amp; this.number == otherCardCopy.number);</b>
+<i>128</i>&nbsp;    }
+<i>129</i>&nbsp;}
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2020-09-23 21:45</div>
+    <div style="float:right;">generated on 2020-09-29 12:41</div>
 </div>
 </body>
 </html>

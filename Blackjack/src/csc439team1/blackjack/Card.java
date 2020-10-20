@@ -2,6 +2,9 @@ package csc439team1.blackjack;
 
 /**
  * This is a unique card that has 2 private variables: int suit and int number
+ * @author Trevor Sears
+ * @author Will Sie
+ * @author Conner Martin
  */
 public class Card
 {
@@ -104,26 +107,5 @@ public class Card
     public String toString()
     {
         return getNumberString() + " of " + getSuitString();
-    }
-
-    /**
-     * equals(Card other) is the a method that compares 2 card objects for their properties
-     *
-     * @param otherCard is the card that we are comparing with the original card
-     * @return true if both cards has the same numbers and suits; otherwise, return false
-     */
-    public boolean equals(Card otherCard)
-    {
-        // If the object is compared with itself then return true (has the same reference)
-        if (otherCard == this)
-        {
-            return true;
-        }
-
-        // cast otherCard to Card so to compare data members
-        Card otherCardCopy = (Card) otherCard;
-
-        // Compare the data members (suit and number) and return accordingly
-        return (this.suit == otherCardCopy.suit && this.number == otherCardCopy.number);
     }
 }

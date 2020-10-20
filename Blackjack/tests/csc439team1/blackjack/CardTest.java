@@ -1,14 +1,13 @@
 package csc439team1.blackjack;
 
-import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.Objects;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * This is test class for Card class
+ * @author Trevor Sears
+ * @author Will Sie
+ * @author Conner Martin
  */
 public class CardTest
 {
@@ -166,29 +165,5 @@ public class CardTest
     {
         Card card4 = new Card(1, 0);
         assertEquals("Ace of CLUB", card4.toString());
-    }
-
-    /**
-     * Test equals() by creating card5 and card6 (both has cardNumber 1 and cardSuit 0)
-     * If both cards are equal, it should pass the test case
-     */
-    @Test
-    public void testEquals()
-    {
-        Card card5 = new Card(1, 0);
-        Card card6 = new Card(1, 0);
-        assertTrue(card5.equals(card6));
-    }
-
-    /**
-     * Test to verify override of equals if clause that compares
-     * object to self.
-     */
-    @Test
-    public void testEqualsCardObject()
-    {
-        Card card7 = new Card(1, 0);
-        Card card8 = card7;
-        assertTrue(card8.equals(card7));
     }
 }
