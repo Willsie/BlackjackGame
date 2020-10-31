@@ -1,4 +1,4 @@
-package csc439team1.blackjack;
+package csc439team1.blackjack.model;
 
 import java.util.*;
 

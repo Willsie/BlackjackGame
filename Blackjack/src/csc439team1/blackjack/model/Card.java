@@ -1,4 +1,4 @@
-package csc439team1.blackjack;
+package csc439team1.blackjack.model;
 
 /**
  * This is a unique card that has 2 private variables: int suit and int number
@@ -19,12 +19,12 @@ public class Card
     private final int number;
 
     /**
-     * constructor for Card object that takes 2 parameters: int cardnumber, and int cardSuit
+     * constructor for Card object that takes 2 parameters: int cardNumber, and int cardSuit
      *
      * @param cardNumber the number of the card ranges from 1 to 13 (1 is ACE, 11 is JACK, 12 is QUEEN, 13 is KING)
      * @param cardSuit   the suit of the card (0 is CLUBS, 1 is HEARTS, 2 is SPADES, 3 is DIAMONDS)
      * @throws IllegalArgumentException if the parameter cardSuit is smaller than 0 or greater than 3 or
-     *                                  if the parameter cardnumber is smaller than 1 or greater than 13
+     *                                  if the parameter cardNumber is smaller than 1 or greater than 13
      */
     public Card(int cardNumber, int cardSuit)
     {

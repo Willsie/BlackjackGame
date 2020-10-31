@@ -1,3 +1,5 @@
+// THIS IS NOT A CONTROLLER CLASS !!!
+
 /*
 package csc439team1.blackjack;
 

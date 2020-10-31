@@ -1,6 +1,6 @@
-package csc439team1.blackjack;
+package csc439team1.blackjack.model;
 
-import java.util.*;
+import java.util.ArrayList;
 
 /**
  * Shoe class contains the collections of deck objects
