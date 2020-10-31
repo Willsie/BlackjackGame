@@ -21,18 +21,18 @@ public class Card
     /**
      * constructor for Card object that takes 2 parameters: int cardnumber, and int cardSuit
      *
-     * @param cardnumber the number of the card ranges from 1 to 13 (1 is ACE, 11 is JACK, 12 is QUEEN, 13 is KING)
+     * @param cardNumber the number of the card ranges from 1 to 13 (1 is ACE, 11 is JACK, 12 is QUEEN, 13 is KING)
      * @param cardSuit   the suit of the card (0 is CLUBS, 1 is HEARTS, 2 is SPADES, 3 is DIAMONDS)
      * @throws IllegalArgumentException if the parameter cardSuit is smaller than 0 or greater than 3 or
      *                                  if the parameter cardnumber is smaller than 1 or greater than 13
      */
-    public Card(int cardnumber, int cardSuit)
+    public Card(int cardNumber, int cardSuit)
     {
         if (cardSuit > 3 || cardSuit < 0)       //if cardSuit > 3 or cardSuit <0, throws IllegalArgumentException
             throw new IllegalArgumentException("Illegal card suit:" + cardSuit);
-        else if (cardnumber > 13 || cardnumber < 1)    //if cardnumber > 13 or cardnumber < 1, throws IllegalArgumentException
-            throw new IllegalArgumentException("Illegal card number:" + cardnumber);
-        number = cardnumber;
+        else if (cardNumber > 13 || cardNumber < 1)    //if cardNumber > 13 or cardNumber < 1, throws IllegalArgumentException
+            throw new IllegalArgumentException("Illegal card number:" + cardNumber);
+        number = cardNumber;
         suit = cardSuit;
     }
 

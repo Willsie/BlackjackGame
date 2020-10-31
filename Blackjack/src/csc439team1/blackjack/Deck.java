@@ -4,6 +4,7 @@ import java.util.*;
 
 /**
  * Deck class is a collection of Card objects
+ *
  * @author Trevor Sears
  * @author Will Sie
  * @author Conner Martin
@@ -39,7 +40,11 @@ public class Deck
     public Card pick()
     {
         int random = (int) (Math.random() * deck.size());   //generate random number from 0 to current size of the deck
-        return deck.remove(random); //remove and return random card from deck
+        if (deck.size() < 1) throw new IndexOutOfBoundsException();
+        else
+        {
+            return deck.remove(random); //remove and return random card from deck
+        }
     }
 
     /**
