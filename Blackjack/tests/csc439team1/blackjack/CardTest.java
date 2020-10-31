@@ -32,6 +32,12 @@ public class CardTest
         Card card0 = new Card(-1, 2);
     }
 
+    @Test(expected = IllegalArgumentException.class) // cardNumber being illegal
+    public void Card13()
+    {
+        Card card0 = new Card(14, 2);
+    }
+
     /**
      * Test constructor statement for assigning cardNumber to 13
      */
