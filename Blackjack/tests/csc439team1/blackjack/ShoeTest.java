@@ -5,6 +5,9 @@ import static org.junit.Assert.*;
 
 /**
  * This is the test class for Shoe class
+ * @author Trevor Sears
+ * @author Will Sie
+ * @author Conner Martin
  */
 public class ShoeTest {
     /**

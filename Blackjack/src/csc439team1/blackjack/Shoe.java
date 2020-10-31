@@ -4,7 +4,9 @@ import java.util.*;
 
 /**
  * Shoe class contains the collections of deck objects
- *
+ * @author Trevor Sears
+ * @author Will Sie
+ * @author Conner Martin
  */
 public class Shoe
 {
@@ -17,7 +19,8 @@ public class Shoe
      * This is Shoe constructor that takes number of deck(s). Will throw IllegalArgumentException if a
      * number below 1 is entered.
      *
-     * @param numberOfDecks the number of deck(s) taken from user input
+     * @param numberOfDecks the number of deck(s) taken from user input.
+     * @throws IllegalArgumentException when user enters value of less than 1.
      */
     public Shoe(int numberOfDecks)  //Shoe constructor that takes number of deck(s)
     {
@@ -49,7 +52,8 @@ public class Shoe
      * empty decks from shoe. Method will also throw IllegalStateException should the shoe be
      * allowed to allowed to run below 1 deck.
      *
-     * @return a random card by calling Deck.pick()
+     * @return a random card by calling Deck.pick().
+     * @throws IllegalStateException if shoe becomes empty.
      */
     public Card pick()
     {
