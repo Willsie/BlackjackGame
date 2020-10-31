@@ -29,7 +29,7 @@ public class Deck
     }
 
     /**
-     * pick() will remove and return one random card from curent deck
+     * pick() will remove and return one random card from current deck
      *
      * @return a single card removed from the current deck
      */
