@@ -33,7 +33,7 @@ public class Deck
      *
      * @return a single card removed from the current deck
      */
-    public Card pick()
+    public Card pick() throws IllegalArgumentException
     {
         int random = (int) (Math.random() * deck.size());   //generate random number from 0 to current size of the deck
         return deck.remove(random); //remove and return random card from deck
