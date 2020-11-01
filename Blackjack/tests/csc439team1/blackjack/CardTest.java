@@ -32,10 +32,10 @@ public class CardTest
         Card card0 = new Card(-1, 2);
     }
 
-    @Test // Test case that ensures both entries are correct.
+    @Test (expected = IllegalArgumentException.class)// Test case that ensures both entries are correct.
     public void Card13()
     {
-        Card card0 = new Card(10, 1);
+        Card card0 = new Card(14, 2);
     }
 
     /**
