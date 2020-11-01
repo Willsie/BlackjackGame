@@ -20,22 +20,22 @@ public class CardTest
         Card card0 = new Card(-1, -1);
     }
 
-    @Test(expected = IllegalArgumentException.class) // cardSuit being illegal
+    @Test(expected = IllegalArgumentException.class) // cardNumber is correct while cardSuit is illegal
     public void Card1()
     {
         Card card0 = new Card(5, 5);
     }
 
-    @Test(expected = IllegalArgumentException.class) // cardNumber being illegal
+    @Test(expected = IllegalArgumentException.class) // cardNumber being illegal while cardSuit is correct
     public void Card2()
     {
         Card card0 = new Card(-1, 2);
     }
 
-    @Test(expected = IllegalArgumentException.class) // cardNumber being illegal
+    @Test // Test case that ensures both entries are correct.
     public void Card13()
     {
-        Card card0 = new Card(14, 2);
+        Card card0 = new Card(10, 1);
     }
 
     /**
