@@ -1,91 +1,25 @@
 package csc439team1.blackjack.view;
 
-import csc439team1.blackjack.model.Dealer;
-import csc439team1.blackjack.model.Player;
+import java.util.Scanner;
 
 public class CLIView extends View
 {
+
+    /**
+     * display the message arguments to the display
+     */
     @Override
-    public void buyChip()
-    {
-        System.out.println("How much chips do you want to buy ? ($5,000 max");
+    public void output(String message) {
+           System.out.print(message);
     }
 
-    @Override
-    public String showHand(Player playerName)
-    {
-        return playerName.getPlayerHand().getCards().toString();
-    }
-
-    @Override
-    public String showHand(Dealer playerName)
-    {
-        return playerName.getDealerHand().getCards().toString();
-    }
-
-    @Override
-    public int showChips()
-    {
-        return 0;
-    }
-
-    @Override
-    public double showMoney()
-    {
-        return 0;
-    }
-
-    @Override
-    public int showValue()
-    {
-        return 0;
-    }
-
-    @Override
-    public boolean hitOrStand()
-    {
-        return false;
-    }
-
-    @Override
-    public String quit()
-    {
-        return null;
-    }
-
-    @Override
-    public void gameStart()
-    {
-
-    }
-
-    @Override
-    public void jackpot()
-    {
-
-    }
-
-    @Override
-    public void busted()
-    {
-
-    }
-
-    @Override
-    public void lostBet()
-    {
-
-    }
-
-    @Override
-    public void winBet()
-    {
-
-    }
-
-    @Override
-    public void push()
-    {
-
+    /**
+     * creates new Scanner object called input as placeholder to return the input from user
+     * @return String message
+     */
+    public String input () {
+        Scanner input = new Scanner(System.in);
+            return input.next();
     }
 }
+

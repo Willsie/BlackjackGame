@@ -1,21 +1,30 @@
 package csc439team1.blackjack.model;
 
+import java.util.ArrayList;
+
 /**
  * Dealer class contains a private variable type Hand
  */
-public class Dealer
-{
+public class Dealer {
     /**
      * this is the collection of cards on the current Dealer hand
      */
-   private final Hand dealerHand;
+    private Hand dealerHand = new Hand();
 
     /**
-     * this is the Dealer(...) constructor
-     * @param dealerHand is the Hand type consists of collection of dealer cards
+     * default no args constructor for Dealer()
      */
-    public Dealer(Hand dealerHand){
-        this.dealerHand = dealerHand;
+    public Dealer() {
+    }
+
+
+    /**
+     * Getter method for Dealer's hand
+     *
+     * @return deaer's hand.
+     */
+    public ArrayList<Card> getHand() {
+        return this.dealerHand.getCards();
     }
 
     /**
@@ -23,8 +32,16 @@ public class Dealer
      *
      * @return Hand object
      */
-    public Hand getDealerHand(){
+    public Hand getDealerHand() {
         if (this.dealerHand.size() < 1) throw new IndexOutOfBoundsException();
         return this.dealerHand;
+    }
+
+    /**
+     * Adds a card to the dealer's hand.
+     * @param card Card returned from shoe.pick() will be added to dealer's hand.
+     */
+    public void addCard(Card card){
+        dealerHand.addCard(card);
     }
 }

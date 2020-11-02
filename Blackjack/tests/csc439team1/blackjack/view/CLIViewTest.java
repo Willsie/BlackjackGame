@@ -2,63 +2,19 @@ package csc439team1.blackjack.view;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class CLIViewTest {
 
+    /**
+     * tests output method to make sure display message properly
+     */
     @Test
-    public void buyChip() {
+    public void output() {
     }
 
+    /**
+     * tests input method to make sure the input scan the right type of user input
+     */
     @Test
-    public void showHand() {
-    }
-
-    @Test
-    public void testShowHand() {
-    }
-
-    @Test
-    public void showChips() {
-    }
-
-    @Test
-    public void showMoney() {
-    }
-
-    @Test
-    public void showValue() {
-    }
-
-    @Test
-    public void hitOrStand() {
-    }
-
-    @Test
-    public void quit() {
-    }
-
-    @Test
-    public void gameStart() {
-    }
-
-    @Test
-    public void jackpot() {
-    }
-
-    @Test
-    public void busted() {
-    }
-
-    @Test
-    public void lostBet() {
-    }
-
-    @Test
-    public void winBet() {
-    }
-
-    @Test
-    public void push() {
+    public void input() {
     }
 }
