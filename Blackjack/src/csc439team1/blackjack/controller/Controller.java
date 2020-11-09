@@ -24,28 +24,36 @@ public class Controller {
         askBet();
         initialDeal(shoe);
     }
-    //example of changed method
+
     public void buyChips() {
         view.output("Game is starting.....how much chips do you want to buy (between $10 to $5000): ");
         String input = view.input();
         //call to method which checks for quit
         checkQuit(input);
-        //call to method which does try catch via console to ensure converts to int
+        //call to method which does try catch via console to ensure converts to int also assigns acceptable string to input.
         input = checkInt(input);
+        //While block which checks parsed int for being between 10 and 5000, rechecks for correct conversion throughout
+        // process, and user can quit via checkInt method call.
         while (Integer.parseInt(input) > 5000 || Integer.parseInt(input) < 10) {
             view.output("The amount is either too large or low, enter an amount between $10 and $5000.\n");
             input = view.input();
             input = checkInt(input);
         }
+        //after all checks passed input is assigned to amount variable and player object updated with amount of chips.
         int amount = Integer.parseInt(input);
         player.setChips(amount);
     }
-
+    //Method for placing a bet, starts with using view to prompt user, then checks input before accepting and assigning value
+    //to int variable or player object.
     public void askBet() {
         view.output("How much do you want to bet (between $10 to $500): ");
         String input = view.input();
+        //call to method which checks for quit
         checkQuit(input);
+        //call to method which does try catch via console to ensure converts to int also assigns acceptable string to input.
         input = checkInt(input);
+        //While block which checks parsed int for being between 10 and 500, rechecks for correct conversion throughout
+        // process, and user can quit via checkInt method call.
         while (Integer.parseInt(input) > player.getChips() || Integer.parseInt(input) > 500 || Integer.parseInt(input) < 10) {
             view.output("The bet is either too large or low, enter an amount between $10 and $500 which does not exceed" +
                     "your total amount of chips.");
@@ -98,13 +106,6 @@ public class Controller {
     {
         if (input.toLowerCase().equals("quit")) {
             quit();
-        }
-    }
-    private void checkRange(int amount, int high, int low)
-    {
-        if (amount > high || amount < low)
-        {
-            throw new IllegalArgumentException();
         }
     }
 }
