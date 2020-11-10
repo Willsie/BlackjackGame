@@ -19,7 +19,7 @@ public class CLIView extends View
      */
     public String input () {
         Scanner input = new Scanner(System.in);
-            return input.next();
+        return input.next();
     }
 }
 
