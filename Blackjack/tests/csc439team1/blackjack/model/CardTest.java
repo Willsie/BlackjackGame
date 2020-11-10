@@ -13,32 +13,66 @@ import static org.junit.Assert.assertEquals;
 public class CardTest
 {
     /**
-     * Tests constructor's argument checking. Should catch IllegalArgumentException if cardNumber is greater than 13 or less than 1, or if cardSuit is less than 0 or greater than 3.
+     * Test below check for IllegalArgumentException thrown by Card constructor, plus one instance where both inputs are correct
+     * with no exception thrown for completeness. Methodology is as follows, both correct, test for all remaining combinations of
+     * cardNumber being correct with incorrect cardSuit, then all remaining combinations of cardSuit being correct with incorrect cardNumber,
+     * followed by cardNumber being to high with combinations of incorrect cardSuit, and lastly cardNumber being too low with all combinataions
+     * of cardSuit being incorrect.
      */
-    @Test(expected = IllegalArgumentException.class) // tests both arguments being illegal
-    public void Card()
+    //Test to verify bot correct entries do not throw any exceptions.
+    @Test
+    public void cardConstruct1()
     {
-        Card card0 = new Card(-1, -1);
+        Card testCard = new Card(1, 1);
     }
-
-    @Test(expected = IllegalArgumentException.class) // cardNumber is correct while cardSuit is illegal
-    public void Card1()
+    //Test cardNumber correct, while cardSuit is too high
+    @Test (expected = IllegalArgumentException.class)
+    public void cardConstruct2()
     {
-        Card card0 = new Card(5, 5);
+        Card testCard = new Card(1, 10);
     }
-
-    @Test(expected = IllegalArgumentException.class) // cardNumber being illegal while cardSuit is correct
-    public void Card2()
+    //Test cardNumber correct, while cardSuit is too low
+    @Test (expected = IllegalArgumentException.class)
+    public void cardConstruct3()
     {
-        Card card0 = new Card(-1, 2);
+        Card testCard = new Card(1, -50);
     }
-
-    @Test (expected = IllegalArgumentException.class)// Test case that ensures both entries are correct.
-    public void Card13()
+    //Test cardNumber too high, while cardSuit is correct
+    @Test (expected = IllegalArgumentException.class)
+    public void cardConstruct4()
     {
-        Card card0 = new Card(14, 2);
+        Card testCard = new Card(1000, 1);
     }
-
+    //Test cardNumber too low, while cardSuit is correct
+    @Test (expected = IllegalArgumentException.class)
+    public void cardConstruct5()
+    {
+        Card testCard = new Card(-99, 1);
+    }
+    //Test cardNumber too high, while cardSuit is also too high
+    @Test (expected = IllegalArgumentException.class)
+    public void cardConstruct6()
+    {
+        Card testCard = new Card(1000, 1000);
+    }
+    //Test cardNumber too high, while cardSuit is too low
+    @Test (expected = IllegalArgumentException.class)
+    public void cardConstruct7()
+    {
+        Card testCard = new Card(1000, -1000);
+    }
+    //Test cardNumber too low, while cardSuit is too high
+    @Test (expected = IllegalArgumentException.class)
+    public void cardConstruct8()
+    {
+        Card testCard = new Card(-1000, 1000);
+    }
+    //Test cardNumber too low, while cardSuit is also too low
+    @Test (expected = IllegalArgumentException.class)
+    public void cardConstruct9()
+    {
+        Card testCard = new Card(-1000, -1000);
+    }
     /**
      * Test constructor statement for assigning cardNumber to 13
      */
