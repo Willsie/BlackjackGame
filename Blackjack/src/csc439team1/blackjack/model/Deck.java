@@ -40,7 +40,7 @@ public class Deck
     public Card pick() throws IllegalArgumentException
     {
         int random = (int) (Math.random() * deck.size());   //generate random number from 0 to current size of the deck
-        if (deck.size() < 1) throw new IndexOutOfBoundsException();
+        if (deck.size() < 1) throw new IllegalStateException();
         else
         {
             return deck.remove(random); //remove and return random card from deck
