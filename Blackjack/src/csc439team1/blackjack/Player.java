@@ -1,5 +1,8 @@
 package csc439team1.blackjack;
 
+import csc439team1.blackjack.model.Card;
+import csc439team1.blackjack.model.Hand;
+
 public class Player {
     private int chips;
     private Hand hand;

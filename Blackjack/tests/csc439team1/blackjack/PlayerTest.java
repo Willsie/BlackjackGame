@@ -1,5 +1,7 @@
 package csc439team1.blackjack;
 
+import csc439team1.blackjack.model.Card;
+import csc439team1.blackjack.model.Shoe;
 import org.junit.Test;
 
 import java.util.ArrayList;
