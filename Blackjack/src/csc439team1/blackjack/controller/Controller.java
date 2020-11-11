@@ -5,10 +5,6 @@ import csc439team1.blackjack.model.Player;
 import csc439team1.blackjack.model.Shoe;
 import csc439team1.blackjack.view.View;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Scanner;
-
 public class Controller {
     View view;
     Player player = new Player();
