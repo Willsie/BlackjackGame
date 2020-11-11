@@ -8,7 +8,7 @@ public class TestView<E> extends View {
     /**
      * ArrayList to store "user inputs" to be returned to the controller. Mimics the functionality of CLIView
      */
-    private ArrayList<E> inputs = new ArrayList<E>();
+    private ArrayList<E> inputs = new ArrayList<>();
 
     public TestView() {
 

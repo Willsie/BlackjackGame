@@ -48,7 +48,7 @@ public class ControllerTest {
      */
     @Test
     public void buyChipsOutput() {
-        TestView TestView = new TestView();
+        TestView<Integer> TestView = new TestView<>();
         TestView.add(0);
         TestView.add(5001);
         TestView.add(50);
@@ -69,7 +69,7 @@ public class ControllerTest {
      */
     @Test
     public void buyChips() {
-        TestView TestView = new TestView();
+        TestView<Integer> TestView = new TestView<>();
         TestView.add(0);
         TestView.add(5001);
         TestView.add(50);
@@ -86,7 +86,7 @@ public class ControllerTest {
      */
     @Test(expected = Exception.class)
     public void buyChipsQuit() {
-        TestView TestView = new TestView();
+        TestView<String> TestView = new TestView<>();
         TestView.add("quit");
         Controller controller2 = new Controller(TestView);
         controller2.buyChips();
@@ -101,7 +101,7 @@ public class ControllerTest {
      */
     @Test
     public void askBet() {
-        TestView TestView = new TestView();
+        TestView<Integer> TestView = new TestView<>();
         TestView.add(0);
         TestView.add(5001);
         TestView.add(400);
@@ -122,7 +122,7 @@ public class ControllerTest {
      */
 
     public void askBet1() {
-        TestView TestView = new TestView();
+        TestView<Integer> TestView = new TestView<>();
         TestView.add(0);
         TestView.add(5001);
         TestView.add(600);
@@ -143,7 +143,7 @@ public class ControllerTest {
      */
     @Test
     public void askBetOutput() {
-        TestView TestView = new TestView();
+        TestView<Integer> TestView = new TestView<>();
         TestView.add(500);
         TestView.add(0);
         TestView.add(501);
@@ -173,7 +173,7 @@ public class ControllerTest {
      */
     @Test
     public void initialDeal() {
-        TestView TestView = new TestView();
+        TestView<Integer> TestView = new TestView<>();
         Shoe shoe = new Shoe(1);
         TestView.add(500);
         TestView.add(50);
@@ -191,7 +191,7 @@ public class ControllerTest {
      */
     @Test(expected = Exception.class)
     public void initialDeal1() {
-        TestView TestView = new TestView();
+        TestView<Integer> TestView = new TestView<>();
         Shoe shoe = new Shoe(1);
         TestView.add(500);
         TestView.add(50);
@@ -211,7 +211,7 @@ public class ControllerTest {
      */
     @Test
     public void playBlackJack() {
-        TestView TestView = new TestView();
+        TestView<Integer> TestView = new TestView<>();
         TestView.add(500);
         TestView.add(100);
         Controller controller8 = new Controller(TestView);
