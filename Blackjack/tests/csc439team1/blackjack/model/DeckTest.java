@@ -17,7 +17,7 @@ public class DeckTest
     /**
      * Tests Deck.pick(). Should catch IllegalArgumentException if Deck.pick() returning null or when trying to return a card from empty Deck
      */
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test(expected = IllegalStateException.class)
     public void testDeckPick()
     {
         Deck deck0 = new Deck();

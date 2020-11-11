@@ -3,7 +3,7 @@ package csc439team1.blackjack.model;
 import java.util.ArrayList;
 
 public class Player {
-    private int chips;
+    private int chips = 0;
     private Hand hand = new Hand();
 
     /**
@@ -41,14 +41,6 @@ public class Player {
      * */
     public ArrayList<Card> getHand() {
         //Added try catch block to rethrow any exceptions from Hand or Card Classes, and pass to Controller or CLIView. TS
-       try
-       {
-           hand.getCards();
-       }
-       catch (Exception e)
-       {
-           throw e;
-       }
         return this.hand.getCards();
     }
 
@@ -78,7 +70,7 @@ public class Player {
     private void checkChips(int chips)
     {
         //checkChips looks for chips being less than 1, and throws IllegalStateException.TS
-        if (chips < 1)
+        if (chips < 0)
         {
             throw new IllegalStateException();
         }
