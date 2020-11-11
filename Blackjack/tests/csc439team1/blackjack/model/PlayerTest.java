@@ -16,7 +16,7 @@ public class PlayerTest {
     }
 
     /**
-     * Verify that setChips sets the correct amount;
+     * Verify that setChips sets the correct amount
      */
     @Test
     public void setChips() {
@@ -44,10 +44,11 @@ public class PlayerTest {
         assertEquals(player3.getChips(), 50);
     }
 
-    @Test
+
     /**
      * Test that addCard correctly adds a card to the players hand.
      */
+    @Test
     public void addCard() {
         Player player4 = new Player();
         Shoe shoe = new Shoe(1);
