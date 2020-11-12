@@ -10,10 +10,20 @@ public class Controller {
     Player player = new Player();
     Dealer dealer = new Dealer();
 
+    /**
+     * Constructor, for Controller object, accepts a View parameter. View object is required as Controller passes messages
+     * and requirements to user via View and CLIView.
+     * @param view accepts View object as parameter.
+     */
     public Controller(View view) {
         this.view = view;
     }
 
+    /**
+     * playBlackjack method initiates gameplay for the first level of stories (using hard coded shoe of 1 deck, calls to
+     * buyChips, askBet, and initialDeal) to show start of game, purchasing chips, betting, and first deal of cards to both
+     * player and dealer. Accepts no parameters at current since shoe is hardcoded.
+     */
     public void playBlackjack() {
         Shoe shoe = new Shoe(1);
         buyChips();

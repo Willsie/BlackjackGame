@@ -79,4 +79,11 @@ public class PlayerTest {
         player6.addCard(shoe.pick());
         assertEquals(player6.getHand().size(), 1);
     }
+
+    @Test (expected = Exception.class)
+    public void testAddCardException() {
+        Player player = new Player();
+        Card card = new Card(100, 100);
+        player.addCard(card);
+    }
 }
