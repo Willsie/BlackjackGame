@@ -1,13 +1,28 @@
 package csc439team1.blackjack.controller;
 
 import csc439team1.blackjack.model.Dealer;
+import csc439team1.blackjack.model.Hand;
 import csc439team1.blackjack.model.Player;
 import csc439team1.blackjack.model.Shoe;
 import csc439team1.blackjack.view.View;
 
+/**
+ * Controller class that control all game logic for BlackJack game
+ */
 public class Controller {
+    /**
+     * View type object  used by Controller to receive input and display output
+     */
     View view;
+
+    /**
+     * Player type object to store current player information
+     */
     Player player = new Player();
+
+    /**
+     * Dealer type object to store current dealer information
+     */
     Dealer dealer = new Dealer();
 
     /**
@@ -53,7 +68,6 @@ public class Controller {
             }
         }
     }
-
 
     /**
      * Method for placing a bet, starts with using view to prompt user, then checks input before updating the value of Player's chip data member
@@ -106,5 +120,31 @@ public class Controller {
         view.output("Player has quit\n");
         throw new IllegalStateException("");
     }
+
+    /**
+     * This method will check if the current shoe is less than 1/5 of the initial shoe when first created
+     * if it is less, then the new shoe will be generated
+     *
+     * @param shoe current shoe
+     * @return new shoe if the size of the current shoe is less than 1/5 of the initial shoe
+     */
+    public Shoe cut(Shoe shoe) {
+        if(shoe.size() < 11) shoe = new Shoe(1);
+        return shoe;
+    }
+
+    /*
+    //To Do - finish and insert JavaDoc
+    public void double(Hand hand){
+        if (9 <= getTotalScore(hand) <= 11 ){
+            view.output('Would you like to double, hit or stand ?');
+        }
+    }
+
+    //To Do - finish and insert JavaDoc
+    public int getTotalScore(Hand hand){
+
+    }
+    */
 
 }

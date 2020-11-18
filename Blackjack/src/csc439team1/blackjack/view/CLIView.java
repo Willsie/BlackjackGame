@@ -2,6 +2,9 @@ package csc439team1.blackjack.view;
 
 import java.util.Scanner;
 
+/**
+ * CLIView class extends View to get input and display output to console
+ */
 public class CLIView extends View
 {
 
