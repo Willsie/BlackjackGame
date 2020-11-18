@@ -1,10 +1,10 @@
 package csc439team1.blackjack.controller;
 
-import csc439team1.blackjack.model.Dealer;
-import csc439team1.blackjack.model.Hand;
-import csc439team1.blackjack.model.Player;
-import csc439team1.blackjack.model.Shoe;
+import csc439team1.blackjack.model.*;
 import csc439team1.blackjack.view.View;
+
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Controller class that control all game logic for BlackJack game
@@ -28,6 +28,7 @@ public class Controller {
     /**
      * Constructor, for Controller object, accepts a View parameter. View object is required as Controller passes messages
      * and requirements to user via View and CLIView.
+     *
      * @param view accepts View object as parameter.
      */
     public Controller(View view) {
@@ -43,7 +44,11 @@ public class Controller {
         Shoe shoe = new Shoe(1);
         buyChips();
         askBet();
+        cut(shoe);
         initialDeal(shoe);
+        //playerActions(player);
+        cut(shoe);
+
     }
 
     /**
@@ -94,10 +99,10 @@ public class Controller {
     /**
      * InitialDeal is called at the start of every hand. It removes cards from the shoe provided the shoe has those cards available.
      * It then outputs the hands to the player, with one deal card remaining hidden.
+     *
      * @param shoe Takes the shoe object created at the start of the game.
      */
     public void initialDeal(Shoe shoe) {
-
         try {
             player.addCard(shoe.pick());
             player.addCard(shoe.pick());
@@ -129,22 +134,71 @@ public class Controller {
      * @return new shoe if the size of the current shoe is less than 1/5 of the initial shoe
      */
     public Shoe cut(Shoe shoe) {
-        if(shoe.size() < 11) shoe = new Shoe(1);
+        if (shoe.size() < 11) shoe = new Shoe(1);
         return shoe;
     }
 
-    /*
-    //To Do - finish and insert JavaDoc
-    public void double(Hand hand){
-        if (9 <= getTotalScore(hand) <= 11 ){
-            view.output('Would you like to double, hit or stand ?');
+
+    /**
+     * This method will ask for player actions (hit, stand or double)
+     * If current player's total score is between 9 and 11, offers player to double the bet, hit or stand
+     * If current player's total score is less than 22 (not busted), offers player to hit or stand
+     * Otherwise will display busted notification to console
+     *
+     * @param player current player
+     */
+    /* TODO - STILL NOT WORKING, PLEASE FINISH
+    public String playerActions(Player player) {
+        try {
+            int score = getTotalValue(player.getHand());
+            String input;
+
+            if (9 <= score && score <= 11) {
+                view.output("Would you like to double, hit or stand ?");
+                input = view.input();
+            } else if (score > 21) {
+                view.output("Busted...you lose !!! Your total score is " + score);
+            } else {
+                view.output("Would you like to hit or stand ?");
+                input = view.input();
+            }
+
+        }catch (Exception e) {
+            quit();
         }
-    }
-
-    //To Do - finish and insert JavaDoc
-    public int getTotalScore(Hand hand){
-
+        return input;
     }
     */
 
-}
+        /**
+         * This method counts the total value / score of the current hand
+         *
+         * @param hand is current hand
+         * @return total value / score of the current hand
+         */
+        public int getTotalValue(ArrayList<Card> hand)
+        {
+            Iterator handIterator = hand.iterator();
+            int acesCounter = 0, total = 0;
+            while (handIterator.hasNext()) {
+                Card currentCard = (Card) handIterator.next();
+                if (currentCard.getNumber() < 2) {
+                    acesCounter++;
+                } else {
+                    if (currentCard.getNumber() < 10) {
+                        total = total + currentCard.getNumber();
+                    } else {
+                        total = total + 10;
+                    }
+                }
+            }
+            if (acesCounter > 0) {
+                if ((acesCounter - 1 + 11) + total <= 21) {
+                    total = total + (acesCounter - 1 + 11);
+                } else {
+                    total = total + acesCounter;
+                }
+            }
+            return total;
+        }
+    }
