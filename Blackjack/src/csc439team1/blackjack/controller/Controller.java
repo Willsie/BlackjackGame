@@ -1,10 +1,10 @@
 package csc439team1.blackjack.controller;
 
-import csc439team1.blackjack.model.Dealer;
-import csc439team1.blackjack.model.Hand;
-import csc439team1.blackjack.model.Player;
-import csc439team1.blackjack.model.Shoe;
+import csc439team1.blackjack.model.*;
 import csc439team1.blackjack.view.View;
+
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Controller class that control all game logic for BlackJack game
@@ -24,7 +24,24 @@ public class Controller {
      * Dealer type object to store current dealer information
      */
     Dealer dealer = new Dealer();
+    /**
+     * double variable that holds amount for cut of shoe, so that shoe may be repopulated during gameplay.
+     */
+    double cut, bet = 0;
 
+    /**
+     * Shoe object to be used during game play, and hold at current hard coded number of decks.
+     */
+    Shoe shoe;
+    /**
+     * Boolean hasQuit is used for looping gameplay mechanics after purchasing chips and setting cut amount
+     */
+    private boolean hasQuit = false, doubled = false, blackjack = false, plyBust, dlrBust;
+    /**
+     * int variable shoeSize holds the number of decks to be used in the shoe, currently that number is hardcoded
+     * versus asking for user input.
+     */
+    private int shoeDecks = 1;
     /**
      * Constructor, for Controller object, accepts a View parameter. View object is required as Controller passes messages
      * and requirements to user via View and CLIView.
@@ -40,10 +57,18 @@ public class Controller {
      * player and dealer. Accepts no parameters at current since shoe is hardcoded.
      */
     public void playBlackjack() {
-        Shoe shoe = new Shoe(1);
+        shoe = new Shoe(shoeDecks);
+        cut = shoe.size() * .2;
+        System.out.println(cut);
         buyChips();
-        askBet();
-        initialDeal(shoe);
+        while(!hasQuit) {
+            askBet();
+            initialDeal(shoe);
+            playerDouble();
+            playerAction();
+            postPlayerAction();
+            endGameFunc();
+        }
     }
 
     /**
@@ -57,7 +82,7 @@ public class Controller {
         while (!validInput) {
             try {
                 int input = view.intInput();
-                if (input > 10 && input <= 5000) {
+                if (input >= 10 && input <= 5000) {
                     validInput = true;
                     player.setChips((input));
                 } else {
@@ -78,10 +103,11 @@ public class Controller {
 
         while (!validInput) {
             try {
-                int input = view.intInput();
+                double input = view.intInput();
                 if ((input >= 10) && (input <= 500) && (input <= player.getChips())) {
                     validInput = true;
-                    player.setChips(player.getChips() - input);
+                    bet = input;
+                    player.setChips(player.getChips() - bet);
                 } else {
                     view.output("Invalid bet amount! Bet needs to be between 10 & 500, and less than your current chips(" + player.getChips() + "): ");
                 }
@@ -117,10 +143,174 @@ public class Controller {
      * This allows the program to quit in a clear manner.
      */
     public void quit() {
+        //Added has quit boolean in order to perform loop beyond operations of buy chips in playBlackjack method. TS
+        hasQuit = true;
         view.output("Player has quit\n");
         throw new IllegalStateException("");
     }
 
+    /**
+     * Method which repopulates shoe if it is less than cut variable (1/5 of original shoe size).
+     */
+    public void rePopulateShoe() {
+        if (shoe.size() < cut) {
+            shoe = new Shoe(2);
+        }
+    }
+    public int getTotalValue(ArrayList<Card> hand) {
+        Iterator handIterator = hand.iterator();
+        int acesCounter = 0, total = 0;
+        while (handIterator.hasNext()) {
+            Card currentCard = (Card) handIterator.next();
+            if (currentCard.getNumber() < 2) {
+                acesCounter++;
+            }
+            else {
+                if (currentCard.getNumber() < 10) {
+                    total = total + currentCard.getNumber();
+                }
+                else {
+                    total = total + 10;
+                }
+            }
+        }
+        if (acesCounter > 0) {
+            if ((acesCounter - 1 + 11) + total <= 21) {
+                total = total + (acesCounter -1 + 11);
+            }
+            else {
+                total = total + acesCounter;
+            }
+        }
+        return total;
+    }
+    public int playerTotal() {
+        return getTotalValue(player.getHand());
+    }
+    public int dealerTotal()
+    {
+        return getTotalValue(dealer.getHand());
+    }
+    public boolean ableToDouble() {
+        doubled = false;
+        double chips = player.getChips();
+        if (playerTotal() > 0 && playerTotal() < 21) {
+            try {
+                player.setChips(player.getChips() - bet);
+            }
+            catch (IllegalStateException e)
+            {
+                player.setChips(chips);
+                return false;
+            }
+            player.setChips(chips);
+            return true;
+        }
+       return false;
+    }
+    public void playerDouble() {
+        boolean validInput = false;
+        if (ableToDouble())
+        {
+            view.output("Do you wish to double, y for yes or n for no");
+            while (!validInput) {
+                try {
+                    String input = view.input();
+                    if (input.toLowerCase().equals("y") || input.toLowerCase().equals("n")) {
+                        validInput = true;
+                        if (input.toLowerCase().equals("y")) {
+                            player.setChips(player.getChips() - bet);
+                            bet = bet * 2;
+                            player.addCard(shoe.pick());
+                            doubled = true;
+                        }
+                    }
+                    else {
+                        view.output("That is not a valid entry, y for yes or n for no");
+                    }
+
+                } catch (Exception e)
+                {
+                    quit();
+                }
+            }
+        }
+    }
+    public String playerInputActions() {
+        boolean validInput = false;
+        String action = "";
+        while (!validInput) {
+            try {
+                action = view.input();
+                if (action.toLowerCase().equals("h") || action.toLowerCase().equals("s") ) {
+                    validInput = true;
+                }
+                else {
+                    view.output("That is not a valid entry, h for hit or s for stand");
+                }
+            }
+            catch (Exception e) {
+                quit();
+            }
+        }
+        return action;
+    }
+    public void playerAction() {
+        String action = "";
+        boolean stand = false;
+        if (!doubled){
+            while (playerTotal() < 21 && !stand) {
+                view.output("Would you like to hit or stand, h for hit or s for stand");
+                action = playerInputActions();
+                if (action.toLowerCase().equals("h")) {
+                    player.addCard(shoe.pick());
+                    view.output("\nYour cards are: ");
+                    view.output(player.getHand().toString() + "\n\n");
+                }
+                else {
+                    stand = true;
+                }
+            }
+        }
+    }
+    public void postPlayerAction() {
+        if (playerTotal() > 21){
+            view.output("\nYou have gone bust, and lost the hand\n");
+            plyBust = true;
+        }
+        else if(playerTotal() == 21){
+            view.output("\nBlackjack\n");
+        }
+        else{
+            while (dealerTotal() < 17) {
+                dealer.addCard(shoe.pick());
+                if (dealerTotal() > 21){
+                    dlrBust = true;
+                }
+            }
+        }
+    }
+    public void results(){
+        view.output("Dealer total: " + dealerTotal() + "\n");
+        view.output("Your total:" + playerTotal() + "\n");
+        if (playerTotal() == dealerTotal()){
+            view.output("Draw, therefore push\n");
+            player.setChips(player.getChips() + bet);
+        }
+    }
+    public void endGameFunc(){
+        results();
+        view.output("\nDealer cards are: ");
+        view.output(dealer.getHand().toString() + "\n\n");
+        view.output("Your cards are: ");
+        view.output(player.getHand().toString() + "\n\n");
+        view.output("End of hand\n\n");
+        player.getHand().clear();
+        dealer.getHand().clear();
+        if (shoe.size() < cut) {
+            shoe = new Shoe(shoeDecks);
+        }
+    }
     /**
      * This method will check if the current shoe is less than 1/5 of the initial shoe when first created
      * if it is less, then the new shoe will be generated
@@ -128,10 +318,10 @@ public class Controller {
      * @param shoe current shoe
      * @return new shoe if the size of the current shoe is less than 1/5 of the initial shoe
      */
-    public Shoe cut(Shoe shoe) {
+   /* public Shoe cut(Shoe shoe) {
         if(shoe.size() < 11) shoe = new Shoe(1);
         return shoe;
-    }
+    }*/
 
     /*
     //To Do - finish and insert JavaDoc
@@ -139,11 +329,6 @@ public class Controller {
         if (9 <= getTotalScore(hand) <= 11 ){
             view.output('Would you like to double, hit or stand ?');
         }
-    }
-
-    //To Do - finish and insert JavaDoc
-    public int getTotalScore(Hand hand){
-
     }
     */
 

@@ -14,7 +14,7 @@ public class Hand
     /**
      * an array list of card objects called "cards"
      */
-    private final ArrayList<Card> cardsOnHand;
+    public final ArrayList<Card> cardsOnHand;
 
     /**
      * Hand object default constructor
