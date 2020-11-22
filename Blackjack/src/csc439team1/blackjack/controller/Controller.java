@@ -61,11 +61,12 @@ public class Controller {
      */
     public void playBlackjack() {
         shoe = new Shoe(shoeDecks);
+        //cut variable is 1/2 of original shoe size, and is used by checkCut() to see if shoe needs repopulating
         cut = shoe.size() * .2;
         System.out.println(cut);
         buyChips();
         //While loop which operates as long as the player's chips are at minimum bet amount (10)
-        while(player.getChips() > 9) {
+        while(player.getChips() >= 10) {
             askBet();
             initialDeal(shoe);
             naturalBlackJack();
