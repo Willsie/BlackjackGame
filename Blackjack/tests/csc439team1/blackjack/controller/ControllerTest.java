@@ -416,6 +416,7 @@ public class ControllerTest {
     public void naturalBlackJack2() {
         TestView<Integer> TestView = new TestView<>();
         Controller controller20 = new Controller(TestView);
+        controller20.naturalBlackJack();
         controller20.dealer.addCard(new Card(1,1));
         controller20.dealer.addCard(new Card(11,2));
         controller20.player.addCard(new Card(5,0));
@@ -438,7 +439,48 @@ public class ControllerTest {
 
         assertTrue(controller20.naturalBlackJack());
 
+ }
+
+    /**
+     * Test ableToDouble. In this test, player should have a chip amount that would allow a double,
+     * but would not have the correct range of card values to be able to double, so ableToDouble should return false.
+     */
+    @Test
+    public void ableToDouble() {
+        TestView TestView = new TestView();
+        TestView.add(500);
+        TestView.add(100);
+        Controller controller21 = new Controller(TestView);
+        controller21.buyChips();
+        controller21.askBet();
+        controller21.player.addCard(new Card(11,1));
+        controller21.player.addCard(new Card(2,0));
+        assertEquals(controller21.playerTotal(), 12);
+        assertEquals(controller21.bet, 100, .0001);
+        assertFalse(controller21.ableToDouble());
+
     }
+
+    /**
+     * Test ableToDouble, in this test, player should have the card total to allow a double (testing on the lower bound of 9),
+     * but should not have a chip amount that would allow a double (i.e. the player doubling his bet would bring him to a negative chip value.)
+     */
+    @Test
+    public void ableToDouble1() {
+        TestView TestView = new TestView();
+        TestView.add(20);
+        TestView.add(15);
+        Controller controller22 = new Controller(TestView);
+        controller22.buyChips();
+        controller22.askBet();
+        controller22.player.addCard(new Card(5,1));
+        controller22.player.addCard(new Card(4,0));
+        assertEquals(controller22.playerTotal(), 9);
+        assertEquals(controller22.bet, 15, .0001);
+        assertFalse(controller22.ableToDouble());
+    }
+
+
 
 
 }
