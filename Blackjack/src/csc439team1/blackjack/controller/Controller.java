@@ -218,12 +218,15 @@ public class Controller {
      * Method that looks for natural blackjack in either player or dealer, and sets blackJack boolean to true; with the
      * effect that the game goes straight to endGameFunc, where if both player & dealer have blackjack will produce a push
      * or declare winner if only one has blackjack.
+     * @return boolean value blackJack
      */
-    public void naturalBlackJack(){
+    public boolean naturalBlackJack(){
         if (playerTotal() == 21 || dealerTotal() == 21){
             blackJack = true;
             view.output("Blackjack\n");
+            return blackJack;
         }
+        return blackJack;
     }
 
     /**
