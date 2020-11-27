@@ -231,7 +231,7 @@ public class ControllerTest {
     public void getTotalValue0() {
         TestView<Integer> TestView = new TestView<>();
         Controller controller9 = new Controller(TestView);
-        ArrayList<Card> cards = new ArrayList();
+        ArrayList<Card> cards = new ArrayList<>();
         cards.add(new Card(2,1));
         cards.add(new Card(2, 2));
         cards.add(new Card(2,3));
@@ -260,7 +260,7 @@ public class ControllerTest {
     public void getTotalValue2() {
         TestView<Integer> TestView = new TestView<>();
         Controller controller11 = new Controller(TestView);
-        ArrayList<Card> cards = new ArrayList();
+        ArrayList<Card> cards = new ArrayList<>();
         cards.add(new Card(11,1));
         cards.add(new Card(5, 2));
         for(int i = 0; i <=1 ; i ++){
@@ -278,7 +278,7 @@ public class ControllerTest {
     public void getTotalValue3() {
         TestView<Integer> TestView = new TestView<>();
         Controller controller12 = new Controller(TestView);
-        ArrayList<Card> cards = new ArrayList();
+        ArrayList<Card> cards = new ArrayList<>();
         cards.add(new Card(1,1));
         cards.add(new Card(11, 2));
         for(int i = 0; i <=1 ; i ++){
@@ -293,7 +293,7 @@ public class ControllerTest {
     public void getTotalValue4() {
         TestView<Integer> TestView = new TestView<>();
         Controller controller13 = new Controller(TestView);
-        ArrayList<Card> cards = new ArrayList();
+        ArrayList<Card> cards = new ArrayList<>();
         cards.add(new Card(1,1));
         cards.add(new Card(1,2));
         cards.add(new Card(11, 2));
@@ -310,7 +310,7 @@ public class ControllerTest {
     public void getTotalValue5() {
         TestView<Integer> TestView = new TestView<>();
         Controller controller14 = new Controller(TestView);
-        ArrayList<Card> cards = new ArrayList();
+        ArrayList<Card> cards = new ArrayList<>();
         cards.add(new Card(1,1));
         cards.add(new Card(1,2));
         cards.add(new Card(1, 3));
@@ -329,7 +329,7 @@ public class ControllerTest {
     public void getTotalValue6() {
         TestView<Integer> TestView = new TestView<>();
         Controller controller15 = new Controller(TestView);
-        ArrayList<Card> cards = new ArrayList();
+        ArrayList<Card> cards = new ArrayList<>();
         cards.add(new Card(1,1));
         cards.add(new Card(5,2));
         for(int i = 0; i <= 1 ; i ++){
@@ -350,7 +350,7 @@ public class ControllerTest {
     public void playerTotal() {
         TestView<Integer> TestView = new TestView<>();
         Controller controller16 = new Controller(TestView);
-        ArrayList<Card> cards = new ArrayList();
+        ArrayList<Card> cards = new ArrayList<>();
         cards.add(new Card(2,1));
         cards.add(new Card(5,2));
         for(int i = 0; i <= 1 ; i ++){
@@ -367,7 +367,7 @@ public class ControllerTest {
     public void dealerTotal() {
         TestView<Integer> TestView = new TestView<>();
         Controller controller17 = new Controller(TestView);
-        ArrayList<Card> cards = new ArrayList();
+        ArrayList<Card> cards = new ArrayList<>();
         cards.add(new Card(3,1));
         cards.add(new Card(5,2));
         for(int i = 0; i <= 1 ; i ++){
@@ -384,7 +384,7 @@ public class ControllerTest {
     public void naturalBlackJack() {
         TestView<Integer> TestView = new TestView<>();
         Controller controller18 = new Controller(TestView);
-        ArrayList<Card> cards = new ArrayList();
+        ArrayList<Card> cards = new ArrayList<>();
         cards.add(new Card(3,1));
         cards.add(new Card(5,2));
         for(int i = 0; i <= 1 ; i ++){
