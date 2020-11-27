@@ -3,6 +3,11 @@ package csc439team1.blackjack.view;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * Class created to testing Controller class
+ *
+ * @param <E> generic type E
+ */
 public class TestView<E> extends View {
 
     /**
@@ -10,8 +15,10 @@ public class TestView<E> extends View {
      */
     private ArrayList<E> inputs = new ArrayList<>();
 
+    /**
+     * Default TestView() constructor
+     */
     public TestView() {
-
     }
 
     /**
@@ -31,7 +38,6 @@ public class TestView<E> extends View {
     @Override
     public void output(String str) {
         System.out.print(str);
-
     }
 
     /**
@@ -45,7 +51,6 @@ public class TestView<E> extends View {
         return null;
     }
 
-
     /**
      * @return Integer to mimic integer input from user being returned to to controller.
      * @throws Exception mimics CLIviews detection of 'quit' being input to the user, which then throws an exception to the controller which then calls quit().
@@ -57,7 +62,5 @@ public class TestView<E> extends View {
         } else {
             return (Integer) inputs.remove(0);
         }
-
     }
-
 }
