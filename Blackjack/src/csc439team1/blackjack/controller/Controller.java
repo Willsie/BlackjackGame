@@ -44,7 +44,7 @@ public class Controller {
      * int variable shoeSize holds the number of decks to be used in the shoe, currently that number is hardcoded
      * versus asking for user input.
      */
-    private int shoeDecks = 1;
+    private final int shoeDecks = 1;
     /**
      * Constructor, for Controller object, accepts a View parameter. View object is required as Controller passes messages
      * and requirements to user via View and CLIView.
@@ -168,10 +168,10 @@ public class Controller {
      * @return Returns an int that is the total value of the cards in a hand.
      */
     public int getTotalValue(ArrayList<Card> hand) {
-        Iterator handIterator = hand.iterator();
+        Iterator<Card> handIterator = hand.iterator();
         int acesCounter = 0, total = 0;
         while (handIterator.hasNext()) {
-            Card currentCard = (Card) handIterator.next();
+            Card currentCard = handIterator.next();
             if (currentCard.getNumber() < 2) {
                 acesCounter++;
             }
@@ -260,8 +260,8 @@ public class Controller {
      * doubling. Additionally, boolean variable doubled is set to true, as it is used by playerAction method to determine
      * if the player can hit or stand.
      */
-    public void playerDouble() {
-        String input = "";
+    public boolean playerDouble() {
+        String input;
         if (ableToDouble()) {
             view.output("Do you wish to double, y for yes or n for no");
             //call to player input actions to verify user input is acceptable. TS
@@ -272,7 +272,9 @@ public class Controller {
                 player.addCard(shoe.pick());
                 doubled = true;
             }
+            return doubled;
         }
+        return doubled;
     }
 
     /**
@@ -281,7 +283,7 @@ public class Controller {
      * @param a is String parameter filled by other method(s) inside of Controller class.
      */
     private void printHand(String a){
-        if (a == "p"){
+        if (a.equals("p")){
             view.output("Your cards are: ");
             view.output(player.getHand().toString() + "\n");
         }
@@ -327,7 +329,7 @@ public class Controller {
      * opportunity to quit game.
      */
     public void playerAction() {
-        String action = "";
+        String action;
         boolean stand = false;
         if (!doubled){
             while (playerTotal() < 21 && !stand) {

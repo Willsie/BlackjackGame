@@ -122,7 +122,7 @@ public class ControllerTest {
     /**
      * This again tests askBet in controller, but verifies that bets over 500 will not accepted when the players chips are greater than 500.
      */
-
+    @Test
     public void askBet1() {
         TestView<Integer> TestView = new TestView<>();
         TestView.add(0);
@@ -162,7 +162,7 @@ public class ControllerTest {
 
     @Test(expected = Exception.class)
     public void askBetQuit() {
-        TestView TestView = new TestView();
+        TestView TestView = new TestView<>();
         TestView.add(500);
         Controller controller = new Controller(TestView);
         controller.buyChips();
@@ -326,6 +326,7 @@ public class ControllerTest {
      * Test getTotalValue by added an ace and a 5 to the hand and checking that it equals 16, then add a face card to the hand
      * make sure that it still equals 16.
      */
+    @Test
     public void getTotalValue6() {
         TestView<Integer> TestView = new TestView<>();
         Controller controller15 = new Controller(TestView);
@@ -413,6 +414,7 @@ public class ControllerTest {
     /**
      * Test that naturalBlackJack returns true when dealer has blackJack and player does not.
      */
+    @Test
     public void naturalBlackJack2() {
         TestView<Integer> TestView = new TestView<>();
         Controller controller20 = new Controller(TestView);
@@ -429,35 +431,52 @@ public class ControllerTest {
     /**
      * Test that naturalBlackJack returns true when both have blackJack
      */
+    @Test
     public void naturalBlackJack3() {
         TestView<Integer> TestView = new TestView<>();
-        Controller controller20 = new Controller(TestView);
-        controller20.dealer.addCard(new Card(1,1));
-        controller20.dealer.addCard(new Card(11,2));
-        controller20.player.addCard(new Card(1,0));
-        controller20.player.addCard(new Card(12,0));
+        Controller controller21 = new Controller(TestView);
+        controller21.dealer.addCard(new Card(1,1));
+        controller21.dealer.addCard(new Card(11,2));
+        controller21.player.addCard(new Card(1,0));
+        controller21.player.addCard(new Card(12,0));
 
-        assertTrue(controller20.naturalBlackJack());
+        assertTrue(controller21.naturalBlackJack());
 
  }
 
     /**
      * Test ableToDouble. In this test, player should have a chip amount that would allow a double,
-     * but would not have the correct range of card values to be able to double, so ableToDouble should return false.
+     * but would not have the correct range of card values to be able to double (i.e. 12), so ableToDouble should return false.
      */
     @Test
     public void ableToDouble() {
-        TestView TestView = new TestView();
+        TestView<Integer> TestView = new TestView<>();
         TestView.add(500);
         TestView.add(100);
-        Controller controller21 = new Controller(TestView);
-        controller21.buyChips();
-        controller21.askBet();
-        controller21.player.addCard(new Card(11,1));
-        controller21.player.addCard(new Card(2,0));
-        assertEquals(controller21.playerTotal(), 12);
-        assertEquals(controller21.bet, 100, .0001);
-        assertFalse(controller21.ableToDouble());
+        Controller controller22 = new Controller(TestView);
+        controller22.buyChips();
+        controller22.askBet();
+        controller22.player.addCard(new Card(11,1));
+        controller22.player.addCard(new Card(2,0));
+        assertFalse(controller22.ableToDouble());
+
+    }
+
+    /**
+     * Test ableToDouble. In this test, player should have a chip amount that would allow a double,
+     * but would not have the correct range of card values to be able to double (i.e. 8), so ableToDouble should return false.
+     */
+    @Test
+    public void ableToDouble1() {
+        TestView<Integer> TestView = new TestView<>();
+        TestView.add(500);
+        TestView.add(100);
+        Controller controller23 = new Controller(TestView);
+        controller23.buyChips();
+        controller23.askBet();
+        controller23.player.addCard(new Card(5,1));
+        controller23.player.addCard(new Card(3,0));
+        assertFalse(controller23.ableToDouble());
 
     }
 
@@ -466,21 +485,78 @@ public class ControllerTest {
      * but should not have a chip amount that would allow a double (i.e. the player doubling his bet would bring him to a negative chip value.)
      */
     @Test
-    public void ableToDouble1() {
-        TestView TestView = new TestView();
+    public void ableToDouble2() {
+        TestView<Integer> TestView = new TestView<>();
         TestView.add(20);
         TestView.add(15);
-        Controller controller22 = new Controller(TestView);
-        controller22.buyChips();
-        controller22.askBet();
-        controller22.player.addCard(new Card(5,1));
-        controller22.player.addCard(new Card(4,0));
-        assertEquals(controller22.playerTotal(), 9);
-        assertEquals(controller22.bet, 15, .0001);
-        assertFalse(controller22.ableToDouble());
+        Controller controller24 = new Controller(TestView);
+        controller24.buyChips();
+        controller24.askBet();
+
+        assertFalse(controller24.ableToDouble());
     }
 
+    /**
+     * This test of ableToDouble should return true as the player's card total is within in the acceptable range and his chip value allows a double.
+     */
+    @Test
+    public void ableToDouble3() {
+        TestView<Integer> TestView = new TestView<>();
+        TestView.add(200);
+        TestView.add(15);
+        Controller controller25 = new Controller(TestView);
+        controller25.buyChips();
+        controller25.askBet();
+        controller25.player.addCard(new Card(5,1));
+        controller25.player.addCard(new Card(4,0));
+        assertTrue(controller25.ableToDouble());
 
+    }
 
+    /**
+     * Test playerDouble. As there is no bet amount or cards in the player's hand, the call to ableToDouble in playerDouble should leave the boolean double value as false, thus causing playerDouble to return false as well.
+     */
+    @Test
+    public void playerDouble() {
+        TestView testView = new TestView();
+        Controller controller26 = new Controller(testView);
+        assertFalse(controller26.playerDouble());
+    }
 
+    /**
+     * Verify that a call to playerDouble while ableToDouble is true but the user inputs "N" results in no change to the players hand, bet amount, or chip amount.
+     */
+    @Test
+    public void playerDouble1() {
+        TestView testView = new TestView();
+        testView.add(100);
+        testView.add("N");
+        Controller controller27 = new Controller(testView);
+        controller27.player.addCard(new Card(5,0));
+        controller27.player.addCard(new Card(4,0));
+        controller27.player.setChips(400);
+        controller27.askBet();
+        controller27.playerDouble();
+        assertEquals(controller27.player.getChips(), 300, .0001);
+        assertEquals(controller27.bet, 100, .0001);
+        assertEquals(controller27.player.getHand().size(), 2);
+    }
+
+    @Test
+    public void playerDouble2() {
+        TestView testView = new TestView();
+        testView.add(100);
+        testView.add("Y");
+        Controller controller28 = new Controller(testView);
+        controller28.shoe = new Shoe(1);
+        controller28.player.addCard(new Card(5,0));
+        controller28.player.addCard(new Card(5, 1));
+        controller28.player.setChips(400);
+        controller28.askBet();
+        controller28.playerDouble();
+        assertEquals(controller28.player.getChips(), 200, .0001);
+        assertEquals(controller28.bet, 200, .0001);
+        assertEquals(controller28.player.getHand().size(), 3);
+
+    }
 }

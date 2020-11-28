@@ -1,10 +1,7 @@
 package csc439team1.blackjack;
 
 import csc439team1.blackjack.controller.Controller;
-import csc439team1.blackjack.model.Dealer;
 import csc439team1.blackjack.view.CLIView;
-
-import java.util.ArrayList;
 
 /**
  * This class contains main method to run the BlackJack game
