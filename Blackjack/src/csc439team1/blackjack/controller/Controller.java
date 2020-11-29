@@ -263,7 +263,7 @@ public class Controller {
     public boolean playerDouble() {
         String input;
         if (ableToDouble()) {
-            view.output("Do you wish to double, y for yes or n for no");
+            view.output("Do you wish to double, y for yes or n for no: ");
             //call to player input actions to verify user input is acceptable. TS
             input = playerInputActions("yes", "no");
             if (input.toLowerCase().equals("y")) {
@@ -285,11 +285,11 @@ public class Controller {
     private void printHand(String a){
         if (a.equals("p")){
             view.output("Your cards are: ");
-            view.output(player.getHand().toString() + "\n");
+            view.output(player.getHand().toString() + " Total: " + playerTotal() + "\n");
         }
         else{
             view.output("Dealer cards are: ");
-            view.output(dealer.getHand().toString() + "\n");
+            view.output(dealer.getHand().toString() + " Total: " + dealerTotal() + "\n");
         }
     }
 
@@ -312,7 +312,7 @@ public class Controller {
                     validInput = true;
                 }
                 else {
-                    view.output("That is not a valid entry, " + c + " for " + a + "or " + d + " for " + b);
+                    view.output("That is not a valid entry, " + c + " for " + a + "or " + d + " for " + b + "!: ");
                 }
             }
             catch (Exception e) {
@@ -333,7 +333,7 @@ public class Controller {
         boolean stand = false;
         if (!doubled){
             while (playerTotal() < 21 && !stand) {
-                view.output("Would you like to hit or stand, h for hit or s for stand");
+                view.output("Would you like to hit or stand, h for hit or s for stand: ");
                 action = playerInputActions("hit", "stand");
                 if (action.toLowerCase().equals("h")) {
                     player.addCard(shoe.pick());
@@ -355,7 +355,7 @@ public class Controller {
      */
     public void postPlayerActions() {
         if (playerTotal() > 21){
-            view.output("You have gone bust, and lost the hand\n");
+            view.output("You have busted and lost the hand!\n");
             plyBust = true;
         }
         else
@@ -378,7 +378,7 @@ public class Controller {
     public void endHandFunctions(){
         view.output("End of hand\n");
         results();
-        view.output("Your remaining chips are :" + player.getChips() + "\n\n");
+        view.output("Your remaining chips are: " + player.getChips() + "\n\n");
         player.getHand().clear();
         dealer.getHand().clear();
         checkCut();
@@ -397,21 +397,20 @@ public class Controller {
     public void results(){
         printHand("d");
         printHand("p");
-        view.output("Dealer total: " + dealerTotal() + "\n");
-        view.output("Your total:" + playerTotal() + "\n");
+
         if (!plyBust)
         {
             if (playerTotal() == dealerTotal()){
-                view.output("Draw, therefore push\n");
+                view.output("Draw, therefore push!\n");
                 player.setChips(player.getChips() + bet);
             }
             else if (dlrBust || playerTotal() > dealerTotal()){
-                view.output("You have won\n");
+                view.output("You have won!\n");
                 player.setChips(player.getChips() + (1.5 * bet));
             }
             else
             {
-                view.output("You have lost, the Dealer has won\n");
+                view.output("You have lost, the Dealer has won!\n");
             }
         }
 
@@ -435,7 +434,7 @@ public class Controller {
      */
     public void endGameActions(){
         view.output("You have either run out of chips or fell below minimum bet amount, enter either p for purchase" +
-                "or q for quit");
+                "or q for quit: ");
         String action = playerInputActions("p", "q");
         if (action.equals("q")){
             quit();

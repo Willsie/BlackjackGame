@@ -542,6 +542,9 @@ public class ControllerTest {
         assertEquals(controller27.player.getHand().size(), 2);
     }
 
+    /**
+     * Verify that a call to playerDouble while ableToDouble is true and the user inputs "Y" correctly updates the player's chip, the bet amount, and adds one card to the players hand.
+     */
     @Test
     public void playerDouble2() {
         TestView testView = new TestView();
@@ -553,10 +556,22 @@ public class ControllerTest {
         controller28.player.addCard(new Card(5, 1));
         controller28.player.setChips(400);
         controller28.askBet();
-        controller28.playerDouble();
+        assertTrue(controller28.playerDouble());
         assertEquals(controller28.player.getChips(), 200, .0001);
         assertEquals(controller28.bet, 200, .0001);
         assertEquals(controller28.player.getHand().size(), 3);
+
+    }
+
+
+    @Test
+    public void playerInputActions() {
+        TestView testView = new TestView();
+        testView.add("i");
+        testView.add("j");
+        testView.add("Y");
+        Controller controller29 = new Controller(testView);
+        
 
     }
 }
