@@ -2,6 +2,9 @@ package csc439team1.blackjack.view;
 
 import java.util.Scanner;
 
+/**
+ * CLIView class extends View to get input and display output to console
+ */
 public class CLIView extends View
 {
 
@@ -15,7 +18,12 @@ public class CLIView extends View
 
     @Override
     public String input() throws Exception {
-        return null;
+        Scanner input = new Scanner(System.in);
+        String userInput = input.next();
+        if (userInput.toLowerCase().equals("quit") ) {
+            throw new Exception();
+        }
+        return userInput;
     }
 
     /**

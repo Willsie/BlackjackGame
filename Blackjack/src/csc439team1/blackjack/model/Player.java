@@ -2,8 +2,18 @@ package csc439team1.blackjack.model;
 
 import java.util.ArrayList;
 
+/**
+ * Player class has 2 private variables int chips and Hand hand
+ */
 public class Player {
-    private int chips = 0;
+    /**
+     * this is the current player's chips
+     */
+    private double chips = 0;
+
+    /**
+     * this is the current player's hand
+     */
     private Hand hand = new Hand();
 
     /**
@@ -17,7 +27,7 @@ public class Player {
      * @return player's chip value
      * @throws IllegalStateException via checkChips method.
      */
-    public int getChips() {
+    public double getChips() {
         //checkChips verifies that there are chips in player, throws IllegalStateException if there are no chips.TS
         checkChips(chips);
         return chips;
@@ -28,7 +38,8 @@ public class Player {
      * @param chips set a new value for the player's chips. Will be done at the end of hand to reflect win/loss of bet.
      * @throws IllegalStateException via checkChips method.
      */
-    public void setChips(int chips) {
+    //Changed to double for last phase of assignment. TS
+    public void setChips(double chips) {
         //checkChips verifies that there are chips in player, throws IllegalStateException if there are no chips. TS
         checkChips(chips);
         this.chips = chips;
@@ -56,8 +67,8 @@ public class Player {
      * Checks that there are chips for the player object, and throws IllegalStateException if no chips are present.
      * @param chips
      */
-
-    private void checkChips(int chips)
+    //Changed to double for last phase of assignment. TS
+    private void checkChips(double chips)
     {
         //checkChips looks for chips being less than 1, and throws IllegalStateException.TS
         if (chips < 0)

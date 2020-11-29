@@ -4,6 +4,11 @@ import csc439team1.blackjack.controller.Controller;
 import csc439team1.blackjack.model.Dealer;
 import csc439team1.blackjack.view.CLIView;
 
+import java.util.ArrayList;
+
+/**
+ * This class contains main method to run the BlackJack game
+ */
 public class Blackjackgame {
     /**
      * Main starts the Blackjack game by instantiating a CLIview object and passing it to controller's constructor. Then the playBlackJack method is invoked.
