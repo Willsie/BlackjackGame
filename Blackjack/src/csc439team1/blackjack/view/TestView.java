@@ -48,7 +48,12 @@ public class TestView<E> extends View {
      */
     @Override
     public String input() throws Exception {
-        return null;
+        if (inputs.get(0).equals("quit")) {
+            throw new Exception();
+        } else {
+            return (String) inputs.remove(0);
+        }
+
     }
 
     /**
