@@ -406,7 +406,11 @@ public class Controller {
             }
             else if (dlrBust || playerTotal() > dealerTotal()){
                 view.output("You have won!\n");
-                player.setChips(player.getChips() + (1.5 * bet));
+                player.setChips(player.getChips() + (2 * bet));
+                //Clause that adds another %50 of the better to the player's chips provided their total is 21.
+                if (playerTotal() == 21) {
+                    player.setChips(player.getChips() + (.5 * bet));
+                }
             }
             else
             {
