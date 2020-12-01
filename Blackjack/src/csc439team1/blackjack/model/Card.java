@@ -1,5 +1,6 @@
 package csc439team1.blackjack.model;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  * This is a unique card that has 2 private variables: int suit and int number
  * @author Trevor Sears
@@ -8,6 +9,10 @@ package csc439team1.blackjack.model;
  */
 public class Card
 {
+    /**
+     * Logger for Card class.
+     */
+    Logger logger = Logger.getLogger(Card.class.getName());
     /**
      * The card's suit(CLUBS, HEARTHS, SPADES, DIAMONDS)
      */
@@ -28,12 +33,19 @@ public class Card
      */
     public Card(int cardNumber, int cardSuit)
     {
-        if (cardSuit > 3 || cardSuit < 0)       //if cardSuit > 3 or cardSuit <0, throws IllegalArgumentException
+        logger.entering(getClass().getName(), "Card");
+        logger.setLevel(Level.SEVERE);
+        if (cardSuit > 3 || cardSuit < 0) {     //if cardSuit > 3 or cardSuit <0, throws IllegalArgumentException
+            logger.info("Suit value of either below 0 or greater than 3 entered, " + cardSuit);
             throw new IllegalArgumentException("Illegal card suit:" + cardSuit);
-        else if (cardNumber > 13 || cardNumber < 1)    //if cardNumber > 13 or cardNumber < 1, throws IllegalArgumentException
+        }
+        else if (cardNumber > 13 || cardNumber < 1) {    //if cardNumber > 13 or cardNumber < 1, throws IllegalArgumentException
+            logger.info("Card number of below 1 or greater than 13 entered, " + cardNumber);
             throw new IllegalArgumentException("Illegal card number:" + cardNumber);
+        }
         number = cardNumber;
         suit = cardSuit;
+        logger.exiting(getClass().getName(), "Card");
     }
 
     /**
@@ -43,7 +55,12 @@ public class Card
      */
     public int getSuit()
     {
+        logger.entering(getClass().getName(), "getSuit");
+        logger.setLevel(Level.SEVERE);
+        logger.info("Related to suit, " + suit);
+        logger.exiting(getClass().getName(), "getSuit");
         return this.suit;
+
     }
 
     /**
@@ -53,6 +70,10 @@ public class Card
      */
     public int getNumber()
     {
+        logger.entering(getClass().getName(), "getNumber");
+        logger.setLevel(Level.SEVERE);
+        logger.info("Related to suit, " + number);
+        logger.exiting(getClass().getName(), "getNumber");
         return this.number;
     }
 
@@ -63,6 +84,10 @@ public class Card
      */
     public String getSuitString()
     {
+        logger.entering(getClass().getName(), "getSuitString");
+        logger.setLevel(Level.SEVERE);
+        logger.info("Related to Suit, " + suit);
+        logger.exiting(getClass().getName(), "getSuitString");
         switch (suit)
         {
             case 1:
@@ -83,6 +108,10 @@ public class Card
      */
     public String getNumberString()
     {
+        logger.entering(getClass().getName(), "getNumberString");
+        logger.setLevel(Level.SEVERE);
+        logger.info("Related to card number, " + number);
+        logger.exiting(getClass().getName(), "getNumberString");
         switch (number)
         {
             case 1:
@@ -106,6 +135,10 @@ public class Card
     @Override
     public String toString()
     {
+        logger.entering(getClass().getName(), "toString");
+        logger.setLevel(Level.SEVERE);
+        logger.info("Related to toString override with either number string or suit string, " + getNumberString() + " or " + getSuitString());
+        logger.exiting(getClass().getName(), "toString");
         return getNumberString() + " of " + getSuitString();
     }
 }
