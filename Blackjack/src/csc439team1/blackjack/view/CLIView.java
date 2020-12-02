@@ -7,7 +7,6 @@ import java.util.Scanner;
  */
 public class CLIView extends View
 {
-
     /**
      * display the message arguments to the console
      */
@@ -25,6 +24,34 @@ public class CLIView extends View
         }
         return userInput;
     }
+
+    /**
+     * This method takes input from user
+     * @return string input from user
+     * @throws Exception if user input is "quit"
+     */
+    /* TODO - still not working, please finish
+    @Override
+    public String input() throws Exception {
+        Scanner input = new Scanner(System.in);
+        String userInput = input.next();
+
+        boolean isString = false;
+        while (!isString) {
+            try {
+                if (userInput.toLowerCase().equals("quit") ) {
+                    throw new Exception();
+                }
+                isString = true;
+            } catch (NumberFormatException e) {
+                output("Entry must be a string ex:\"hit\", \"stand\", \"double\", try again: ");
+                userInput = input.next();
+            }
+        }
+        return userInput;
+    }
+    */
+
 
     /**
      * Creates a new scanner object and prompts the user for valid integer input. Will only except input that can be parsed as an Integer or the string "quit", which will end the game.
@@ -46,7 +73,6 @@ public class CLIView extends View
             } catch (NumberFormatException e) {
                 output("Entry must be an integer, try again: ");
                 userInput = input.next();
-
             }
         }
         return Integer.parseInt(userInput);

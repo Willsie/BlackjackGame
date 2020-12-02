@@ -48,6 +48,7 @@ public class Controller {
     /**
      * Constructor, for Controller object, accepts a View parameter. View object is required as Controller passes messages
      * and requirements to user via View and CLIView.
+     *
      * @param view accepts View object as parameter.
      */
     public Controller(View view) {
@@ -130,10 +131,10 @@ public class Controller {
     /**
      * InitialDeal is called at the start of every hand. It removes cards from the shoe provided the shoe has those cards available.
      * It then outputs the hands to the player, with one deal card remaining hidden.
+     *
      * @param shoe Takes the shoe object created at the start of the game.
      */
     public void initialDeal(Shoe shoe) {
-
         try {
             player.addCard(shoe.pick());
             player.addCard(shoe.pick());
@@ -282,6 +283,7 @@ public class Controller {
      * player's hand, while all other chars will execute dealers hand to print).
      * @param a is String parameter filled by other method(s) inside of Controller class.
      */
+
     private void printHand(String a){
         if (a.equals("p")){
             view.output("Your cards are: ");
@@ -446,3 +448,4 @@ public class Controller {
         playBlackjack();
     }
 }
+
