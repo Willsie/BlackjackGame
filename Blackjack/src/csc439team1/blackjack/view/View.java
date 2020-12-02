@@ -1,5 +1,7 @@
 package csc439team1.blackjack.view;
 
+import java.util.logging.Logger;
+
 /**
  * Abstract class View has output(), input(), intInput() that need to be implemented by CLIView
  */

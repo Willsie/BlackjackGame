@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 public class CLIView extends View
 {
     /**
-     * Logger for CLIVIEW class.
+     * Logger for CLIView class.
      */
     Logger logger = Logger.getLogger(CLIView.class.getName());
 
