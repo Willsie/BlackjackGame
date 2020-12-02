@@ -34,7 +34,7 @@ public class Card
     public Card(int cardNumber, int cardSuit)
     {
         logger.entering(getClass().getName(), "Card");
-        logger.setLevel(Level.SEVERE);
+        logger.setLevel(Level.INFO);
         if (cardSuit > 3 || cardSuit < 0) {     //if cardSuit > 3 or cardSuit <0, throws IllegalArgumentException
             logger.info("Suit value of either below 0 or greater than 3 entered, " + cardSuit);
             throw new IllegalArgumentException("Illegal card suit:" + cardSuit);
@@ -56,7 +56,7 @@ public class Card
     public int getSuit()
     {
         logger.entering(getClass().getName(), "getSuit");
-        logger.setLevel(Level.SEVERE);
+        logger.setLevel(Level.INFO);
         logger.info("Related to suit, " + suit);
         logger.exiting(getClass().getName(), "getSuit");
         return this.suit;
@@ -71,7 +71,7 @@ public class Card
     public int getNumber()
     {
         logger.entering(getClass().getName(), "getNumber");
-        logger.setLevel(Level.SEVERE);
+        logger.setLevel(Level.INFO);
         logger.info("Related to suit, " + number);
         logger.exiting(getClass().getName(), "getNumber");
         return this.number;
@@ -85,7 +85,7 @@ public class Card
     public String getSuitString()
     {
         logger.entering(getClass().getName(), "getSuitString");
-        logger.setLevel(Level.SEVERE);
+        logger.setLevel(Level.INFO);
         logger.info("Related to Suit or switch in method, " + suit);
         logger.exiting(getClass().getName(), "getSuitString");
         switch (suit)
@@ -109,7 +109,7 @@ public class Card
     public String getNumberString()
     {
         logger.entering(getClass().getName(), "getNumberString");
-        logger.setLevel(Level.SEVERE);
+        logger.setLevel(Level.INFO);
         logger.info("Related to card number or switch in getNumberString, " + number);
         logger.exiting(getClass().getName(), "getNumberString");
         switch (number)
@@ -136,7 +136,7 @@ public class Card
     public String toString()
     {
         logger.entering(getClass().getName(), "toString");
-        logger.setLevel(Level.SEVERE);
+        logger.setLevel(Level.INFO);
         logger.info("Related to toString override with either number string or suit string, " + getNumberString() + " or " + getSuitString());
         logger.exiting(getClass().getName(), "toString");
         return getNumberString() + " of " + getSuitString();

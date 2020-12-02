@@ -1,6 +1,8 @@
 package csc439team1.blackjack.model;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Hand class is a collection of cards who are being played after being picked from the shoe / deck
@@ -12,6 +14,10 @@ import java.util.ArrayList;
 public class Hand
 {
     /**
+     * Logger for Hand class.
+     */
+    Logger logger = Logger.getLogger(Card.class.getName());
+    /**
      * an array list of card objects called "cards"
      */
     public final ArrayList<Card> cardsOnHand;
@@ -21,7 +27,12 @@ public class Hand
      */
     public Hand()
     {
+        logger.entering(getClass().getName(), "Hand");
+        logger.setLevel(Level.INFO);
         this.cardsOnHand = new ArrayList<>(); //constructor for Hand method
+        logger.info("Creation of empty arraylist for card contained in hand");
+        logger.info("cardsOnHand should contain no elements" + cardsOnHand);
+        logger.exiting(getClass().getName(), "Hand");
     }
 
     /**
@@ -31,7 +42,11 @@ public class Hand
      */
     public void addCard(Card anotherCard)
     {
+        logger.entering(getClass().getName(), "addCard");
+        logger.setLevel(Level.INFO);
+        logger.info("Card being added is " + anotherCard);
         cardsOnHand.add(anotherCard);
+        logger.exiting(getClass().getName(), "addCard");
     }
 
     /**
@@ -41,6 +56,10 @@ public class Hand
      */
     public int size()
     {
+        logger.entering(getClass().getName(), "size");
+        logger.setLevel(Level.INFO);
+        logger.info("cardsOnHand size is " + cardsOnHand.size());
+        logger.exiting(getClass().getName(), "size");
         return cardsOnHand.size();
     }
 
@@ -51,6 +70,10 @@ public class Hand
      */
     public ArrayList<Card> getCards()
     {
+        logger.entering(getClass().getName(), "getCards");
+        logger.setLevel(Level.INFO);
+        logger.info("getCards: " + cardsOnHand);
+        logger.exiting(getClass().getName(), "getCards");
         return cardsOnHand;
     }
 }
