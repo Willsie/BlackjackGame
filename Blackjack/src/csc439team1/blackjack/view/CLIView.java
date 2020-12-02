@@ -17,7 +17,12 @@ public class CLIView extends View
 
     @Override
     public String input() throws Exception {
-        return null;
+        Scanner input = new Scanner(System.in);
+        String userInput = input.next();
+        if (userInput.toLowerCase().equals("quit") ) {
+            throw new Exception();
+        }
+        return userInput;
     }
 
     /**

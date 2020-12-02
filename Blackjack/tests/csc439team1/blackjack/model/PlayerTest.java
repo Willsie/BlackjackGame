@@ -11,7 +11,7 @@ public class PlayerTest {
     @Test
     public void player() {
         Player player0 = new Player();
-        assertEquals(player0.getChips(), 0);
+        assertEquals(player0.getChips(), 0, .0001);
         assertEquals(player0.getHand().size(), 0);
     }
 
@@ -22,7 +22,7 @@ public class PlayerTest {
     public void setChips() {
         Player player1 = new Player();
         player1.setChips(25);
-        assertEquals(player1.getChips(), 25);
+        assertEquals(player1.getChips(), 25, .0001);
     }
 
     /**
@@ -41,7 +41,7 @@ public class PlayerTest {
     public void getChips() {
         Player player3 = new Player();
         player3.setChips(50);
-        assertEquals(player3.getChips(), 50);
+        assertEquals(player3.getChips(), 50, .0001);
     }
 
 

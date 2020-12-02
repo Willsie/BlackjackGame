@@ -24,7 +24,27 @@ public class Controller {
      * Dealer type object to store current dealer information
      */
     Dealer dealer = new Dealer();
+    /**
+     * double variable cut that holds amount for cut of shoe, so that shoe may be repopulated during gameplay; and
+     * double variable bet which stores the amount of the player's bet.
+     */
+    double cut, bet = 0;
 
+    /**
+     * Shoe object to be used during game play, and hold at current hard coded number of decks.
+     */
+    Shoe shoe;
+    /**
+     * Boolean values for doubling (doubled), plyBust (player bust), dlrBust (dealer bust), and blackJack (for natural
+     * blackjack); which are used by various methods to judge winners/losers, or if the hand skips to end due to a blackjack
+     * on the initial deal.
+     */
+    private boolean doubled, plyBust, dlrBust, blackJack;
+    /**
+     * int variable shoeSize holds the number of decks to be used in the shoe, currently that number is hardcoded
+     * versus asking for user input.
+     */
+    private final int shoeDecks = 1;
     /**
      * Constructor, for Controller object, accepts a View parameter. View object is required as Controller passes messages
      * and requirements to user via View and CLIView.
@@ -41,14 +61,24 @@ public class Controller {
      * player and dealer. Accepts no parameters at current since shoe is hardcoded.
      */
     public void playBlackjack() {
-        Shoe shoe = new Shoe(1);
+        shoe = new Shoe(shoeDecks);
+        //cut variable is 1/5 of original shoe size, and is used by checkCut() to see if shoe needs repopulating
+        cut = shoe.size() * .2;
         buyChips();
-        askBet();
-        cut(shoe);
-        initialDeal(shoe);
-        //playerActions(player);
-        cut(shoe);
-
+        //While loop which operates as long as the player's chips are at minimum bet amount (10)
+        while(player.getChips() >= 10) {
+            askBet();
+            initialDeal(shoe);
+            naturalBlackJack();
+            //Conditional clause that is only true if there has not been an natural blackjack, else goes straight to endHandFunctions
+            if(!blackJack){
+                playerDouble();
+                playerAction();
+                postPlayerActions();
+            }
+            endHandFunctions();
+        }
+        endGameActions();
     }
 
     /**
@@ -62,9 +92,10 @@ public class Controller {
         while (!validInput) {
             try {
                 int input = view.intInput();
-                if (input > 10 && input <= 5000) {
+                if (input >= 10 && input <= 5000) {
                     validInput = true;
-                    player.setChips((input));
+                    //Changed to player.getChips + input to hold any leftover chips if game is restarted by endGameActions
+                    player.setChips(player.getChips() + (input));
                 } else {
                     view.output("Please enter a number between 10 and 5000!: ");
                 }
@@ -83,10 +114,11 @@ public class Controller {
 
         while (!validInput) {
             try {
-                int input = view.intInput();
+                double input = view.intInput();
                 if ((input >= 10) && (input <= 500) && (input <= player.getChips())) {
                     validInput = true;
-                    player.setChips(player.getChips() - input);
+                    bet = input;
+                    player.setChips(player.getChips() - bet);
                 } else {
                     view.output("Invalid bet amount! Bet needs to be between 10 & 500, and less than your current chips(" + player.getChips() + "): ");
                 }
@@ -112,7 +144,7 @@ public class Controller {
             System.out.println("There was an error(s) of the following" + e);
         }
         view.output("\nDealer card: ");
-        view.output(dealer.getHand().get(0).toString() + "\n\n");
+        view.output(dealer.getHand().get(0).toString() + "\n");
         view.output("Your initial cards are: ");
         view.output(player.getHand().toString() + "\n");
     }
@@ -126,79 +158,294 @@ public class Controller {
         throw new IllegalStateException("");
     }
 
+
     /**
-     * This method will check if the current shoe is less than 1/5 of the initial shoe when first created
-     * if it is less, then the new shoe will be generated
-     *
-     * @param shoe current shoe
-     * @return new shoe if the size of the current shoe is less than 1/5 of the initial shoe
+     * Method for calculating the total of a hand. First runs through entire hand and calculates all cards total except
+     * aces, acesCounter tracks the number of aces in a hand and is used by the final if clause for calculation. The
+     * final if clause subtracts 1 from the number of aces (provided there are any aces) and adds it 11 (one ace counted
+     * as 11, will never have more than 1 ace count as 11 as that would equal 22), then compares to see if it exceeds
+     * 21, should that exceed 21 all aces are counted as one (the aceCounter) and added to the total.
+     * @param hand Param is an Arraylist of cards, ie a hand.
+     * @return Returns an int that is the total value of the cards in a hand.
      */
-    public Shoe cut(Shoe shoe) {
-        if (shoe.size() < 11) shoe = new Shoe(1);
-        return shoe;
+    public int getTotalValue(ArrayList<Card> hand) {
+        Iterator<Card> handIterator = hand.iterator();
+        int acesCounter = 0, total = 0;
+        while (handIterator.hasNext()) {
+            Card currentCard = handIterator.next();
+            if (currentCard.getNumber() < 2) {
+                acesCounter++;
+            }
+            else {
+                if (currentCard.getNumber() < 10) {
+                    total = total + currentCard.getNumber();
+                }
+                else {
+                    total = total + 10;
+                }
+            }
+        }
+        if (acesCounter > 0) {
+            if ((acesCounter - 1 + 11) + total <= 21) {
+                total = total + (acesCounter -1 + 11);
+            }
+            else {
+                total = total + acesCounter;
+            }
+        }
+        return total;
     }
 
+    /**
+     * Method which returns player hand total by calling getTotalValue method, used to save on typing out
+     * getTotalValue() repeatedly.
+     * @return returns int of total card values for the player hand.
+     */
+    public int playerTotal() {
+        return getTotalValue(player.getHand());
+    }
 
     /**
-     * This method will ask for player actions (hit, stand or double)
-     * If current player's total score is between 9 and 11, offers player to double the bet, hit or stand
-     * If current player's total score is less than 22 (not busted), offers player to hit or stand
-     * Otherwise will display busted notification to console
-     *
-     * @param player current player
+     * Method which returns dealer hand total by calling getTotalValue method, used to save on typing out
+     * getTotalValue() repeatedly.
+     * @return returns int of total card values for the dealer hand.
      */
-    /* TODO - STILL NOT WORKING, PLEASE FINISH
-    public String playerActions(Player player) {
-        try {
-            int score = getTotalValue(player.getHand());
-            String input;
+    public int dealerTotal()
+    {
+        return getTotalValue(dealer.getHand());
+    }
 
-            if (9 <= score && score <= 11) {
-                view.output("Would you like to double, hit or stand ?");
-                input = view.input();
-            } else if (score > 21) {
-                view.output("Busted...you lose !!! Your total score is " + score);
-            } else {
-                view.output("Would you like to hit or stand ?");
-                input = view.input();
+    /**
+     * Method that looks for natural blackjack in either player or dealer, and sets blackJack boolean to true; with the
+     * effect that the game goes straight to endGameFunc, where if both player & dealer have blackjack will produce a push
+     * or declare winner if only one has blackjack.
+     * @return boolean value blackJack
+     */
+    public boolean naturalBlackJack(){
+        if (playerTotal() == 21 || dealerTotal() == 21){
+            blackJack = true;
+            view.output("Blackjack\n");
+            return blackJack;
+        }
+        return blackJack;
+    }
+
+    /**
+     * Method which checks if the player is able to double by checking both total and seeing if player.setChips will throw
+     * an IllegalStateException due to making number of chips go below 0. Should the conditional clause not execute or the
+     * exception gets thrown, method will return false signifying to playerDouble method that player is ineligible to double.
+     * @return Returns an boolean value representing whether the player can double or not.
+     */
+    public boolean ableToDouble() {
+        doubled = false;
+        double chips = player.getChips();
+        if (playerTotal() > 8 && playerTotal() < 12) {
+            try {
+                player.setChips(player.getChips() - bet);
             }
+            catch (IllegalStateException e)
+            {
+                player.setChips(chips);
+                return false;
+            }
+            player.setChips(chips);
+            return true;
+        }
+        return false;
+    }
 
-        }catch (Exception e) {
+    /**
+     * playerDouble executes the prompt asking if the player wishes to double, provided ableToDouble returns true. Should
+     * the player respond yes their chips are decremented an additional amount of the initial bet (making the bet double
+     * in size, setting the bet variable to twice its original size, and adding an additional card to simulate live
+     * doubling. Additionally, boolean variable doubled is set to true, as it is used by playerAction method to determine
+     * if the player can hit or stand.
+     */
+    public boolean playerDouble() {
+        String input;
+        if (ableToDouble()) {
+            view.output("Do you wish to double, y for yes or n for no: ");
+            //call to player input actions to verify user input is acceptable. TS
+            input = playerInputActions("yes", "no");
+            if (input.toLowerCase().equals("y")) {
+                player.setChips(player.getChips() - bet);
+                bet = bet * 2;
+                player.addCard(shoe.pick());
+                doubled = true;
+            }
+            return doubled;
+        }
+        return doubled;
+    }
+
+    /**
+     * printHand is a private method that other methods within Controller class can call, pass a char ('p' will print the
+     * player's hand, while all other chars will execute dealers hand to print).
+     * @param a is String parameter filled by other method(s) inside of Controller class.
+     */
+
+    private void printHand(String a){
+        if (a.equals("p")){
+            view.output("Your cards are: ");
+            view.output(player.getHand().toString() + " Total: " + playerTotal() + "\n");
+        }
+        else{
+            view.output("Dealer cards are: ");
+            view.output(dealer.getHand().toString() + " Total: " + dealerTotal() + "\n");
+        }
+    }
+
+    /**
+     * playerInputActions method takes string input, which it uses to prompt the user for desired entries. The entries
+     * all checked in a try catch block in a while loop to certify that the entered data is correct, with the ability of
+     * the user to quit at anytime (same methodology as askBet and buyChips. Method also uses the first letter of each
+     * string parameter to output to the user what they are expected to answer, ie y for yes or h for hit.
+     * @param a is a string which corresponds to either yes or hit
+     * @param b is a sting entered by other methods which corresponds to no or stand.
+     * @return Returns a string of which will be used by other methods to determine user intent of y for yes, h for hit, ect.
+     */
+    public String playerInputActions(String a, String b) {
+        boolean validInput = false;
+        String action = "", c = a.substring(0, 1), d = b.substring(0, 1);
+        while (!validInput) {
+            try {
+                action = view.input();
+                if (action.toLowerCase().equals(c) || action.toLowerCase().equals(d) ) {
+                    validInput = true;
+                }
+                else {
+                    view.output("That is not a valid entry, " + c + " for " + a + "or " + d + " for " + b + "!: ");
+                }
+            }
+            catch (Exception e) {
+                quit();
+            }
+        }
+        return action;
+    }
+
+    /**
+     * playerAction method determines if the player is able to hit or stand, and what input function they wish to pursue,
+     * operates under a while block (executes if player did not double) that loops provided the player total is below 21
+     * and has not indicated a desire to stand. Calls to playerInputActions to verify input of user data, and give user
+     * opportunity to quit game.
+     */
+    public void playerAction() {
+        String action;
+        boolean stand = false;
+        if (!doubled){
+            while (playerTotal() < 21 && !stand) {
+                view.output("Would you like to hit or stand, h for hit or s for stand: ");
+                action = playerInputActions("hit", "stand");
+                if (action.toLowerCase().equals("h")) {
+                    player.addCard(shoe.pick());
+                    printHand("p");
+                }
+                else {
+                    stand = true;
+                }
+            }
+        }
+    }
+
+    /**
+     * postPlayerActions handles what transpires after the player has initiated a stand or gone bust. The if clause checks
+     * if the player has gone over 21 and went bust, with printing a statement to the player stating such, then heading
+     * to endGameFunctions method. Should the if clause not be true, then the else clause will execute and have the dealer
+     * hit while the dealer total is below 17; there is nested if clause within the else that checks if the dealer has gone
+     * bust, and is used by results method to algorithms to ease complications of conditional clauses.
+     */
+    public void postPlayerActions() {
+        if (playerTotal() > 21){
+            view.output("You have busted and lost the hand!\n");
+            plyBust = true;
+        }
+        else
+        {
+            while (dealerTotal() < 17) {
+                dealer.addCard(shoe.pick());
+            }
+            if (dealerTotal() > 21){
+                dlrBust = true;
+            }
+        }
+    }
+
+    /**
+     * This method performs functions for the end of the hand cycle, with statements telling the player the hand has ended,
+     * a call to results method (which prints both hands, player and dealer, and determines a winner or if push occurs),
+     * then prints the dealers remaining chips. Finally, endHandFunctions clears both hands, calls checkCut to see if shoe
+     * must be repopulated, and resets all boolean values to false for the next hand.
+     */
+    public void endHandFunctions(){
+        view.output("End of hand\n");
+        results();
+        view.output("Your remaining chips are: " + player.getChips() + "\n\n");
+        player.getHand().clear();
+        dealer.getHand().clear();
+        checkCut();
+        dlrBust = false;
+        plyBust = false;
+        blackJack = false;
+    }
+
+    /**
+     * results method calculates if there is a draw/push or declares a winner. if the plyBust boolean is true no action is
+     * taken after printing the totals for dealer and player; should plyBust be false the totals are compared, if equal
+     * a push occurs, should dlrBust be true or player total is greater the player is declared winner since the player is
+     * closer to 21 or the dealer exceeded 21. Should neither of the preceding conditions be true the dealer is declared
+     * winner since they have not gone bust and have a greater total than the player.
+     */
+    public void results(){
+        printHand("d");
+        printHand("p");
+
+        if (!plyBust)
+        {
+            if (playerTotal() == dealerTotal()){
+                view.output("Draw, therefore push!\n");
+                player.setChips(player.getChips() + bet);
+            }
+            else if (dlrBust || playerTotal() > dealerTotal()){
+                view.output("You have won!\n");
+                player.setChips(player.getChips() + (2 * bet));
+                //Clause that adds another %50 of the better to the player's chips provided their total is 21.
+                if (playerTotal() == 21) {
+                    player.setChips(player.getChips() + (.5 * bet));
+                }
+            }
+            else
+            {
+                view.output("You have lost, the Dealer has won!\n");
+            }
+        }
+
+    }
+
+    /**
+     * checkCut compares the number of cards in a shoe against the cut variable, and if the shoe is less than the cut
+     * amount the deck is repopulated.
+     */
+    public void checkCut(){
+        if (shoe.size() < cut) {
+            shoe = new Shoe(shoeDecks);
+        }
+    }
+
+    /**
+     * Method that determines what route to take for the player once they have either fallen below minimum bet amount or
+     * have 0 chips. They are prompted to either purchase chips, which calls playBlackjack to restart game, or type q for
+     * quit (a reply of quit will also quit the game). The conditional clause only checks for a desire to quit, no additional
+     * checks are needed since the only other option is to continue/restart with more chips.
+     */
+    public void endGameActions(){
+        view.output("You have either run out of chips or fell below minimum bet amount, enter either p for purchase" +
+                "or q for quit: ");
+        String action = playerInputActions("p", "q");
+        if (action.equals("q")){
             quit();
         }
-        return input;
+        playBlackjack();
     }
-    */
+}
 
-        /**
-         * This method counts the total value / score of the current hand
-         *
-         * @param hand is current hand
-         * @return total value / score of the current hand
-         */
-        public int getTotalValue(ArrayList<Card> hand)
-        {
-            Iterator handIterator = hand.iterator();
-            int acesCounter = 0, total = 0;
-            while (handIterator.hasNext()) {
-                Card currentCard = (Card) handIterator.next();
-                if (currentCard.getNumber() < 2) {
-                    acesCounter++;
-                } else {
-                    if (currentCard.getNumber() < 10) {
-                        total = total + currentCard.getNumber();
-                    } else {
-                        total = total + 10;
-                    }
-                }
-            }
-            if (acesCounter > 0) {
-                if ((acesCounter - 1 + 11) + total <= 21) {
-                    total = total + (acesCounter - 1 + 11);
-                } else {
-                    total = total + acesCounter;
-                }
-            }
-            return total;
-        }
-    }
