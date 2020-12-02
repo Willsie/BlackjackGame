@@ -22,6 +22,5 @@ public class Blackjackgame {
         } catch (IllegalStateException e) {
             System.exit(0);
         }
-
     }
 }

@@ -7,16 +7,12 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.*;
 
+/**
+ * This is the test class for CLIView
+ */
 public class CLIViewTest {
-
-
     ByteArrayInputStream in = new ByteArrayInputStream("500".getBytes());
     ByteArrayInputStream in2 = new ByteArrayInputStream("quit".getBytes());
-
-
-
-
-
 
     /**
      * Tests input method to make sure the intInput method returns a valid value when an integer is entered
