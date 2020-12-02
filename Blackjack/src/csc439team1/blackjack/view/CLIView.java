@@ -19,11 +19,11 @@ public class CLIView extends View
      */
     @Override
     public void output(String message) {
-        logger.entering(getClass().getName(), "output method is called");
+        logger.entering(getClass().getName(), "output");
         logger.setLevel(Level.INFO);
         System.out.print(message);
         logger.info("Displaying message parameter to console");
-        logger.entering(getClass().getName(), "output method is exiting");
+        logger.exiting(getClass().getName(), "output");
     }
 
     /**
@@ -33,7 +33,7 @@ public class CLIView extends View
      */
     @Override
     public String input() throws Exception {
-        logger.entering(getClass().getName(), "input method is called");
+        logger.entering(getClass().getName(), "input");
         logger.setLevel(Level.INFO);
         Scanner input = new Scanner(System.in);
         logger.info("Creating new scanner object, open input stream");
@@ -43,7 +43,7 @@ public class CLIView extends View
             logger.info("Player entered quit and exception being thrown to exit the game");
             throw new Exception();
         }
-        logger.entering(getClass().getName(), "input method is exiting");
+        logger.exiting(getClass().getName(), "input");
         return userInput;
     }
 
@@ -53,7 +53,7 @@ public class CLIView extends View
      * @throws Exception when quit is entered. Exception is caught in controller which then calls quit() to exit the game.
      */
     public Integer intInput () throws Exception {
-        logger.entering(getClass().getName(), "intInput method is called");
+        logger.entering(getClass().getName(), "intInput");
         logger.setLevel(Level.INFO);
         Scanner input = new Scanner(System.in);
         logger.info("Creating new scanner object, open input stream");
@@ -77,7 +77,7 @@ public class CLIView extends View
                 logger.info("Reading next input from input stream");
             }
         }
-        logger.entering(getClass().getName(), "intInput method is exiting");
+        logger.exiting(getClass().getName(), "intInput");
         return Integer.parseInt(userInput);
     }
 }

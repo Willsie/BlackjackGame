@@ -67,7 +67,7 @@ public class Controller {
      * player and dealer. Accepts no parameters at current since shoe is hardcoded.
      */
     public void playBlackjack() {
-        logger.entering(getClass().getName(), "playBlackjack method is called");
+        logger.entering(getClass().getName(), "playBlackjack");
         logger.setLevel(Level.INFO);
         shoe = new Shoe(shoeDecks);
         logger.info("Creating new shoe, the size of the deck is " + shoeDecks);
@@ -100,7 +100,7 @@ public class Controller {
         }
         endGameActions();
         logger.info("The game has ended");
-        logger.exiting(getClass().getName(), "exit playBlackjack method");
+        logger.exiting(getClass().getName(), "playBlackjack");
     }
 
     /**
@@ -108,7 +108,7 @@ public class Controller {
      * If the user enters quit during that loop, then game via call to quit method.
      */
     public void buyChips() {
-        logger.entering(getClass().getName(), "buyChips method is called");
+        logger.entering(getClass().getName(), "buyChips");
         logger.setLevel(Level.INFO);
         view.output("Game is starting.....how much chips do you want to buy (between $10 to $5000): ");
         boolean validInput = false;
@@ -139,7 +139,7 @@ public class Controller {
      * Method for placing a bet, starts with using view to prompt user, then checks input before updating the value of Player's chip data member
      */
     public void askBet() {
-        logger.entering(getClass().getName(), "askBet method is called");
+        logger.entering(getClass().getName(), "askBet");
         logger.setLevel(Level.INFO);
         view.output("How much do you want to bet (between $10 to $500): ");
         boolean validInput = false;
@@ -166,7 +166,7 @@ public class Controller {
                 logger.info("askBet method is exiting - quitting the game");
             }
         }
-        logger.exiting(getClass().getName(), "exit askBet method");
+        logger.exiting(getClass().getName(), "askBet");
     }
 
     /**
@@ -176,7 +176,7 @@ public class Controller {
      * @param shoe Takes the shoe object created at the start of the game.
      */
     public void initialDeal(Shoe shoe) {
-        logger.entering(getClass().getName(), "initialDeal method is called");
+        logger.entering(getClass().getName(), "initialDeal");
         logger.setLevel(Level.INFO);
         try {
             player.addCard(shoe.pick());
@@ -199,7 +199,7 @@ public class Controller {
         logger.info("Display message to console \"Your initial cards are: \"");
         view.output(player.getHand().toString() + "\n");
         logger.info("Display player hand to the console");
-        logger.exiting(getClass().getName(), "initialDeal method is exiting");
+        logger.exiting(getClass().getName(), "initialDeal");
     }
 
     /**
@@ -207,11 +207,11 @@ public class Controller {
      * This allows the program to quit in a clear manner.
      */
     public void quit() {
-        logger.entering(getClass().getName(), "quit method is called");
+        logger.entering(getClass().getName(), "quit");
         logger.setLevel(Level.INFO);
         view.output("Player has quit\n");
         logger.info("Display message to console \"Player has quit\"");
-        logger.exiting(getClass().getName(), "initialDeal method is exiting");
+        logger.exiting(getClass().getName(), "quit");
         throw new IllegalStateException("");
     }
 
@@ -226,7 +226,7 @@ public class Controller {
      * @return Returns an int that is the total value of the cards in a hand.
      */
     public int getTotalValue(ArrayList<Card> hand) {
-        logger.entering(getClass().getName(), "getTotalValue method is called");
+        logger.entering(getClass().getName(), "getTotalValue");
         logger.setLevel(Level.INFO);
         Iterator<Card> handIterator = hand.iterator();
         logger.info("Initialize handIterator");
@@ -264,7 +264,8 @@ public class Controller {
                 logger.info("add acesCounter to total");
             }
         }
-        logger.exiting(getClass().getName(), "getTotalValue method is exiting and returning " + total);
+        logger.info("Returning total: " + total);
+        logger.exiting(getClass().getName(), "getTotalValue");
         return total;
     }
 
@@ -274,9 +275,9 @@ public class Controller {
      * @return returns int of total card values for the player hand.
      */
     public int playerTotal() {
-        logger.entering(getClass().getName(), "playerTotal method is called");
+        logger.entering(getClass().getName(), "playerTotal");
         logger.setLevel(Level.INFO);
-        logger.exiting(getClass().getName(), "getTotalValue method is exiting and returning total cards value on hand");
+        logger.exiting(getClass().getName(), "getTotalValue");
         return getTotalValue(player.getHand());
     }
 
@@ -287,9 +288,9 @@ public class Controller {
      */
     public int dealerTotal()
     {
-        logger.entering(getClass().getName(), "dealerTotal method is called");
+        logger.entering(getClass().getName(), "dealerTotal)");
         logger.setLevel(Level.INFO);
-        logger.exiting(getClass().getName(), "dealerTotal method is exiting and returning total cards value on hand");
+        logger.exiting(getClass().getName(), "dealerTotal");
         return getTotalValue(dealer.getHand());
     }
 
@@ -300,7 +301,7 @@ public class Controller {
      * @return boolean value blackJack
      */
     public boolean naturalBlackJack(){
-        logger.entering(getClass().getName(), "naturalBlackJack method is called");
+        logger.entering(getClass().getName(), "naturalBlackJack");
         logger.setLevel(Level.INFO);
         if (playerTotal() == 21 || dealerTotal() == 21){
             logger.info("Either player or dealer has blackjack");
@@ -309,7 +310,7 @@ public class Controller {
             logger.info("Display Blackjack notification to console");
             return blackJack;
         }
-        logger.exiting(getClass().getName(), "naturalBlackJack method is exiting and returning false");
+        logger.exiting(getClass().getName(), "naturalBlackJack");
         return blackJack;
     }
 
@@ -320,7 +321,7 @@ public class Controller {
      * @return Returns an boolean value representing whether the player can double or not.
      */
     public boolean ableToDouble() {
-        logger.entering(getClass().getName(), "ableToDouble method is called");
+        logger.entering(getClass().getName(), "ableToDouble");
         logger.setLevel(Level.INFO);
         doubled = false;
         double chips = player.getChips();
@@ -341,7 +342,7 @@ public class Controller {
             logger.info("Set player chip");
             return true;
         }
-        logger.exiting(getClass().getName(), "ableToDouble method is exiting and returning false");
+        logger.exiting(getClass().getName(), "ableToDouble");
         return false;
     }
 
@@ -353,7 +354,7 @@ public class Controller {
      * if the player can hit or stand.
      */
     public boolean playerDouble() {
-        logger.entering(getClass().getName(), "playerDouble method is called");
+        logger.entering(getClass().getName(), "playerDouble");
         logger.setLevel(Level.INFO);
         String input;
         if (ableToDouble()) {
@@ -374,7 +375,7 @@ public class Controller {
             }
             return doubled;
         }
-        logger.exiting(getClass().getName(), "playerDouble method is exiting and returning boolean value of doubled ");
+        logger.exiting(getClass().getName(), "playerDouble");
         return doubled;
     }
 
@@ -385,20 +386,21 @@ public class Controller {
      */
 
     private void printHand(String a){
-        logger.entering(getClass().getName(), "printHand method is called");
+        logger.entering(getClass().getName(), "printHand");
         logger.setLevel(Level.INFO);
         if (a.equals("p")){
-            logger.entering(getClass().getName(), "printing hand");
+            logger.info("If printHand parameter is \"p\"");
             view.output("Your cards are: ");
             view.output(player.getHand().toString() + " Total: " + playerTotal() + "\n");
-            logger.entering(getClass().getName(), "Displaying player hand and player total to console");
+            logger.info("Displaying player hand and player total to console");
         }
         else{
+            logger.info("If printHand parameter is not \"p\"");
             view.output("Dealer cards are: ");
             view.output(dealer.getHand().toString() + " Total: " + dealerTotal() + "\n");
-            logger.entering(getClass().getName(), "Displaying dealer hand and player total to console");
+            logger.info("Displaying dealer hand and player total to console");
         }
-        logger.exiting(getClass().getName(), "printHand method is exiting");
+        logger.exiting(getClass().getName(), "printHand");
     }
 
     /**
@@ -411,7 +413,7 @@ public class Controller {
      * @return Returns a string of which will be used by other methods to determine user intent of y for yes, h for hit, ect.
      */
     public String playerInputActions(String a, String b) {
-        logger.entering(getClass().getName(), "playerInputActions method is called");
+        logger.entering(getClass().getName(), "playerInputActions");
         logger.setLevel(Level.INFO);
         boolean validInput = false;
         String action = "", c = a.substring(0, 1), d = b.substring(0, 1);
@@ -434,7 +436,7 @@ public class Controller {
                 logger.info("askBet method is exiting - quitting the game");
             }
         }
-        logger.exiting(getClass().getName(), "playerInputActions method is exiting");
+        logger.exiting(getClass().getName(), "playerInputActions");
         return action;
     }
 
@@ -445,7 +447,7 @@ public class Controller {
      * opportunity to quit game.
      */
     public void playerAction() {
-        logger.entering(getClass().getName(), "playerActions method is called");
+        logger.entering(getClass().getName(), "playerActions");
         logger.setLevel(Level.INFO);
         String action;
         boolean stand = false;
@@ -462,7 +464,7 @@ public class Controller {
                 }
             }
         }
-        logger.exiting(getClass().getName(), "playerActions method is exiting");
+        logger.exiting(getClass().getName(), "playerActions");
     }
 
     /**
@@ -473,7 +475,7 @@ public class Controller {
      * bust, and is used by results method to algorithms to ease complications of conditional clauses.
      */
     public void postPlayerActions() {
-        logger.entering(getClass().getName(), "postPlayerActions method is called");
+        logger.entering(getClass().getName(), "postPlayerActions");
         logger.setLevel(Level.INFO);
         if (playerTotal() > 21){
             view.output("You have busted and lost the hand!\n");
@@ -492,7 +494,7 @@ public class Controller {
                 dlrBust = true;
             }
         }
-        logger.exiting(getClass().getName(), "postPlayerActions method is exiting");
+        logger.exiting(getClass().getName(), "postPlayerActions");
     }
 
     /**
@@ -502,7 +504,7 @@ public class Controller {
      * must be repopulated, and resets all boolean values to false for the next hand.
      */
     public void endHandFunctions(){
-        logger.entering(getClass().getName(), "endHandFunctions method is called");
+        logger.entering(getClass().getName(), "endHandFunctions");
         logger.setLevel(Level.INFO);
         view.output("End of hand\n");
         results();
@@ -518,7 +520,7 @@ public class Controller {
         dlrBust = false;
         plyBust = false;
         blackJack = false;
-        logger.exiting(getClass().getName(), "endHandFunctions method is exiting");
+        logger.exiting(getClass().getName(), "endHandFunctions");
     }
 
     /**
@@ -529,7 +531,7 @@ public class Controller {
      * winner since they have not gone bust and have a greater total than the player.
      */
     public void results(){
-        logger.entering(getClass().getName(), "results method is called");
+        logger.entering(getClass().getName(), "results");
         logger.setLevel(Level.INFO);
         printHand("d");
         logger.info("Calling printHand method");
@@ -559,7 +561,7 @@ public class Controller {
                 logger.info("Dealer win, player lost the current round");
             }
         }
-        logger.exiting(getClass().getName(), "results method is exiting");
+        logger.exiting(getClass().getName(), "results");
     }
 
     /**
@@ -567,13 +569,13 @@ public class Controller {
      * amount the deck is repopulated.
      */
     public void checkCut(){
-        logger.entering(getClass().getName(), "checkCut method is called");
+        logger.entering(getClass().getName(), "checkCut");
         logger.setLevel(Level.INFO);
         if (shoe.size() < cut) {
             shoe = new Shoe(shoeDecks);
             logger.info("Shoe size is smaller than the minimum cut amount, creating new shoe with the number of deck: " + shoeDecks);
         }
-        logger.exiting(getClass().getName(), "checkCut method is exiting");
+        logger.exiting(getClass().getName(), "checkCut");
     }
 
     /**
@@ -583,7 +585,7 @@ public class Controller {
      * checks are needed since the only other option is to continue/restart with more chips.
      */
     public void endGameActions(){
-        logger.entering(getClass().getName(), "endGameActions method is called");
+        logger.entering(getClass().getName(), "endGameActions");
         logger.setLevel(Level.INFO);
         view.output("You have either run out of chips or fell below minimum bet amount, enter either p for purchase" +
                 "or q for quit: ");
@@ -595,7 +597,7 @@ public class Controller {
         }
         playBlackjack();
         logger.info("Player has chosen to purchase chips and continue the game");
-        logger.exiting(getClass().getName(), "endGameActions method is exiting");
+        logger.exiting(getClass().getName(), "endGameActions");
     }
 }
 

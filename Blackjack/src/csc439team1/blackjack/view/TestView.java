@@ -15,21 +15,19 @@ public class TestView<E> extends View {
      */
     Logger logger = Logger.getLogger(TestView.class.getName());
 
-
     /**
      * ArrayList to store "user inputs" to be returned to the controller. Mimics the functionality of CLIView
      */
     private ArrayList<E> inputs = new ArrayList<>();
 
-
     /**
      * Default TestView() constructor
      */
     public TestView() {
-        logger.entering(getClass().getName(), "TestView default constructor is called");
+        logger.entering(getClass().getName(), "TestView");
         logger.setLevel(Level.INFO);
         logger.info("TestView() is invoked");
-        logger.entering(getClass().getName(), "TestView default constructor is exiting");
+        logger.exiting(getClass().getName(), "TestView");
     }
 
     /**
@@ -38,11 +36,11 @@ public class TestView<E> extends View {
      * @param value will be an integer or the string "quit"
      */
     public void add(E value) {
-        logger.entering(getClass().getName(), "add method is called");
+        logger.entering(getClass().getName(), "add");
         logger.setLevel(Level.INFO);
         this.inputs.add(value);
         logger.info("Adding value to inputs");
-        logger.entering(getClass().getName(), "add method is exiting");
+        logger.exiting(getClass().getName(), "add");
     }
 
     /**
@@ -52,11 +50,11 @@ public class TestView<E> extends View {
      */
     @Override
     public void output(String str) {
-        logger.entering(getClass().getName(), "output method is called");
+        logger.entering(getClass().getName(), "output");
         logger.setLevel(Level.INFO);
         System.out.print(str);
         logger.info("Displaying str to console");
-        logger.entering(getClass().getName(), "output method is exiting");
+        logger.exiting(getClass().getName(), "output");
     }
 
     /**
@@ -67,14 +65,14 @@ public class TestView<E> extends View {
      */
     @Override
     public String input() throws Exception {
-        logger.entering(getClass().getName(), "input method is called");
+        logger.entering(getClass().getName(), "input");
         logger.setLevel(Level.INFO);
         if (inputs.get(0).equals("quit")) {
             logger.info("Player entered quit - exiting the game");
             throw new Exception();
         } else {
             logger.info("Player did not enter quit - return player string");
-            logger.entering(getClass().getName(), "output method is exiting");
+            logger.exiting(getClass().getName(), "output");
             return (String) inputs.remove(0);
         }
     }
@@ -85,14 +83,14 @@ public class TestView<E> extends View {
      */
     @Override
     public Integer intInput() throws Exception {
-        logger.entering(getClass().getName(), "intInput method is called");
+        logger.entering(getClass().getName(), "intInput");
         logger.setLevel(Level.INFO);
         if (inputs.get(0).equals("quit")) {
             logger.info("Player entered quit - exiting the game");
             throw new Exception();
         } else {
             logger.info("Player enter valid integer input - return player integer input");
-            logger.entering(getClass().getName(), "intInput method is exiting");
+            logger.exiting(getClass().getName(), "intInput");
             return (Integer) inputs.remove(0);
         }
     }
