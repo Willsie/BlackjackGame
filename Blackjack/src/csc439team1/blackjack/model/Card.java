@@ -86,7 +86,7 @@ public class Card
     {
         logger.entering(getClass().getName(), "getSuitString");
         logger.setLevel(Level.SEVERE);
-        logger.info("Related to Suit, " + suit);
+        logger.info("Related to Suit or switch in method, " + suit);
         logger.exiting(getClass().getName(), "getSuitString");
         switch (suit)
         {
@@ -110,7 +110,7 @@ public class Card
     {
         logger.entering(getClass().getName(), "getNumberString");
         logger.setLevel(Level.SEVERE);
-        logger.info("Related to card number, " + number);
+        logger.info("Related to card number or switch in getNumberString, " + number);
         logger.exiting(getClass().getName(), "getNumberString");
         switch (number)
         {
