@@ -225,6 +225,12 @@ public class Controller {
         throw new IllegalStateException("");
     }
 
+
+    /**
+     * This is a special case of doubling where the player has an ace and a numbered card such that the
+     * two card numbers equal a number between 9 and 11, inclusive.
+     * Ace has a card number of 1, so a hand with Ace + either 8 or 9 or 10 will result in a valid doubling value.
+     */
     public void softTotal(){
         int value = player.getHand().get(0).getNumber() + player.getHand().get(1).getNumber();
         if (value > 8 && value < 12){
