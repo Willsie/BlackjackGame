@@ -15,7 +15,7 @@ public class Deck {
     /**
      * Logger for Deck class.
      */
-    Logger logger = Logger.getLogger(Card.class.getName());
+    private static final Logger logger = Logger.getLogger(Card.class.getName());
     /**
      * deck is an ArrayList<Card> (an ArrayList containing Card objects)
      */

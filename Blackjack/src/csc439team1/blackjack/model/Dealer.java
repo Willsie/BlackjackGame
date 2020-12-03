@@ -11,7 +11,7 @@ public class Dealer {
     /**
      * Logger for Dealer class.
      */
-    Logger logger = Logger.getLogger(Card.class.getName());
+    private static final Logger logger = Logger.getLogger(Card.class.getName());
     /**
      * this is the collection of cards on the current Dealer hand
      */

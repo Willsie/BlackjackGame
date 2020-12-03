@@ -15,7 +15,7 @@ public class Shoe
     /**
      * Logger for Shoe class.
      */
-    Logger logger = Logger.getLogger(Card.class.getName());
+    private static final Logger logger = Logger.getLogger(Card.class.getName());
     /**
      * an array list of deck called "shoe"
      */

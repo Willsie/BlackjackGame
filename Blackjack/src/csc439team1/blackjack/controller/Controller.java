@@ -408,7 +408,7 @@ public class Controller {
                 view.output("You have won!\n");
                 player.setChips(player.getChips() + (2 * bet));
                 //Clause that adds another %50 of the better to the player's chips provided their total is 21.
-                if (playerTotal() == 21) {
+                if (blackJack) {
                     player.setChips(player.getChips() + (.5 * bet));
                 }
             }

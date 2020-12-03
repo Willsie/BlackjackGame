@@ -11,7 +11,7 @@ public class Player {
     /**
      * Logger for Player class.
      */
-    Logger logger = Logger.getLogger(Card.class.getName());
+    private static final Logger logger = Logger.getLogger(Card.class.getName());
     /**
      * this is the current player's chips
      */

@@ -16,7 +16,7 @@ public class Hand
     /**
      * Logger for Hand class.
      */
-    Logger logger = Logger.getLogger(Card.class.getName());
+    private static final Logger logger = Logger.getLogger(Card.class.getName());
     /**
      * an array list of card objects called "cards"
      */

@@ -12,7 +12,7 @@ public class Card
     /**
      * Logger for Card class.
      */
-    Logger logger = Logger.getLogger(Card.class.getName());
+    private static final Logger logger = Logger.getLogger(Card.class.getName());
     /**
      * The card's suit(CLUBS, HEARTHS, SPADES, DIAMONDS)
      */
