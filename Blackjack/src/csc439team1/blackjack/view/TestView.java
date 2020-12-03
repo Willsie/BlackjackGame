@@ -1,7 +1,8 @@
 package csc439team1.blackjack.view;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Class created to testing Controller class
@@ -9,6 +10,10 @@ import java.util.Collections;
  * @param <E> generic type E
  */
 public class TestView<E> extends View {
+    /**
+     * Logger for TestView<E> class.
+     */
+    Logger logger = Logger.getLogger(TestView.class.getName());
 
     /**
      * ArrayList to store "user inputs" to be returned to the controller. Mimics the functionality of CLIView
@@ -19,6 +24,10 @@ public class TestView<E> extends View {
      * Default TestView() constructor
      */
     public TestView() {
+        logger.entering(getClass().getName(), "TestView");
+        logger.setLevel(Level.INFO);
+        logger.info("TestView() is invoked");
+        logger.exiting(getClass().getName(), "TestView");
     }
 
     /**
@@ -27,7 +36,11 @@ public class TestView<E> extends View {
      * @param value will be an integer or the string "quit"
      */
     public void add(E value) {
+        logger.entering(getClass().getName(), "add");
+        logger.setLevel(Level.INFO);
         this.inputs.add(value);
+        logger.info("Adding value to inputs");
+        logger.exiting(getClass().getName(), "add");
     }
 
     /**
@@ -37,7 +50,11 @@ public class TestView<E> extends View {
      */
     @Override
     public void output(String str) {
+        logger.entering(getClass().getName(), "output");
+        logger.setLevel(Level.INFO);
         System.out.print(str);
+        logger.info("Displaying str to console");
+        logger.exiting(getClass().getName(), "output");
     }
 
     /**
@@ -48,12 +65,16 @@ public class TestView<E> extends View {
      */
     @Override
     public String input() throws Exception {
+        logger.entering(getClass().getName(), "input");
+        logger.setLevel(Level.INFO);
         if (inputs.get(0).equals("quit")) {
+            logger.info("Player entered quit - exiting the game");
             throw new Exception();
         } else {
+            logger.info("Player did not enter quit - return player string");
+            logger.exiting(getClass().getName(), "output");
             return (String) inputs.remove(0);
         }
-
     }
 
     /**
@@ -62,9 +83,14 @@ public class TestView<E> extends View {
      */
     @Override
     public Integer intInput() throws Exception {
+        logger.entering(getClass().getName(), "intInput");
+        logger.setLevel(Level.INFO);
         if (inputs.get(0).equals("quit")) {
+            logger.info("Player entered quit - exiting the game");
             throw new Exception();
         } else {
+            logger.info("Player enter valid integer input - return player integer input");
+            logger.exiting(getClass().getName(), "intInput");
             return (Integer) inputs.remove(0);
         }
     }
