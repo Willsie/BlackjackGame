@@ -513,6 +513,23 @@ public class ControllerTest {
 
     }
 
+
+    /**
+     * This test of ableToDouble ensures that the method returns false when a double would result in the players chips going negative.
+     */
+    @Test
+    public void ableToDouble4() {
+        TestView<Integer> TestView = new TestView<>();
+        TestView.add(100);
+        TestView.add(75);
+        Controller controller = new Controller(TestView);
+        controller.buyChips();
+        controller.askBet();
+        controller.player.addCard(new Card(5,1));
+        controller.player.addCard(new Card(4,0));
+        assertFalse(controller.ableToDouble());
+    }
+
     /**
      * Test playerDouble. As there is no bet amount or cards in the player's hand, the call to ableToDouble in playerDouble should leave the boolean double value as false, thus causing playerDouble to return false as well.
      */
@@ -564,14 +581,239 @@ public class ControllerTest {
     }
 
 
+    /**
+     * Test playerInputActions by feeding the method two bad input's for the specified parameters, the two valid inputs.
+     * The loop should exit when the first valid input is detected, so the return value should be the first valid input
+     * and not the second.
+     */
     @Test
     public void playerInputActions() {
         TestView testView = new TestView();
         testView.add("i");
         testView.add("j");
         testView.add("Y");
+        testView.add("N");
         Controller controller29 = new Controller(testView);
-        
+        assertEquals(controller29.playerInputActions("yes", "no"), "Y");
+    }
+
+
+    /**
+     * Same test as above, but using hit and stand as the parameters passed to the method instead of yes and no. (yes and no are only used for
+     * doubling)
+     */
+    @Test
+    public void playerInputActions1() {
+        TestView testView = new TestView();
+        testView.add("i");
+        testView.add("j");
+        testView.add("H");
+        testView.add("S");
+        Controller controller30 = new Controller(testView);
+        assertEquals(controller30.playerInputActions("stand", "hit"), "H");
+    }
+
+
+    /**
+     * Test playerAction by calling the method when two cards totaling 20 exist in the players hand. This will test the control of the loop.
+     * The testView array list is loaded with three 'hit' commands, but only one hit should occur as any card given to the player will put
+     * the total over 20. The means that after the call to playerAction, the player's hand should only have 3 cards.
+     */
+    @Test
+    public void playerAction() {
+        TestView testView = new TestView();
+        testView.add("h");
+        testView.add("h");
+        testView.add("h");
+        Controller controller31 = new Controller(testView);
+        controller31.shoe = new Shoe(1);
+        controller31.player.addCard(new Card(11,0));
+        controller31.player.addCard(new Card(11,1));
+        controller31.playerAction();
+        assertEquals(controller31.player.getHand().size(), 3);
+    }
+
+
+    /**
+     * This test also tests the loop control in playerAction. A single card of value 2 is added to the hand prior to calling the method, and
+     * the test view is loaded with commands of (hit, stand, hit). The value of two means that any card dealt to the player will result in a value less than 21.
+     * Then the stand command is given, meaning the loop should exit and the player's hand should only have two cards, as the final hit is never executed.
+     */
+    @Test
+    public void playerAction1() {
+        TestView testView =  new TestView();
+        testView.add("h");
+        testView.add("s");
+        testView.add("h");
+        Controller controller32 = new Controller(testView);
+        controller32.shoe = new Shoe(1);
+        controller32.player.addCard(new Card(2,0));
+        controller32.playerAction();
+        assertEquals(controller32.player.getHand().size(), 2);
+    }
+
+
+    /**
+     * Test postPlayerActions control flow by ensuring that the body of the first if statement executes when player's hand is greater than 21.
+     */
+    @Test
+    public void postPlayerActions() {
+        TestView testView = new TestView();
+        Controller controller33 = new Controller(testView);
+        controller33.player.addCard(new Card(11,0));
+        controller33.player.addCard(new Card(11,1));
+        controller33.player.addCard(new Card(11,2));
+        controller33.postPlayerActions();
+        assertEquals("You have busted and lost the hand!\n", out.toString());
+    }
+
+
+    /**
+     * Test postPlayerActions control flow by ensuring that only one card is added when the dealer's total is at 16 prior to the call.
+     */
+    @Test
+    public void postPlayerActions1() {
+        TestView testView = new TestView();
+        Controller controller34 = new Controller(testView);
+        controller34.player.addCard(new Card(11,0));
+        controller34.shoe = new Shoe(1);
+        controller34.dealer.addCard(new Card(11,0));
+        controller34.dealer.addCard(new Card(6,0));
+        controller34.postPlayerActions();
+        assertEquals(controller34.dealer.getHand().size(), 3);
+
+    }
+
+    /**
+     * This verifys that postPlayerActions correctly sets dlrBust to true when dealer's hand is greater than 21.
+     *
+     */
+    @Test
+    public void postPlayerActions2() {
+        TestView testView = new TestView();
+        Controller controller35 = new Controller(testView);
+        controller35.player.addCard(new Card(2,0));
+        controller35.dealer.addCard(new Card(11,0));
+        controller35.dealer.addCard(new Card(12,0));
+        controller35.dealer.addCard(new Card(5,0));
+        controller35.postPlayerActions();
+        assertTrue(controller35.isDlrBust());
+    }
+
+
+    /**
+     * Verify that postPlayerActions correctly sets plyBust to true when player's total is greater than 21
+     *
+     */
+    @Test
+    public void postPlayerActions3() {
+        TestView testView = new TestView();
+        Controller controller36 = new Controller(testView);
+        controller36.player.addCard(new Card(11,0));
+        controller36.player.addCard(new Card(12,0));
+        controller36.player.addCard(new Card(5,0));
+        controller36.postPlayerActions();
+        assertTrue(controller36.isPlyBust());
+    }
+
+
+    /**
+     * Test's the various operations that occur in endHandFunctions. Player is given a hand that would result in a bust and postPlayerActions is call to ensure that 
+     * plyBust is set to true. Also check to make sure the player's hand has been cleared correctly. 
+     */
+    @Test
+    public void endHandFunctions() {
+        TestView testView = new TestView();
+        Controller controller37 = new Controller(testView);
+        controller37.shoe = new Shoe(1);
+        controller37.player.addCard(new Card(11, 0));
+        controller37.player.addCard(new Card(12, 0));
+        controller37.player.addCard(new Card(13, 0));
+        controller37.postPlayerActions();
+        assertTrue(controller37.isPlyBust());
+        controller37.endHandFunctions();
+        assertFalse(controller37.isPlyBust());
+        assertEquals(controller37.player.getHand().size(),0);
+
+    }
+
+
+    /**
+     * Same test as above but instead with dealer having a busting hand, and then checking that the relevant values have been set correctly
+     */
+    @Test
+    public void endHandFunctions1() {
+        TestView testView = new TestView();
+        Controller controller38 = new Controller(testView);
+        controller38.shoe = new Shoe(1);
+        controller38.dealer.addCard(new Card(11, 0));
+        controller38.dealer.addCard(new Card(12, 0));
+        controller38.dealer.addCard(new Card(13, 0));
+        controller38.postPlayerActions();
+        assertTrue(controller38.isDlrBust());
+        controller38.endHandFunctions();
+        assertFalse(controller38.isDlrBust());
+        assertEquals(controller38.dealer.getHand().size(),0);
+
+    }
+
+
+    /**
+     * Test that results updates the player's chip amount correctly in the case of a push.
+     * Chip amount is verified to be decremented correctly after a call to askBet, and then verified to be returned
+     * to the original amount after a call to results.
+     */
+    @Test
+    public void results() {
+        TestView testView = new TestView();
+        testView.add(100);
+        testView.add(25);
+        Controller controller39 = new Controller(testView);
+        controller39.buyChips();
+        controller39.askBet();
+        assertEquals(controller39.player.getChips(), 75, .0001);
+        controller39.player.addCard(new Card(11,0));
+        controller39.player.addCard(new Card(8,0));
+        controller39.dealer.addCard(new Card(11,1));
+        controller39.dealer.addCard(new Card(8,1));
+        controller39.results();
+        assertEquals(controller39.player.getChips(), 100, .0001);
+
+    }
+
+    @Test
+    public void results1() {
+        TestView testView = new TestView();
+        testView.add(100);
+        testView.add(25);
+        Controller controller40 = new Controller(testView);
+        controller40.buyChips();
+        controller40.askBet();
+        controller40.dealer.addCard(new Card(11,1));
+        controller40.dealer.addCard(new Card(8,1));
+        controller40.dealer.addCard(new Card(9,1));
+        controller40.postPlayerActions();    //set dlrBust to true
+
+        controller40.results();
+        //assertEquals();
+    }
+
+    @Test
+    public void softTotal() {
+        TestView testView = new TestView();
+        testView.add(100);
+        testView.add(25);
+        testView.add("y");
+        Controller controller = new Controller(testView);
+        controller.shoe = new Shoe(1);
+        controller.buyChips();
+        controller.askBet();
+        controller.player.addCard(new Card(1, 1));
+        controller.player.addCard(new Card(8,1));
+        controller.softTotal();
+        controller.playerDouble();
+        assertEquals(controller.bet, 50, .0001);
+        assertEquals(controller.player.getHand().size(), 3);
 
     }
 }

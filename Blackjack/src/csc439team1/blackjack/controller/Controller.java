@@ -45,7 +45,7 @@ public class Controller {
      * blackjack); which are used by various methods to judge winners/losers, or if the hand skips to end due to a blackjack
      * on the initial deal.
      */
-    private boolean doubled, plyBust, dlrBust, blackJack;
+    private boolean doubled, plyBust, dlrBust, blackJack, specialDouble;
     /**
      * int variable shoeSize holds the number of decks to be used in the shoe, currently that number is hardcoded
      * versus asking for user input.
@@ -59,6 +59,14 @@ public class Controller {
      */
     public Controller(View view) {
         this.view = view;
+    }
+
+    public boolean isDlrBust() {
+        return dlrBust;
+    }
+
+    public boolean isPlyBust() {
+        return plyBust;
     }
 
     /**
@@ -191,6 +199,8 @@ public class Controller {
             System.out.println("There was an error(s) of the following" + e);
             logger.info("initialDeal method is throwing exception - " + e);
         }
+        softTotal();
+
         view.output("\nDealer card: ");
         logger.info("Display message to console \"Dealer card: \"");
         view.output(dealer.getHand().get(0).toString() + "\n");
@@ -213,6 +223,13 @@ public class Controller {
         logger.info("Display message to console \"Player has quit\"");
         logger.exiting(getClass().getName(), "initialDeal method is exiting");
         throw new IllegalStateException("");
+    }
+
+    public void softTotal(){
+        int value = player.getHand().get(0).getNumber() + player.getHand().get(1).getNumber();
+        if (value > 8 && value < 12){
+            specialDouble = true;
+        }
     }
 
 
@@ -325,7 +342,7 @@ public class Controller {
         doubled = false;
         double chips = player.getChips();
         logger.info("Total player chips: " + chips);
-        if (playerTotal() > 8 && playerTotal() < 12) {
+        if ((playerTotal() > 8 && playerTotal() < 12) || specialDouble) {
             logger.info("Total cards value on hand value is between 9 and 11");
             try {
                 player.setChips(player.getChips() - bet);
@@ -518,6 +535,7 @@ public class Controller {
         dlrBust = false;
         plyBust = false;
         blackJack = false;
+        specialDouble = false;
         logger.exiting(getClass().getName(), "endHandFunctions method is exiting");
     }
 
@@ -548,8 +566,8 @@ public class Controller {
                 player.setChips(player.getChips() + (2 * bet));
                 logger.info("Dealer bust or Player total is greater then dealer total, return bet and winning chips to player");
                 //Clause that adds another %50 of the better to the player's chips provided their total is 21.
-                if (playerTotal() == 21) {
-                    player.setChips(player.getChips() + (.5 * bet));
+                if (blackJack) {
+                    player.setChips(player.getChips() + (2.5 * bet));
                     logger.info("If player win and has Blackjack, returning winning chip - player win 1.5 times");
                 }
             }
