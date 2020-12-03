@@ -1,7 +1,8 @@
 package csc439team1.blackjack.view;
 
+import csc439team1.blackjack.model.Card;
+
 import java.util.Scanner;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -12,7 +13,7 @@ public class CLIView extends View
     /**
      * Logger for CLIView class.
      */
-    Logger logger = Logger.getLogger(CLIView.class.getName());
+    private static final Logger logger = Logger.getLogger(Card.class.getName());
 
     /**
      * display the message arguments to the console
@@ -20,7 +21,6 @@ public class CLIView extends View
     @Override
     public void output(String message) {
         logger.entering(getClass().getName(), "output");
-        logger.setLevel(Level.INFO);
         System.out.print(message);
         logger.info("Displaying message parameter to console");
         logger.exiting(getClass().getName(), "output");
@@ -34,7 +34,6 @@ public class CLIView extends View
     @Override
     public String input() throws Exception {
         logger.entering(getClass().getName(), "input");
-        logger.setLevel(Level.INFO);
         Scanner input = new Scanner(System.in);
         logger.info("Creating new scanner object, open input stream");
         String userInput = input.next();
@@ -54,7 +53,6 @@ public class CLIView extends View
      */
     public Integer intInput () throws Exception {
         logger.entering(getClass().getName(), "intInput");
-        logger.setLevel(Level.INFO);
         Scanner input = new Scanner(System.in);
         logger.info("Creating new scanner object, open input stream");
         String userInput = input.next();

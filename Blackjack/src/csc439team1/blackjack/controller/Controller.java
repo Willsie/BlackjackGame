@@ -4,7 +4,6 @@ import csc439team1.blackjack.model.*;
 import csc439team1.blackjack.view.View;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -14,7 +13,7 @@ public class Controller {
     /**
      * Logger for Controller class.
      */
-    Logger logger = Logger.getLogger(Controller.class.getName());
+    private static final Logger logger = Logger.getLogger(Card.class.getName());
 
     /**
      * View type object  used by Controller to receive input and display output
@@ -68,7 +67,6 @@ public class Controller {
      */
     public void playBlackjack() {
         logger.entering(getClass().getName(), "playBlackjack");
-        logger.setLevel(Level.INFO);
         shoe = new Shoe(shoeDecks);
         logger.info("Creating new shoe, the size of the deck is " + shoeDecks);
         //cut variable is 1/5 of original shoe size, and is used by checkCut() to see if shoe needs repopulating
@@ -109,7 +107,6 @@ public class Controller {
      */
     public void buyChips() {
         logger.entering(getClass().getName(), "buyChips");
-        logger.setLevel(Level.INFO);
         view.output("Game is starting.....how much chips do you want to buy (between $10 to $5000): ");
         boolean validInput = false;
         while (!validInput) {
@@ -140,7 +137,6 @@ public class Controller {
      */
     public void askBet() {
         logger.entering(getClass().getName(), "askBet");
-        logger.setLevel(Level.INFO);
         view.output("How much do you want to bet (between $10 to $500): ");
         boolean validInput = false;
 
@@ -177,7 +173,6 @@ public class Controller {
      */
     public void initialDeal(Shoe shoe) {
         logger.entering(getClass().getName(), "initialDeal");
-        logger.setLevel(Level.INFO);
         try {
             player.addCard(shoe.pick());
             logger.info("add 1 card to player hand by calling shoe.pick()");
@@ -208,7 +203,6 @@ public class Controller {
      */
     public void quit() {
         logger.entering(getClass().getName(), "quit");
-        logger.setLevel(Level.INFO);
         view.output("Player has quit\n");
         logger.info("Display message to console \"Player has quit\"");
         logger.exiting(getClass().getName(), "quit");
@@ -227,7 +221,6 @@ public class Controller {
      */
     public int getTotalValue(ArrayList<Card> hand) {
         logger.entering(getClass().getName(), "getTotalValue");
-        logger.setLevel(Level.INFO);
         Iterator<Card> handIterator = hand.iterator();
         logger.info("Initialize handIterator");
         int acesCounter = 0, total = 0;
@@ -276,7 +269,6 @@ public class Controller {
      */
     public int playerTotal() {
         logger.entering(getClass().getName(), "playerTotal");
-        logger.setLevel(Level.INFO);
         logger.exiting(getClass().getName(), "getTotalValue");
         return getTotalValue(player.getHand());
     }
@@ -289,7 +281,6 @@ public class Controller {
     public int dealerTotal()
     {
         logger.entering(getClass().getName(), "dealerTotal)");
-        logger.setLevel(Level.INFO);
         logger.exiting(getClass().getName(), "dealerTotal");
         return getTotalValue(dealer.getHand());
     }
@@ -302,7 +293,6 @@ public class Controller {
      */
     public boolean naturalBlackJack(){
         logger.entering(getClass().getName(), "naturalBlackJack");
-        logger.setLevel(Level.INFO);
         if (playerTotal() == 21 || dealerTotal() == 21){
             logger.info("Either player or dealer has blackjack");
             blackJack = true;
@@ -322,7 +312,6 @@ public class Controller {
      */
     public boolean ableToDouble() {
         logger.entering(getClass().getName(), "ableToDouble");
-        logger.setLevel(Level.INFO);
         doubled = false;
         double chips = player.getChips();
         logger.info("Total player chips: " + chips);
@@ -355,7 +344,6 @@ public class Controller {
      */
     public boolean playerDouble() {
         logger.entering(getClass().getName(), "playerDouble");
-        logger.setLevel(Level.INFO);
         String input;
         if (ableToDouble()) {
             logger.info("ableToDouble condition is true");
@@ -387,7 +375,6 @@ public class Controller {
 
     private void printHand(String a){
         logger.entering(getClass().getName(), "printHand");
-        logger.setLevel(Level.INFO);
         if (a.equals("p")){
             logger.info("If printHand parameter is \"p\"");
             view.output("Your cards are: ");
@@ -414,7 +401,6 @@ public class Controller {
      */
     public String playerInputActions(String a, String b) {
         logger.entering(getClass().getName(), "playerInputActions");
-        logger.setLevel(Level.INFO);
         boolean validInput = false;
         String action = "", c = a.substring(0, 1), d = b.substring(0, 1);
         while (!validInput) {
@@ -448,7 +434,6 @@ public class Controller {
      */
     public void playerAction() {
         logger.entering(getClass().getName(), "playerActions");
-        logger.setLevel(Level.INFO);
         String action;
         boolean stand = false;
         if (!doubled){
@@ -476,7 +461,6 @@ public class Controller {
      */
     public void postPlayerActions() {
         logger.entering(getClass().getName(), "postPlayerActions");
-        logger.setLevel(Level.INFO);
         if (playerTotal() > 21){
             view.output("You have busted and lost the hand!\n");
             logger.info("Player total card is over 21");
@@ -505,7 +489,6 @@ public class Controller {
      */
     public void endHandFunctions(){
         logger.entering(getClass().getName(), "endHandFunctions");
-        logger.setLevel(Level.INFO);
         view.output("End of hand\n");
         results();
         logger.info("End of current hand, display result");
@@ -532,7 +515,6 @@ public class Controller {
      */
     public void results(){
         logger.entering(getClass().getName(), "results");
-        logger.setLevel(Level.INFO);
         printHand("d");
         logger.info("Calling printHand method");
         printHand("p");
@@ -570,7 +552,6 @@ public class Controller {
      */
     public void checkCut(){
         logger.entering(getClass().getName(), "checkCut");
-        logger.setLevel(Level.INFO);
         if (shoe.size() < cut) {
             shoe = new Shoe(shoeDecks);
             logger.info("Shoe size is smaller than the minimum cut amount, creating new shoe with the number of deck: " + shoeDecks);
@@ -586,7 +567,6 @@ public class Controller {
      */
     public void endGameActions(){
         logger.entering(getClass().getName(), "endGameActions");
-        logger.setLevel(Level.INFO);
         view.output("You have either run out of chips or fell below minimum bet amount, enter either p for purchase" +
                 "or q for quit: ");
         String action = playerInputActions("p", "q");

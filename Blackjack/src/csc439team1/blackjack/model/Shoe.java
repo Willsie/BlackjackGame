@@ -1,7 +1,6 @@
 package csc439team1.blackjack.model;
 
 import java.util.ArrayList;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -31,7 +30,6 @@ public class Shoe
     public Shoe(int numberOfDecks)  //Shoe constructor that takes number of deck(s)
     {
         logger.entering(getClass().getName(), "Shoe");
-        logger.setLevel(Level.INFO);
         if (numberOfDecks < 1){
             logger.info("Exception thrown due to numberOfDecks being below 1, " + numberOfDecks);
             throw new IllegalArgumentException();
@@ -56,7 +54,6 @@ public class Shoe
     public int numDeck()
     {
         logger.entering(getClass().getName(), "numDeck");
-        logger.setLevel(Level.INFO);
         logger.info("Related to the size of the Shoe: " + shoe.size());
         logger.exiting(getClass().getName(), "numDeck");
         //Call to size method from Arraylist returns the number of decks within the shoe.
@@ -74,7 +71,6 @@ public class Shoe
     public Card pick()
     {
         logger.entering(getClass().getName(), "pick");
-        logger.setLevel(Level.INFO);
         //Throws IllegalStatementException should game play neglect addressing an empty shoe.
         if (shoe.size() < 1)
         {
@@ -111,7 +107,6 @@ public class Shoe
     public int size()
     {
         logger.entering(getClass().getName(), "size");
-        logger.setLevel(Level.INFO);
         int totalCards = 0;
         logger.info("totalCards should be 0: " + totalCards);
         for (Deck deck : shoe)

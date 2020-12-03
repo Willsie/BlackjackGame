@@ -1,5 +1,4 @@
 package csc439team1.blackjack.model;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
  * This is a unique card that has 2 private variables: int suit and int number
@@ -34,15 +33,15 @@ public class Card
     public Card(int cardNumber, int cardSuit)
     {
         logger.entering(getClass().getName(), "Card");
-        logger.setLevel(Level.INFO);
         if (cardSuit > 3 || cardSuit < 0) {     //if cardSuit > 3 or cardSuit <0, throws IllegalArgumentException
-            logger.info("Suit value of either below 0 or greater than 3 entered, " + cardSuit);
+            logger.warning("Suit value of either below 0 or greater than 3 entered, " + cardSuit);
             throw new IllegalArgumentException("Illegal card suit:" + cardSuit);
         }
         else if (cardNumber > 13 || cardNumber < 1) {    //if cardNumber > 13 or cardNumber < 1, throws IllegalArgumentException
-            logger.info("Card number of below 1 or greater than 13 entered, " + cardNumber);
+            logger.warning("Card number of below 1 or greater than 13 entered, " + cardNumber);
             throw new IllegalArgumentException("Illegal card number:" + cardNumber);
         }
+        logger.info("Card Suit is " + cardSuit + ". Card Number is " + cardNumber);
         number = cardNumber;
         suit = cardSuit;
         logger.exiting(getClass().getName(), "Card");
@@ -56,8 +55,7 @@ public class Card
     public int getSuit()
     {
         logger.entering(getClass().getName(), "getSuit");
-        logger.setLevel(Level.INFO);
-        logger.info("Related to suit, " + suit);
+        logger.severe("Unexpected Error with getSuit method");
         logger.exiting(getClass().getName(), "getSuit");
         return this.suit;
 
@@ -71,8 +69,7 @@ public class Card
     public int getNumber()
     {
         logger.entering(getClass().getName(), "getNumber");
-        logger.setLevel(Level.INFO);
-        logger.info("Related to suit, " + number);
+        logger.severe("Unexpected error related to suit, " + number);
         logger.exiting(getClass().getName(), "getNumber");
         return this.number;
     }
@@ -85,8 +82,7 @@ public class Card
     public String getSuitString()
     {
         logger.entering(getClass().getName(), "getSuitString");
-        logger.setLevel(Level.INFO);
-        logger.info("Related to Suit or switch in method, " + suit);
+        logger.severe("Issue related to Suit or switch in method, " + suit);
         logger.exiting(getClass().getName(), "getSuitString");
         switch (suit)
         {
@@ -109,8 +105,7 @@ public class Card
     public String getNumberString()
     {
         logger.entering(getClass().getName(), "getNumberString");
-        logger.setLevel(Level.INFO);
-        logger.info("Related to card number or switch in getNumberString, " + number);
+        logger.severe("Related to card number or switch in getNumberString, " + number);
         logger.exiting(getClass().getName(), "getNumberString");
         switch (number)
         {
@@ -136,8 +131,7 @@ public class Card
     public String toString()
     {
         logger.entering(getClass().getName(), "toString");
-        logger.setLevel(Level.INFO);
-        logger.info("Related to toString override with either number string or suit string, " + getNumberString() + " or " + getSuitString());
+        logger.severe("Related to toString override with either number string or suit string, " + getNumberString() + " or " + getSuitString());
         logger.exiting(getClass().getName(), "toString");
         return getNumberString() + " of " + getSuitString();
     }
