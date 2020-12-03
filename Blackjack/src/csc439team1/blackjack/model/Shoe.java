@@ -32,6 +32,7 @@ public class Shoe
     {
         logger.entering(getClass().getName(), "Shoe");
         logger.setLevel(Level.INFO);
+
         if (numberOfDecks < 1){
             logger.info("Exception thrown due to numberOfDecks being below 1, " + numberOfDecks);
             throw new IllegalArgumentException();

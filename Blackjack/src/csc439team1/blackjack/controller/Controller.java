@@ -61,10 +61,19 @@ public class Controller {
         this.view = view;
     }
 
+
+    /**
+     * Getter method for dlrBust
+     * @return the boolean value dlrBust
+     */
     public boolean isDlrBust() {
         return dlrBust;
     }
 
+    /**
+     * Getter method for plyBust
+     * @return the boolean value plyBust
+     */
     public boolean isPlyBust() {
         return plyBust;
     }
@@ -573,7 +582,7 @@ public class Controller {
                 logger.info("Dealer bust or Player total is greater then dealer total, return bet and winning chips to player");
                 //Clause that adds another %50 of the better to the player's chips provided their total is 21.
                 if (blackJack) {
-                    player.setChips(player.getChips() + (2.5 * bet));
+                    player.setChips(player.getChips() + (.5 * bet));
                     logger.info("If player win and has Blackjack, returning winning chip - player win 1.5 times");
                 }
             }

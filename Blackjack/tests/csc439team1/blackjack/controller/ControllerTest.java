@@ -535,7 +535,7 @@ public class ControllerTest {
      */
     @Test
     public void playerDouble() {
-        TestView testView = new TestView();
+        TestView<Integer> testView = new TestView<>();
         Controller controller26 = new Controller(testView);
         assertFalse(controller26.playerDouble());
     }
@@ -588,7 +588,7 @@ public class ControllerTest {
      */
     @Test
     public void playerInputActions() {
-        TestView testView = new TestView();
+        TestView<String> testView = new TestView<>();
         testView.add("i");
         testView.add("j");
         testView.add("Y");
@@ -604,7 +604,7 @@ public class ControllerTest {
      */
     @Test
     public void playerInputActions1() {
-        TestView testView = new TestView();
+        TestView<String> testView = new TestView<>();
         testView.add("i");
         testView.add("j");
         testView.add("H");
@@ -621,7 +621,7 @@ public class ControllerTest {
      */
     @Test
     public void playerAction() {
-        TestView testView = new TestView();
+        TestView<String> testView = new TestView<>();
         testView.add("h");
         testView.add("h");
         testView.add("h");
@@ -641,7 +641,7 @@ public class ControllerTest {
      */
     @Test
     public void playerAction1() {
-        TestView testView =  new TestView();
+        TestView<String> testView =  new TestView<>();
         testView.add("h");
         testView.add("s");
         testView.add("h");
@@ -658,7 +658,7 @@ public class ControllerTest {
      */
     @Test
     public void postPlayerActions() {
-        TestView testView = new TestView();
+        TestView<Integer> testView = new TestView<>();
         Controller controller33 = new Controller(testView);
         controller33.player.addCard(new Card(11,0));
         controller33.player.addCard(new Card(11,1));
@@ -673,7 +673,7 @@ public class ControllerTest {
      */
     @Test
     public void postPlayerActions1() {
-        TestView testView = new TestView();
+        TestView<Integer> testView = new TestView<>();
         Controller controller34 = new Controller(testView);
         controller34.player.addCard(new Card(11,0));
         controller34.shoe = new Shoe(1);
@@ -690,7 +690,7 @@ public class ControllerTest {
      */
     @Test
     public void postPlayerActions2() {
-        TestView testView = new TestView();
+        TestView<Integer> testView = new TestView<>();
         Controller controller35 = new Controller(testView);
         controller35.player.addCard(new Card(2,0));
         controller35.dealer.addCard(new Card(11,0));
@@ -707,7 +707,7 @@ public class ControllerTest {
      */
     @Test
     public void postPlayerActions3() {
-        TestView testView = new TestView();
+        TestView<Integer> testView = new TestView<>();
         Controller controller36 = new Controller(testView);
         controller36.player.addCard(new Card(11,0));
         controller36.player.addCard(new Card(12,0));
@@ -723,7 +723,7 @@ public class ControllerTest {
      */
     @Test
     public void endHandFunctions() {
-        TestView testView = new TestView();
+        TestView<Integer> testView = new TestView<>();
         Controller controller37 = new Controller(testView);
         controller37.shoe = new Shoe(1);
         controller37.player.addCard(new Card(11, 0));
@@ -743,7 +743,7 @@ public class ControllerTest {
      */
     @Test
     public void endHandFunctions1() {
-        TestView testView = new TestView();
+        TestView<Integer> testView = new TestView<>();
         Controller controller38 = new Controller(testView);
         controller38.shoe = new Shoe(1);
         controller38.dealer.addCard(new Card(11, 0));
@@ -765,7 +765,7 @@ public class ControllerTest {
      */
     @Test
     public void results() {
-        TestView testView = new TestView();
+        TestView<Integer> testView = new TestView<>();
         testView.add(100);
         testView.add(25);
         Controller controller39 = new Controller(testView);
@@ -781,9 +781,13 @@ public class ControllerTest {
 
     }
 
+
+    /**
+     * Ensure that results correctly updates the player's chip amount when the dealer busts.
+     */
     @Test
     public void results1() {
-        TestView testView = new TestView();
+        TestView<Integer> testView = new TestView<>();
         testView.add(100);
         testView.add(25);
         Controller controller40 = new Controller(testView);
@@ -795,25 +799,183 @@ public class ControllerTest {
         controller40.postPlayerActions();    //set dlrBust to true
 
         controller40.results();
-        //assertEquals();
+        assertEquals(controller40.player.getChips(),  125, .0001);
     }
 
+    /**
+     * Ensure that the player's chip amount has been correctly decremented after a call to results() when the player has busted
+     */
+    @Test
+    public void results2() {
+        TestView<Integer> testView = new TestView<>();
+        testView.add(100);
+        testView.add(25);
+        Controller controller41 = new Controller(testView);
+        controller41.buyChips();
+        controller41.askBet();
+        controller41.player.addCard(new Card(11,0));
+        controller41.player.addCard(new Card(8,1));
+        controller41.player.addCard(new Card(9,2));
+        controller41.postPlayerActions(); //set plyBust to true
+        controller41.results();
+        assertEquals(controller41.player.getChips(), 75, .0001);
+
+    }
+
+    /**
+     * Ensure that player's chips are incremented correctly by results when dlrBust is false and the player has a hand total greater than the dealer's total. 
+     */
+    @Test
+    public void results3() {
+        TestView<Integer> testView = new TestView<>();
+        testView.add(100);
+        testView.add(25);
+        Controller controller42 = new Controller(testView);
+        controller42.buyChips();
+        controller42.askBet();
+        controller42.player.addCard(new Card(11,0));
+        controller42.player.addCard(new Card(8,1));
+        controller42.dealer.addCard(new Card(11,1));
+        controller42.dealer.addCard(new Card(7,2));
+        controller42.results();
+        assertEquals(controller42.player.getChips(), 125, .0001);
+    }
+
+
+    /**
+     * Test that results correctly increments the player's chip count by 2.5 (1.5 * player's original bet in profit.) when the player has a natural blackjack.
+     */
+    @Test
+    public void results4() {
+        TestView<Integer> testView = new TestView<>();
+        testView.add(100);
+        testView.add(25);
+        Controller controller43 = new Controller(testView);
+        controller43.buyChips();
+        controller43.askBet();
+        controller43.player.addCard(new Card(11,0));
+        controller43.player.addCard(new Card(1,1));
+        controller43.dealer.addCard(new Card(11,1));
+        controller43.dealer.addCard(new Card(7,2));
+        controller43.naturalBlackJack();
+        controller43.results();
+        assertEquals(controller43.player.getChips(), 137.5, .0001);
+
+
+    }
+
+    /**
+     * Ensure that results correctly reads a push when both player and dealer have a blackJack.
+     */
+    @Test
+    public void results5() {
+        TestView<Integer> testView = new TestView<>();
+        testView.add(100);
+        testView.add(25);
+        Controller controller44 = new Controller(testView);
+        controller44.buyChips();
+        controller44.askBet();
+        controller44.player.addCard(new Card(11,0));
+        controller44.player.addCard(new Card(1,1));
+        controller44.dealer.addCard(new Card(11,1));
+        controller44.dealer.addCard(new Card(1,2));
+        controller44.naturalBlackJack();
+        controller44.results();
+        assertEquals(controller44.player.getChips(), 100, .0001);
+
+    }
+
+    /**
+     * Ensure that player's chips are correctly decremented when the dealer has a higher hand total than the player.
+     */
+    @Test
+    public void results6() {
+        TestView<Integer> testView = new TestView<>();
+        testView.add(100);
+        testView.add(25);
+        Controller controller = new Controller(testView);
+        controller.buyChips();
+        controller.askBet();
+        controller.player.addCard(new Card(4,0));
+        controller.player.addCard(new Card(1,1));
+        controller.dealer.addCard(new Card(11,1));
+        controller.dealer.addCard(new Card(8,2));
+        controller.results();
+        assertEquals(controller.player.getChips(), 75, .0001);
+    }
+
+
+    /**
+     * Ensure checkCut correctly repopulates the shoe when the amount of cards in the shoe drops below the cut level = Shoe.size() * .2
+     */
+    @Test
+    public void checkCut() {
+        TestView testView =  new TestView();
+        Controller controller45 = new Controller(testView);
+        controller45.shoe = new Shoe(1);
+        controller45.cut = controller45.shoe.size() * .2; // cut determined the same way in playBlackJack()
+        for(int i = 0; i <= 45; i++){
+            controller45.shoe.pick();
+        }
+        controller45.checkCut();
+        assertEquals(controller45.shoe.size(), 52);
+    }
+
+    /**
+     * Ensure that checkCut does nothing when the amount of cards in the shoe is above the threshold for a cut.
+     */
+    @Test
+    public void checkCut1() {
+        TestView testView =  new TestView();
+        Controller controller46 = new Controller(testView);
+        controller46.shoe = new Shoe(1);
+        controller46.cut = controller46.shoe.size() * .2; // cut determined the same way in playBlackJack()
+        for(int i = 0; i < 20; i++){
+            controller46.shoe.pick();
+        }
+        controller46.checkCut();
+        assertEquals(controller46.shoe.size(), 32);
+    }
+
+
+    /**
+     * Test that softTotal() correctly sets specialDouble to true when the player's hand has two cards with card numbers totaling between 9 and 11 inclusive.
+     */
     @Test
     public void softTotal() {
         TestView testView = new TestView();
         testView.add(100);
         testView.add(25);
         testView.add("y");
-        Controller controller = new Controller(testView);
-        controller.shoe = new Shoe(1);
-        controller.buyChips();
-        controller.askBet();
-        controller.player.addCard(new Card(1, 1));
-        controller.player.addCard(new Card(8,1));
-        controller.softTotal();
-        controller.playerDouble();
-        assertEquals(controller.bet, 50, .0001);
-        assertEquals(controller.player.getHand().size(), 3);
+        Controller controller47 = new Controller(testView);
+        controller47.shoe = new Shoe(1);
+        controller47.buyChips();
+        controller47.askBet();
+        controller47.player.addCard(new Card(1, 1));
+        controller47.player.addCard(new Card(8,1));
+        controller47.softTotal();
+        controller47.playerDouble();
+        assertEquals(controller47.bet, 50, .0001);
+        assertEquals(controller47.player.getHand().size(), 3);
+
+    }
+
+
+    /**
+     * Test that soft total does not set specialDouble to true when card numbers of initial hand are outside of the range 9 and 11
+     */
+    @Test
+    public void softTotal1() {
+        TestView testView = new TestView();
+        testView.add(100);
+        testView.add(25);
+        Controller controller48 = new Controller(testView);
+        controller48.buyChips();
+        controller48.askBet();
+        controller48.player.addCard(new Card(1, 0));
+        controller48.player.addCard(new Card(11, 0));
+        controller48.softTotal();
+        assertFalse(controller48.ableToDouble());
 
     }
 }
