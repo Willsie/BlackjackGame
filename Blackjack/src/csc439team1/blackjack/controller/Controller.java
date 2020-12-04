@@ -60,6 +60,14 @@ public class Controller {
         this.view = view;
     }
 
+    public boolean isDlrBust() {
+        return dlrBust;
+    }
+
+    public boolean isPlyBust() {
+        return plyBust;
+    }
+
     /**
      * playBlackjack method initiates gameplay for the first level of stories (using hard coded shoe of 1 deck, calls to
      * buyChips, askBet, and initialDeal) to show start of game, purchasing chips, betting, and first deal of cards to both
@@ -76,9 +84,9 @@ public class Controller {
         logger.info("Player is buying chips");
         //While loop which operates as long as the player's chips are at minimum bet amount (10)
         while(player.getChips() >= 10) {
-            boolean working = true;
             logger.info("Game is running while player chip is more than $10");
             askBet();
+            logger.info("Ask player for bet");
             initialDeal(shoe);
             naturalBlackJack();
             //Conditional clause that is only true if there has not been an natural blackjack, else goes straight to endHandFunctions
@@ -143,11 +151,12 @@ public class Controller {
                     logger.info("Player entered invalid amount of bet ");
                 }
             } catch (Exception e) {
+                logger.info("Exception thrown by askBet method " + e);
                 quit();
-                logger.warning("askBet method is exiting - quitting the game");
+                logger.info("askBet method is exiting - quitting the game");
             }
         }
-        logger.exiting(getClass().getName(), "askBet");
+        logger.exiting(getClass().getName(), "exit askBet method");
     }
 
     /**
@@ -168,6 +177,8 @@ public class Controller {
             System.out.println("There was an error(s) of the following" + e);
             logger.warning("initialDeal method is throwing exception - " + e);
         }
+        softTotal();
+
         view.output("\nDealer card: ");
         view.output(dealer.getHand().get(0).toString() + "\n");
         view.output("Your initial cards are: ");
@@ -185,6 +196,19 @@ public class Controller {
         logger.config("Display message to console \"Player has quit\"");
         logger.exiting(getClass().getName(), "quit");
         throw new IllegalStateException("");
+    }
+
+
+    /**
+     * This is a special case of doubling where the player has an ace and a numbered card such that the
+     * two card numbers equal a number between 9 and 11, inclusive.
+     * Ace has a card number of 1, so a hand with Ace + either 8 or 9 or 10 will result in a valid doubling value.
+     */
+    public void softTotal(){
+        int value = player.getHand().get(0).getNumber() + player.getHand().get(1).getNumber();
+        if (value > 8 && value < 12){
+            specialDouble = true;
+        }
     }
 
 
@@ -289,7 +313,7 @@ public class Controller {
         doubled = false;
         double chips = player.getChips();
         logger.info("Total player chips: " + chips);
-        if (playerTotal() > 8 && playerTotal() < 12) {
+        if ((playerTotal() > 8 && playerTotal() < 12) || specialDouble) {
             logger.info("Total cards value on hand value is between 9 and 11");
             try {
                 player.setChips(player.getChips() - bet);
@@ -472,6 +496,8 @@ public class Controller {
         plyBust = false;
         blackJack = false;
         logger.exiting(getClass().getName(), "endHandFunctions");
+        specialDouble = false;
+        logger.exiting(getClass().getName(), "endHandFunctions method is exiting");
     }
 
     /**
@@ -500,8 +526,8 @@ public class Controller {
                 player.setChips(player.getChips() + (2 * bet));
                 logger.info("Dealer bust or Player total is greater then dealer total, return bet and winning chips to player");
                 //Clause that adds another %50 of the better to the player's chips provided their total is 21.
-                if (playerTotal() == 21) {
-                    player.setChips(player.getChips() + (.5 * bet));
+                if (blackJack) {
+                    player.setChips(player.getChips() + (2.5 * bet));
                     logger.info("If player win and has Blackjack, returning winning chip - player win 1.5 times");
                 }
             }
