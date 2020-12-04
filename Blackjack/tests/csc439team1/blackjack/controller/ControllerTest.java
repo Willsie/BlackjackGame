@@ -540,7 +540,7 @@ public class ControllerTest {
         controller27.askBet();
         controller27.playerDouble();
         assertEquals(controller27.getPlayer().getChips(), 300, .0001);
-        assertEquals(controller27.bet, 100, .0001);
+        assertEquals(controller27.getBet(), 100, .0001);
         assertEquals(controller27.getPlayer().getHand().size(), 2);
     }
 
@@ -553,14 +553,14 @@ public class ControllerTest {
         testView.add(100);
         testView.add("Y");
         Controller controller28 = new Controller(testView);
-        controller28.shoe = new Shoe(1);
+        controller28.setShoe(new Shoe(1));
         controller28.getPlayer().addCard(new Card(5,0));
         controller28.getPlayer().addCard(new Card(5, 1));
         controller28.getPlayer().setChips(400);
         controller28.askBet();
         assertTrue(controller28.playerDouble());
         assertEquals(controller28.getPlayer().getChips(), 200, .0001);
-        assertEquals(controller28.bet, 200, .0001);
+        assertEquals(controller28.getBet(), 200, .0001);
         assertEquals(controller28.getPlayer().getHand().size(), 3);
 
     }
@@ -626,7 +626,7 @@ public class ControllerTest {
         testView.add("h");
         testView.add("h");
         Controller controller31 = new Controller(testView);
-        controller31.shoe = new Shoe(1);
+        controller31.setShoe(new Shoe(1));
         controller31.getPlayer().addCard(new Card(11,0));
         controller31.getPlayer().addCard(new Card(11,1));
         controller31.playerAction();
@@ -646,7 +646,7 @@ public class ControllerTest {
         testView.add("s");
         testView.add("h");
         Controller controller32 = new Controller(testView);
-        controller32.shoe = new Shoe(1);
+        controller32.setShoe(new Shoe(1));
         controller32.getPlayer().addCard(new Card(2,0));
         controller32.playerAction();
         assertEquals(controller32.getPlayer().getHand().size(), 2);
@@ -676,7 +676,7 @@ public class ControllerTest {
         TestView<Integer> testView = new TestView<>();
         Controller controller34 = new Controller(testView);
         controller34.getPlayer().addCard(new Card(11,0));
-        controller34.shoe = new Shoe(1);
+        controller34.setShoe(new Shoe(1));
         controller34.getDealer().addCard(new Card(11,0));
         controller34.getDealer().addCard(new Card(6,0));
         controller34.postPlayerActions();
@@ -725,7 +725,7 @@ public class ControllerTest {
     public void endHandFunctions() {
         TestView<Integer> testView = new TestView<>();
         Controller controller37 = new Controller(testView);
-        controller37.shoe = new Shoe(1);
+        controller37.setShoe(new Shoe(1));
         controller37.getPlayer().addCard(new Card(11, 0));
         controller37.getPlayer().addCard(new Card(12, 0));
         controller37.getPlayer().addCard(new Card(13, 0));
@@ -745,7 +745,7 @@ public class ControllerTest {
     public void endHandFunctions1() {
         TestView<Integer> testView = new TestView<>();
         Controller controller38 = new Controller(testView);
-        controller38.shoe = new Shoe(1);
+        controller38.setShoe(new Shoe(1));
         controller38.getDealer().addCard(new Card(11, 0));
         controller38.getDealer().addCard(new Card(12, 0));
         controller38.getDealer().addCard(new Card(13, 0));
@@ -912,13 +912,13 @@ public class ControllerTest {
     public void checkCut() {
         TestView<Integer> testView =  new TestView<>();
         Controller controller45 = new Controller(testView);
-        controller45.shoe = new Shoe(1);
-        controller45.cut = controller45.shoe.size() * .2; // cut determined the same way in playBlackJack()
+        controller45.setShoe(new Shoe(1));
+        controller45.setCut(controller45.getShoe().size() * .2);// cut determined the same way in playBlackJack()
         for(int i = 0; i <= 45; i++){
-            controller45.shoe.pick();
+            controller45.getShoe().pick();
         }
         controller45.checkCut();
-        assertEquals(controller45.shoe.size(), 52);
+        assertEquals(controller45.getShoe().size(), 52);
     }
 
     /**
@@ -928,13 +928,13 @@ public class ControllerTest {
     public void checkCut1() {
         TestView<Integer> testView =  new TestView<>();
         Controller controller46 = new Controller(testView);
-        controller46.shoe = new Shoe(1);
-        controller46.cut = controller46.shoe.size() * .2; // cut determined the same way in playBlackJack()
+        controller46.setShoe(new Shoe(1));
+        controller46.setCut(controller46.getShoe().size() * .2); // cut determined the same way in playBlackJack()
         for(int i = 0; i < 20; i++){
-            controller46.shoe.pick();
+            controller46.getShoe().pick();
         }
         controller46.checkCut();
-        assertEquals(controller46.shoe.size(), 32);
+        assertEquals(controller46.getShoe().size(), 32);
     }
 
 
@@ -948,14 +948,14 @@ public class ControllerTest {
         testView.add(25);
         testView.add("y");
         Controller controller47 = new Controller(testView);
-        controller47.shoe = new Shoe(1);
+        controller47.setShoe(new Shoe(1));
         controller47.buyChips();
         controller47.askBet();
         controller47.getPlayer().addCard(new Card(1, 1));
         controller47.getPlayer().addCard(new Card(8,1));
         controller47.softTotal();
         controller47.playerDouble();
-        assertEquals(controller47.bet, 50, .0001);
+        assertEquals(controller47.getBet(), 50, .0001);
         assertEquals(controller47.getPlayer().getHand().size(), 3);
 
     }

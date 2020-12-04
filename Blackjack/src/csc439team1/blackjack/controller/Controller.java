@@ -34,12 +34,12 @@ public class Controller {
      * double variable cut that holds amount for cut of shoe, so that shoe may be repopulated during gameplay; and
      * double variable bet which stores the amount of the player's bet.
      */
-    double cut, bet = 0;
+    private double cut, bet = 0;
 
     /**
      * Shoe object to be used during game play, and hold at current hard coded number of decks.
      */
-    Shoe shoe;
+    private Shoe shoe;
     /**
      * Boolean values for doubling (doubled), plyBust (player bust), dlrBust (dealer bust), and blackJack (for natural
      * blackjack); which are used by various methods to judge winners/losers, or if the hand skips to end due to a blackjack
@@ -61,12 +61,51 @@ public class Controller {
         this.view = view;
     }
 
+    /**
+     * getter method for Player data member
+     * @return this.player
+     */
     public Player getPlayer() {
         return player;
     }
 
+    /**
+     * getter method for Dealer data member
+     * @return this.dealer
+     */
     public Dealer getDealer() {
         return dealer;
+    }
+
+    /**
+     * getter method for bet data member
+     * @return this.bet
+     */
+    public double getBet() {
+        return bet;
+    }
+
+    /**
+     * setter method for cut
+     * @param cut
+     */
+    public void setCut(double cut) {
+        this.cut = cut;
+    }
+
+    /**
+     * getter method for shoe
+     * @return this.shoe
+     */
+    public Shoe getShoe() {
+        return shoe;
+    }
+
+    /**
+     * setter method for shoe
+     */
+    public void setShoe(Shoe shoe) {
+        this.shoe = shoe;
     }
 
     /**
