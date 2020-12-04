@@ -207,22 +207,7 @@ public class ControllerTest {
 
     }
 
-    /**
-     * Test playBlackJack() in controller. After successful run of all methods in controller,
-     * Player's initial chip count should have been decremented by the bet amount, and both the player and dealers hands should be of size 2.
-     */
-   /* @Test
-    public void playBlackJack() {
-        TestView<Integer> TestView = new TestView<>();
-        TestView.add(500);
-        TestView.add(100);
-        Controller controller8 = new Controller(TestView);
-        controller8.playBlackjack();
-        assertEquals(controller8.player.getChips(), 400);
-        assertEquals(controller8.player.getHand().size(), 2);
-        assertEquals(controller8.dealer.getHand().size(), 2);
 
-    }*/
 
     /**
      * Test getTotalValue with hand having no aces. With three two's the expected value should be 6.
