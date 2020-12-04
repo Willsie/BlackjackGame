@@ -26,7 +26,7 @@ public class Player {
      */
     public Player() {
         logger.entering(getClass().getName(), "Player");
-        logger.info("Related to Player constructor");
+        logger.severe("Issue related to Player constructor");
         logger.exiting(getClass().getName(), "Player");
     }
 
@@ -53,7 +53,7 @@ public class Player {
     public void setChips(double chips) {
         logger.entering(getClass().getName(), "setChips");
         //checkChips verifies that there are chips in player, throws IllegalStateException if there are no chips. TS
-        logger.info("Checking correct value of chips via call to checkChips, chips value is " +chips);
+        logger.info("Checking correct value of chips via call to checkChips, chips value is " + chips);
         checkChips(chips);
         this.chips = chips;
         logger.exiting(getClass().getName(), "setChips");
@@ -65,7 +65,7 @@ public class Player {
      * */
     public ArrayList<Card> getHand() {
         logger.entering(getClass().getName(), "getHand");
-        logger.info("getHand method of Player class, getHand is: " + this.hand.getCards());
+        logger.info("getHand method of Player class, getHand is: " + hand.getCards());
         logger.exiting(getClass().getName(), "getHand");
         return this.hand.getCards();
     }
@@ -93,7 +93,7 @@ public class Player {
         //checkChips looks for chips being less than 1, and throws IllegalStateException.TS
         if (chips < 0)
         {
-            logger.info("Exception thrown due to chips being below 0, chips are: " + chips);
+            logger.warning("Exception thrown due to chips being below 0, chips are: " + chips);
             throw new IllegalStateException();
         }
         logger.exiting(getClass().getName(), "checkChips");

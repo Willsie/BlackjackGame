@@ -44,7 +44,7 @@ public class Controller {
      * blackjack); which are used by various methods to judge winners/losers, or if the hand skips to end due to a blackjack
      * on the initial deal.
      */
-    private boolean doubled, plyBust, dlrBust, blackJack;
+    private boolean doubled, plyBust, dlrBust, blackJack, specialDouble;
     /**
      * int variable shoeSize holds the number of decks to be used in the shoe, currently that number is hardcoded
      * versus asking for user input.
@@ -76,25 +76,18 @@ public class Controller {
         logger.info("Player is buying chips");
         //While loop which operates as long as the player's chips are at minimum bet amount (10)
         while(player.getChips() >= 10) {
+            boolean working = true;
             logger.info("Game is running while player chip is more than $10");
             askBet();
-            logger.info("Ask player for bet");
             initialDeal(shoe);
-            logger.info("Deal initial cards to dealer and player");
             naturalBlackJack();
-            logger.info("Check if player has BlackJack");
             //Conditional clause that is only true if there has not been an natural blackjack, else goes straight to endHandFunctions
             if(!blackJack){
-                logger.info("If player does not have Blackjack");
                 playerDouble();
-                logger.info("Ask player to double the bet");
                 playerAction();
-                logger.info("Ask player to hit or stand");
                 postPlayerActions();
-                logger.info("Player has taken action");
             }
             endHandFunctions();
-            logger.info("Show results of the current round");
         }
         endGameActions();
         logger.info("The game has ended");
@@ -110,12 +103,9 @@ public class Controller {
         view.output("Game is starting.....how much chips do you want to buy (between $10 to $5000): ");
         boolean validInput = false;
         while (!validInput) {
-            logger.info("Starting while loop - condition: while player inserting valid input");
             try {
                 int input = view.intInput();
-                logger.info("Asking player input for buying chip");
                 if (input >= 10 && input <= 5000) {
-                    logger.info("amount of chip entered is between $10 - $5000 inclusive");
                     validInput = true;
                     //Changed to player.getChips + input to hold any leftover chips if game is restarted by endGameActions
                     player.setChips(player.getChips() + (input));
@@ -141,25 +131,20 @@ public class Controller {
         boolean validInput = false;
 
         while (!validInput) {
-            logger.info("Starting while loop - condition: while input is valid for askBet method");
             try {
                 double input = view.intInput();
-                logger.info("Asking player input for askBet method");
                 if ((input >= 10) && (input <= 500) && (input <= player.getChips())) {
-                    logger.info("Player entered valid bet amount: " + input);
                     validInput = true;
                     bet = input;
-                    logger.info("Set player bet according to the player input");
                     player.setChips(player.getChips() - bet);
-                    logger.info("Subtract player chips by " + bet);
+                    logger.info("Subtract player chips by " + bet + ", input is " + input);
                 } else {
                     view.output("Invalid bet amount! Bet needs to be between 10 & 500, and less than your current chips(" + player.getChips() + "): ");
                     logger.info("Player entered invalid amount of bet ");
                 }
             } catch (Exception e) {
-                logger.info("Exception thrown by askBet method " + e);
                 quit();
-                logger.info("askBet method is exiting - quitting the game");
+                logger.warning("askBet method is exiting - quitting the game");
             }
         }
         logger.exiting(getClass().getName(), "askBet");
@@ -175,25 +160,18 @@ public class Controller {
         logger.entering(getClass().getName(), "initialDeal");
         try {
             player.addCard(shoe.pick());
-            logger.info("add 1 card to player hand by calling shoe.pick()");
             player.addCard(shoe.pick());
-            logger.info("add 1 card to player hand by calling shoe.pick()");
             dealer.addCard(shoe.pick());
-            logger.info("add 1 card to dealer hand by calling shoe.pick()");
             dealer.addCard(shoe.pick());
-            logger.info("add 1 card to dealer hand by calling shoe.pick()");
+            logger.info("Cards are player: " + player.getHand() + ", dealer: " + dealer.getHand());
         } catch (Exception e) {
             System.out.println("There was an error(s) of the following" + e);
-            logger.info("initialDeal method is throwing exception - " + e);
+            logger.warning("initialDeal method is throwing exception - " + e);
         }
         view.output("\nDealer card: ");
-        logger.info("Display message to console \"Dealer card: \"");
         view.output(dealer.getHand().get(0).toString() + "\n");
-        logger.info("Display first / initial dealer card to console");
         view.output("Your initial cards are: ");
-        logger.info("Display message to console \"Your initial cards are: \"");
         view.output(player.getHand().toString() + "\n");
-        logger.info("Display player hand to the console");
         logger.exiting(getClass().getName(), "initialDeal");
     }
 
@@ -204,7 +182,7 @@ public class Controller {
     public void quit() {
         logger.entering(getClass().getName(), "quit");
         view.output("Player has quit\n");
-        logger.info("Display message to console \"Player has quit\"");
+        logger.config("Display message to console \"Player has quit\"");
         logger.exiting(getClass().getName(), "quit");
         throw new IllegalStateException("");
     }
@@ -225,36 +203,31 @@ public class Controller {
         logger.info("Initialize handIterator");
         int acesCounter = 0, total = 0;
         while (handIterator.hasNext()) {
-            logger.info("Starting while loop - condition: handIterator.hasNext");
             Card currentCard = handIterator.next();
-            logger.info("set current card to handIterator.next");
             if (currentCard.getNumber() < 2) {
-                logger.info("If card value is less than 2");
+                logger.config("If card value is less than 2");
                 acesCounter++;
-                logger.info("Increment acesCounter by one");
             }
             else {
                 if (currentCard.getNumber() < 10) {
-                    logger.info("If card value is less than 10");
                     total = total + currentCard.getNumber();
-                    logger.info("add current card to total, the total value is now: " + total);
+                    logger.config("add current card to total, the total value is now: " + total);
                 }
                 else {
                     total = total + 10;
-                    logger.info("If card value is more than than 9, increase total value by 10, total is now: " + total);
+                    logger.config("If card value is more than than 9, increase total value by 10, total is now: " + total);
                 }
             }
         }
         if (acesCounter > 0) {
-            logger.info("If acesCounter greater than 10");
+            logger.config("If acesCounter greater than 10");
             if ((acesCounter - 1 + 11) + total <= 21) {
-                logger.info("If total is still less than 11 after counting aces");
                 total = total + (acesCounter -1 + 11);
-                logger.info("add acesCounter and 10 to total");
+                logger.config("add acesCounter and 11 to total");
             }
             else {
                 total = total + acesCounter;
-                logger.info("add acesCounter to total");
+                logger.config("add acesCounter to total");
             }
         }
         logger.info("Returning total: " + total);
@@ -269,6 +242,7 @@ public class Controller {
      */
     public int playerTotal() {
         logger.entering(getClass().getName(), "playerTotal");
+        logger.info("Player total: " + getTotalValue(player.getHand()));
         logger.exiting(getClass().getName(), "getTotalValue");
         return getTotalValue(player.getHand());
     }
@@ -281,6 +255,7 @@ public class Controller {
     public int dealerTotal()
     {
         logger.entering(getClass().getName(), "dealerTotal)");
+        logger.info("Dealer total: " + getTotalValue(dealer.getHand()));
         logger.exiting(getClass().getName(), "dealerTotal");
         return getTotalValue(dealer.getHand());
     }
@@ -297,7 +272,6 @@ public class Controller {
             logger.info("Either player or dealer has blackjack");
             blackJack = true;
             view.output("Blackjack\n");
-            logger.info("Display Blackjack notification to console");
             return blackJack;
         }
         logger.exiting(getClass().getName(), "naturalBlackJack");
@@ -319,16 +293,16 @@ public class Controller {
             logger.info("Total cards value on hand value is between 9 and 11");
             try {
                 player.setChips(player.getChips() - bet);
-                logger.info("Subtract bet from player chips");
+                logger.info("Subtract bet from player chips, chips are " + player.getChips());
             }
             catch (IllegalStateException e)
             {
                 player.setChips(chips);
-                logger.info("Set player chip");
+                logger.warning("Set player chip");
                 return false;
             }
             player.setChips(chips);
-            logger.info("Set player chip");
+            logger.info("Set player chip " + player.getChips());
             return true;
         }
         logger.exiting(getClass().getName(), "ableToDouble");
@@ -346,19 +320,15 @@ public class Controller {
         logger.entering(getClass().getName(), "playerDouble");
         String input;
         if (ableToDouble()) {
-            logger.info("ableToDouble condition is true");
             view.output("Do you wish to double, y for yes or n for no: ");
-            logger.info("Asking player to double");
             //call to player input actions to verify user input is acceptable. TS
             input = playerInputActions("yes", "no");
             if (input.toLowerCase().equals("y")) {
-                logger.info("Player agreed to double");
                 player.setChips(player.getChips() - bet);
-                logger.info("Setting player chip");
                 bet = bet * 2;
-                logger.info("Doubling the bet");
+                logger.info("Bet doubled " + bet);
                 player.addCard(shoe.pick());
-                logger.info("Add card to player hand");
+                logger.info("Add card to player hand, and doubled variable is " + doubled);
                 doubled = true;
             }
             return doubled;
@@ -376,16 +346,15 @@ public class Controller {
     private void printHand(String a){
         logger.entering(getClass().getName(), "printHand");
         if (a.equals("p")){
-            logger.info("If printHand parameter is \"p\"");
             view.output("Your cards are: ");
             view.output(player.getHand().toString() + " Total: " + playerTotal() + "\n");
-            logger.info("Displaying player hand and player total to console");
+            logger.info("Displaying player hand and player total to console " + player.getHand().toString() + " player total:" + playerTotal());
         }
         else{
             logger.info("If printHand parameter is not \"p\"");
             view.output("Dealer cards are: ");
             view.output(dealer.getHand().toString() + " Total: " + dealerTotal() + "\n");
-            logger.info("Displaying dealer hand and player total to console");
+            logger.info("Displaying dealer hand and dealer total to console " + dealer.getHand().toString() + " player total:" + dealerTotal());
         }
         logger.exiting(getClass().getName(), "printHand");
     }
@@ -404,7 +373,6 @@ public class Controller {
         boolean validInput = false;
         String action = "", c = a.substring(0, 1), d = b.substring(0, 1);
         while (!validInput) {
-            logger.info("Starting while loop - condition: player input is valid");
             try {
                 action = view.input();
                 if (action.toLowerCase().equals(c) || action.toLowerCase().equals(d) ) {
@@ -417,7 +385,7 @@ public class Controller {
                 }
             }
             catch (Exception e) {
-                logger.info("Catching exception" + e);
+                logger.warning("Catching exception" + e);
                 quit();
                 logger.info("askBet method is exiting - quitting the game");
             }

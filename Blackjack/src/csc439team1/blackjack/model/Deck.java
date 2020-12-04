@@ -1,6 +1,5 @@
 package csc439team1.blackjack.model;
-
-import java.util.*;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 /**
@@ -27,10 +26,10 @@ public class Deck {
         logger.entering(getClass().getName(), "Deck");
         //loop 4 times, each loop will generate a deckValue ranges from 0 to 3
         for (int deckValue = 0; deckValue <= 3; deckValue++) {
-            logger.info("Beginning inner for loop deck value is " + deckValue);
+            logger.config("Beginning inner for loop deck value is " + deckValue);
             //loop 13 times, each loop will generate a cardValue ranges from 1 to 13
             for (int cardValue = 1; cardValue <= 13; cardValue++) {
-                logger.info("Inside inner for loop deck value is " + deckValue + ". card value is " + cardValue);
+                logger.config("Inside inner for loop deck value is " + deckValue + ". card value is " + cardValue);
                 deck.add(new Card(cardValue, deckValue));   //add a card to the deck
             }
         }
@@ -45,13 +44,12 @@ public class Deck {
     public Card pick() throws IllegalStateException {
         logger.entering(getClass().getName(), "pick");
         int random = (int) (Math.random() * deck.size());   //generate random number from 0 to current size of the deck
-        logger.info("Random int is " + random);
         if (deck.size() < 1){
-            logger.info("Thrown exception due to deck size being less than 1");
+            logger.warning("Thrown exception due to deck size being less than 1");
             throw new IllegalStateException();
         }
         else {
-            logger.info("Removing this card from the deck " + deck.get(random).toString());
+            logger.info("Removing this card from the deck " + deck.get(random).toString() + ", and random int used " + random);
             logger.exiting(getClass().getName(), "pick");
             return deck.remove(random); //remove and return random card from deck
         }
@@ -64,7 +62,7 @@ public class Deck {
      */
     public int size() {
         logger.entering(getClass().getName(), "size");
-        logger.info("Something is wrong with size of deck" + deck.size());
+        logger.severe("Something is wrong with size of deck" + deck.size());
         logger.exiting(getClass().getName(), "size");
         return deck.size(); //return the size of the deck
     }

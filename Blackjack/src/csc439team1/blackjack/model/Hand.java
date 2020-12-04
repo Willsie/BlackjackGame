@@ -28,7 +28,6 @@ public class Hand
     {
         logger.entering(getClass().getName(), "Hand");
         this.cardsOnHand = new ArrayList<>(); //constructor for Hand method
-        logger.info("Creation of empty arraylist for card contained in hand");
         logger.info("cardsOnHand should contain no elements" + cardsOnHand);
         logger.exiting(getClass().getName(), "Hand");
     }
@@ -41,8 +40,8 @@ public class Hand
     public void addCard(Card anotherCard)
     {
         logger.entering(getClass().getName(), "addCard");
-        logger.info("Card being added is " + anotherCard);
         cardsOnHand.add(anotherCard);
+        logger.info("Card being added is " + anotherCard + ", and cardsOnHand are: " + cardsOnHand);
         logger.exiting(getClass().getName(), "addCard");
     }
 
@@ -54,7 +53,7 @@ public class Hand
     public int size()
     {
         logger.entering(getClass().getName(), "size");
-        logger.info("cardsOnHand size is " + cardsOnHand.size());
+        logger.severe("cardsOnHand size is " + cardsOnHand.size());
         logger.exiting(getClass().getName(), "size");
         return cardsOnHand.size();
     }
@@ -67,7 +66,7 @@ public class Hand
     public ArrayList<Card> getCards()
     {
         logger.entering(getClass().getName(), "getCards");
-        logger.info("getCards: " + cardsOnHand);
+        logger.severe("getCards: " + cardsOnHand);
         logger.exiting(getClass().getName(), "getCards");
         return cardsOnHand;
     }

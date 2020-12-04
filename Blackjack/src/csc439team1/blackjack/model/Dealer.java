@@ -21,7 +21,7 @@ public class Dealer {
      */
     public Dealer() {
         logger.entering(getClass().getName(), "Dealer");
-        logger.info("Related to Dealer constructor");
+        logger.severe("Issue related to Dealer constructor");
         logger.exiting(getClass().getName(), "Dealer");
     }
 
@@ -32,7 +32,7 @@ public class Dealer {
      */
     public ArrayList<Card> getHand() {
         logger.entering(getClass().getName(), "getHand");
-        logger.info("Related to getHand and dealerHand, probably error in Hand class");
+        logger.info("getHand is: " + dealerHand.getCards());
         logger.exiting(getClass().getName(), "getHand");
         return dealerHand.getCards();
     }
@@ -44,7 +44,7 @@ public class Dealer {
     public void addCard(Card card){
         logger.entering(getClass().getName(), "addCard");
         dealerHand.addCard(card);
-        logger.info("Related to adding this card " + card.toString());
+        logger.info("addCard " + card.toString());
         logger.exiting(getClass().getName(), "addCard");
     }
 }

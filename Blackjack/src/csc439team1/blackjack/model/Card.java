@@ -41,7 +41,7 @@ public class Card
             logger.warning("Card number of below 1 or greater than 13 entered, " + cardNumber);
             throw new IllegalArgumentException("Illegal card number:" + cardNumber);
         }
-        logger.info("Card Suit is " + cardSuit + ". Card Number is " + cardNumber);
+        logger.config("Card Suit is " + cardSuit + ". Card Number is " + cardNumber);
         number = cardNumber;
         suit = cardSuit;
         logger.exiting(getClass().getName(), "Card");
