@@ -177,10 +177,8 @@ public class Controller {
             }
             endHandFunctions();
         }
-        endGameActions();
-        logger.info("The game has ended");
-        logger.exiting(getClass().getName(), "playBlackjack");
-    }
+        endGameActions(); logger.exiting(getClass().getName(), "playBlackjack"); }
+
 
     /**
      * Prompt's the user for a chip amount between 10 and 5000. Loops until that criteria is met, and then updates the Player's chip count.
@@ -203,8 +201,8 @@ public class Controller {
                     logger.info("Player entered invalid amount for buying chips");
                 }
             } catch (Exception e) {
+                logger.warning("buyChips method is not successfully executed, Player choose to quit");
                 quit();
-                logger.info("buyChips method is not successfully executed, quitting game");
             }
         }
         logger.exiting(getClass().getName(), "exit buyChips method");
@@ -231,9 +229,8 @@ public class Controller {
                     logger.info("Player entered invalid amount of bet ");
                 }
             } catch (Exception e) {
-                logger.info("Exception thrown by askBet method " + e);
+                logger.warning("Exception thrown by askBet method " + e);
                 quit();
-                logger.info("askBet method is exiting - quitting the game");
             }
         }
         logger.exiting(getClass().getName(), "exit askBet method");
@@ -446,7 +443,6 @@ public class Controller {
      * player's hand, while all other chars will execute dealers hand to print).
      * @param a is String parameter filled by other method(s) inside of Controller class.
      */
-
     private void printHand(String a){
         logger.entering(getClass().getName(), "printHand");
         if (a.equals("p")){
@@ -640,10 +636,8 @@ public class Controller {
             logger.info("action should equal q" + action);
             quit();
         }
-        playBlackjack();
-        logger.info("Player has chosen to purchase chips and continue the game");
         logger.exiting(getClass().getName(), "endGameActions");
-    }
+        playBlackjack();}
 }
 
 
