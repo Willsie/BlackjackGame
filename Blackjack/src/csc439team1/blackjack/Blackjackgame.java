@@ -4,6 +4,8 @@ import csc439team1.blackjack.controller.Controller;
 import csc439team1.blackjack.model.Card;
 import csc439team1.blackjack.view.CLIView;
 
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -18,7 +20,9 @@ public class Blackjackgame {
      * @param args
      */
     public static void main(String[] args) {
-        Logger logger = Logger.getLogger(Card.class.getName());
+        Logger logger = Logger.getLogger("Main");
+        ConsoleHandler consoleHandler = new ConsoleHandler();
+        consoleHandler.setLevel(Level.ALL);
         logger.config("Entering Main");
         try {
             CLIView view = new CLIView();

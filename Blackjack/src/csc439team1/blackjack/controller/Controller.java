@@ -158,17 +158,15 @@ public class Controller {
     public void playBlackjack() {
         logger.entering(getClass().getName(), "playBlackjack");
         shoe = new Shoe(shoeDecks);
-        logger.info("Creating new shoe, the size of the deck is " + shoeDecks);
+        logger.info("Shoe size " + shoeDecks);
         //cut variable is 1/5 of original shoe size, and is used by checkCut() to see if shoe needs repopulating
         cut = shoe.size() * .2;
-        logger.info("Cutting the shoe");
+        logger.info("Cut is " + cut);
         buyChips();
-        logger.info("Player is buying chips");
         //While loop which operates as long as the player's chips are at minimum bet amount (10)
         while(player.getChips() >= 10) {
-            logger.info("Game is running while player chip is more than $10");
+            logger.info("Should be above 9: " + player.getChips());
             askBet();
-            logger.info("Ask player for bet");
             initialDeal(shoe);
             naturalBlackJack();
             //Conditional clause that is only true if there has not been an natural blackjack, else goes straight to endHandFunctions
@@ -275,7 +273,7 @@ public class Controller {
     public void quit() {
         logger.entering(getClass().getName(), "quit");
         view.output("Player has quit\n");
-        logger.info("Display message to console \"Player has quit\"");
+        logger.warning("Player should have initiated a quit");
         logger.exiting(getClass().getName(), "quit");
         throw new IllegalStateException("");
     }
