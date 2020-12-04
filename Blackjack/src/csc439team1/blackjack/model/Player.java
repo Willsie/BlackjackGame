@@ -106,7 +106,6 @@ public class Player {
         if (chips < 0)
         {
             logger.info("Exception thrown due to chips being below 0, chips are: " + chips);
-
             throw new IllegalStateException();
         }
         logger.exiting(getClass().getName(), "checkChips");
