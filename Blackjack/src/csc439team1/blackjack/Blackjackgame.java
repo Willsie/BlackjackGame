@@ -5,7 +5,6 @@ import csc439team1.blackjack.model.Card;
 import csc439team1.blackjack.view.CLIView;
 
 import java.util.logging.ConsoleHandler;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -19,20 +18,18 @@ public class Blackjackgame {
      *
      * @param args
      */
+    private static final Logger logger = Logger.getLogger(Card.class.getName());
     public static void main(String[] args) {
-        Logger logger = Logger.getLogger("Main");
-        ConsoleHandler consoleHandler = new ConsoleHandler();
-        consoleHandler.setLevel(Level.ALL);
-        logger.config("Entering Main");
+        logger.entering("Blackjackgame", "main");
         try {
             CLIView view = new CLIView();
             Controller controller = new Controller(view);
             controller.playBlackjack();
-            logger.info("All methods fired successfully");
+
         } catch (IllegalStateException e) {
             logger.warning("Caught quit exceptions");
             System.exit(0);
         }
-        logger.config("Exiting main method");
+        logger.exiting("Blackjackgame", "main");
     }
 }
