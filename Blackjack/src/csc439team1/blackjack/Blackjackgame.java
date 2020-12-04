@@ -1,7 +1,10 @@
 package csc439team1.blackjack;
 
 import csc439team1.blackjack.controller.Controller;
+import csc439team1.blackjack.model.Card;
 import csc439team1.blackjack.view.CLIView;
+
+import java.util.logging.Logger;
 
 /**
  * This class contains main method to run the BlackJack game
@@ -15,13 +18,17 @@ public class Blackjackgame {
      * @param args
      */
     public static void main(String[] args) {
+        Logger logger = Logger.getLogger(Card.class.getName());
+        logger.config("Entering Main");
         try {
             CLIView view = new CLIView();
             Controller controller = new Controller(view);
             controller.playBlackjack();
+            logger.info("All methods fired successfully");
         } catch (IllegalStateException e) {
+            logger.warning("Caught quit exceptions");
             System.exit(0);
         }
-
+        logger.config("Exiting main method");
     }
 }

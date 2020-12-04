@@ -22,7 +22,7 @@ public class CLIView extends View
     public void output(String message) {
         logger.entering(getClass().getName(), "output");
         System.out.print(message);
-        logger.info("Displaying message parameter to console");
+        logger.info("message is " + message);
         logger.exiting(getClass().getName(), "output");
     }
 
@@ -35,13 +35,12 @@ public class CLIView extends View
     public String input() throws Exception {
         logger.entering(getClass().getName(), "input");
         Scanner input = new Scanner(System.in);
-        logger.info("Creating new scanner object, open input stream");
         String userInput = input.next();
-        logger.info("Reading next input from input stream");
         if (userInput.toLowerCase().equals("quit") ) {
-            logger.info("Player entered quit and exception being thrown to exit the game");
+            logger.info("input should equal quit:" + userInput);
             throw new Exception();
         }
+        logger.info("userInput is: " + userInput);
         logger.exiting(getClass().getName(), "input");
         return userInput;
     }
@@ -54,27 +53,24 @@ public class CLIView extends View
     public Integer intInput () throws Exception {
         logger.entering(getClass().getName(), "intInput");
         Scanner input = new Scanner(System.in);
-        logger.info("Creating new scanner object, open input stream");
         String userInput = input.next();
-        logger.info("Reading next input from input stream");
+        logger.info("userInput is :" + userInput);
         boolean isInt = false;
         while (!isInt) {
-            logger.info("Starting while loop - condition: input is a type integer");
             try {
                 if (userInput.toLowerCase().equals("quit") ) {
-                    logger.info("Player entered quit and exception being thrown to exit the game");
+                    logger.info("userInput is: " + userInput);
                     throw new Exception();
                 }
                 Integer.parseInt(userInput);
-                logger.info("Attempting to parse user input to integer");
                 isInt = true;
             } catch (NumberFormatException e) {
                 output("Entry must be an integer, try again: ");
-                logger.info("Exception is being handled, asking user to enter the correct input");
+                logger.info("userInput should not be a number: " + userInput);
                 userInput = input.next();
-                logger.info("Reading next input from input stream");
             }
         }
+        logger.info("userInput should be a integer: " + userInput);
         logger.exiting(getClass().getName(), "intInput");
         return Integer.parseInt(userInput);
     }

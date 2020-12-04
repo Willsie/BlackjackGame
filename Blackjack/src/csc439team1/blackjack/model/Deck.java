@@ -26,10 +26,10 @@ public class Deck {
         logger.entering(getClass().getName(), "Deck");
         //loop 4 times, each loop will generate a deckValue ranges from 0 to 3
         for (int deckValue = 0; deckValue <= 3; deckValue++) {
-            logger.config("Beginning inner for loop deck value is " + deckValue);
+            logger.info("Beginning inner for loop deck value is " + deckValue);
             //loop 13 times, each loop will generate a cardValue ranges from 1 to 13
             for (int cardValue = 1; cardValue <= 13; cardValue++) {
-                logger.config("Inside inner for loop deck value is " + deckValue + ". card value is " + cardValue);
+                logger.info("Inside inner for loop deck value is " + deckValue + ". card value is " + cardValue);
                 deck.add(new Card(cardValue, deckValue));   //add a card to the deck
             }
         }

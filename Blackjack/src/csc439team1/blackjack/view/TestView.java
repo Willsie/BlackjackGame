@@ -25,7 +25,7 @@ public class TestView<E> extends View {
      */
     public TestView() {
         logger.entering(getClass().getName(), "TestView");
-        logger.info("TestView() is invoked");
+        logger.warning("Unexpected error with TestView constructor");
         logger.exiting(getClass().getName(), "TestView");
     }
 
@@ -37,7 +37,7 @@ public class TestView<E> extends View {
     public void add(E value) {
         logger.entering(getClass().getName(), "add");
         this.inputs.add(value);
-        logger.info("Adding value to inputs");
+        logger.info("value is " + value);
         logger.exiting(getClass().getName(), "add");
     }
 
@@ -50,7 +50,7 @@ public class TestView<E> extends View {
     public void output(String str) {
         logger.entering(getClass().getName(), "output");
         System.out.print(str);
-        logger.info("Displaying str to console");
+        logger.info("str is: " + str);
         logger.exiting(getClass().getName(), "output");
     }
 
@@ -62,10 +62,10 @@ public class TestView<E> extends View {
     public String input() throws Exception {
         logger.entering(getClass().getName(), "input");
         if (inputs.get(0).equals("quit")) {
-            logger.info("Player entered quit - exiting the game");
+            logger.info("should equal quit:" + inputs.get(0));
             throw new Exception();
         } else {
-            logger.info("Player did not enter quit - return player string");
+            logger.info("should not equal quit:" + inputs.get(0));
             logger.exiting(getClass().getName(), "output");
             return (String) inputs.remove(0);
         }
@@ -79,10 +79,10 @@ public class TestView<E> extends View {
     public Integer intInput() throws Exception {
         logger.entering(getClass().getName(), "intInput");
         if (inputs.get(0).equals("quit")) {
-            logger.info("Player entered quit - exiting the game");
+            logger.info("should equal quit:" + inputs.get(0));
             throw new Exception();
         } else {
-            logger.info("Player enter valid integer input - return player integer input");
+            logger.info("Should be an integer: " + inputs.get(0));
             logger.exiting(getClass().getName(), "intInput");
             return (Integer) inputs.remove(0);
         }

@@ -109,7 +109,7 @@ public class Shoe
         for (Deck deck : shoe)
         {
             totalCards += deck.size();
-            logger.config("totalCards value within for each: " + totalCards);
+            logger.info("totalCards value within for each: " + totalCards);
         }
         logger.info("End value of totalCards: " + totalCards);
         logger.exiting(getClass().getName(), "size");
