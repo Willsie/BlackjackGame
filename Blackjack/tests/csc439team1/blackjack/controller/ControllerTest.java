@@ -613,6 +613,21 @@ public class ControllerTest {
         assertEquals(controller30.playerInputActions("stand", "hit"), "H");
     }
 
+    /**
+     * Test to ensure that quit is being handled as a user input in playerInputActions
+     */
+    @Test(expected = IllegalStateException.class)
+    public void playerInputActions2() {
+        TestView<String> testView = new TestView<>();
+        testView.add("i");
+        testView.add("j");
+        testView.add("quit");
+        testView.add("S");
+        Controller controller = new Controller(testView);
+        controller.playerInputActions("stand", "hit");
+    }
+
+
 
     /**
      * Test playerAction by calling the method when two cards totaling 20 exist in the players hand. This will test the control of the loop.
@@ -910,7 +925,7 @@ public class ControllerTest {
      */
     @Test
     public void checkCut() {
-        TestView testView =  new TestView();
+        TestView<Integer> testView =  new TestView<>();
         Controller controller45 = new Controller(testView);
         controller45.shoe = new Shoe(1);
         controller45.cut = controller45.shoe.size() * .2; // cut determined the same way in playBlackJack()
@@ -926,7 +941,7 @@ public class ControllerTest {
      */
     @Test
     public void checkCut1() {
-        TestView testView =  new TestView();
+        TestView<Integer> testView =  new TestView<>();
         Controller controller46 = new Controller(testView);
         controller46.shoe = new Shoe(1);
         controller46.cut = controller46.shoe.size() * .2; // cut determined the same way in playBlackJack()
@@ -976,6 +991,51 @@ public class ControllerTest {
         controller48.player.addCard(new Card(11, 0));
         controller48.softTotal();
         assertFalse(controller48.ableToDouble());
+
+    }
+
+
+    /**
+     * Test that playBlackJack will correctly run through one play of the game and catch the illegal state exception thrown when user enters quit.
+     */
+    @Test (expected = IllegalStateException.class)
+    public void playBlackJack() {
+        TestView testView = new TestView();
+        testView.add(100);
+        testView.add(25);
+        testView.add("n");
+        testView.add("s");
+        testView.add("quit");
+        Controller controller49 = new Controller(testView);
+        controller49.playBlackjack();
+    }
+
+    /**
+     * Test that endGameActions correctly exits the game when user enters q
+     */
+    @Test (expected = IllegalStateException.class)
+    public void endGameActions() {
+        TestView testView = new TestView();
+        testView.add("q");
+        Controller controller50 = new Controller(testView);
+        controller50.endGameActions();
+
+    }
+
+
+    /**
+     * Test that when p is enter that a new game is began by ensuring that player's chip amount it updated to 100, then the next prompt from playBlackJack is requested and quit is enter, ending the game
+     */
+    @Test (expected = IllegalStateException.class)
+    public void endGameActions1() {
+        TestView testView = new TestView();
+        testView.add("p");
+        testView.add(100);
+        testView.add("quit");
+        Controller controller51 = new Controller(testView);
+        controller51.endGameActions();
+        assertEquals(controller51.player.getChips(), 100,.0001);
+
 
     }
 }
