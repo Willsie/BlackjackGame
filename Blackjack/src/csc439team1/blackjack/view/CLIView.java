@@ -1,7 +1,6 @@
 package csc439team1.blackjack.view;
 
 import csc439team1.blackjack.model.Card;
-
 import java.util.Scanner;
 import java.util.logging.Logger;
 

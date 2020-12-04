@@ -58,7 +58,6 @@ public class Card
         logger.severe("Unexpected Error with getSuit method");
         logger.exiting(getClass().getName(), "getSuit");
         return this.suit;
-
     }
 
     /**
@@ -135,6 +134,4 @@ public class Card
         logger.exiting(getClass().getName(), "toString");
         return getNumberString() + " of " + getSuitString();
     }
-
-
 }

@@ -6,7 +6,6 @@ import csc439team1.blackjack.view.TestView;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -30,7 +29,6 @@ public class ControllerTest {
     @Before
     public void setStreams() {
         System.setOut(new PrintStream(out));
-
     }
 
     /**
@@ -40,7 +38,6 @@ public class ControllerTest {
     @After
     public void restoreInitialStreams() {
         System.setOut(originalOut);
-
     }
 
 
@@ -59,7 +56,6 @@ public class ControllerTest {
                 "Please enter a number between 10 and 5000!: " +
                 "Please enter a number between 10 and 5000!: ", out.toString());
         assertEquals(controller0.getPlayer().getChips(), 50, .0001);
-
     }
 
 
@@ -112,10 +108,8 @@ public class ControllerTest {
         Controller controller3 = new Controller(TestView);
         controller3.buyChips();
         assertEquals(controller3.getPlayer().getChips(), 400, .0001);
-
         controller3.askBet();
         assertEquals(controller3.getPlayer().getChips(), 375, .0001);
-
     }
 
     /**
@@ -133,10 +127,8 @@ public class ControllerTest {
         Controller controller4 = new Controller(TestView);
         controller4.buyChips();
         assertEquals(controller4.getPlayer().getChips(), 600, .0001);
-
         controller4.askBet();
         assertEquals(controller4.getPlayer().getChips(), 525, .0001);
-
     }
 
     /**
@@ -156,7 +148,6 @@ public class ControllerTest {
                 "How much do you want to bet (between $10 to $500): " +
                 "Invalid bet amount! Bet needs to be between 10 & 500, and less than your current chips(500.0): " +
                 "Invalid bet amount! Bet needs to be between 10 & 500, and less than your current chips(500.0): ", out.toString());
-
     }
 
     @Test(expected = Exception.class)
@@ -183,8 +174,6 @@ public class ControllerTest {
         controller6.askBet();
         controller6.initialDeal(shoe);
         assertEquals(shoe.size(), 48);
-
-
     }
 
     /**
@@ -203,7 +192,6 @@ public class ControllerTest {
             shoe.pick();
         }
         controller7.initialDeal(shoe);
-
     }
 
 
@@ -233,7 +221,6 @@ public class ControllerTest {
         TestView<Integer> TestView = new TestView<>();
         Controller controller10 = new Controller(TestView);
         assertEquals(controller10.getTotalValue(controller10.getPlayer().getHand()), 0);
-
     }
 
     /**
@@ -251,7 +238,6 @@ public class ControllerTest {
             controller11.getPlayer().addCard(cards.get(i));
         }
         assertEquals(controller11.getTotalValue(controller11.getPlayer().getHand()), 15);
-
     }
 
 
@@ -303,7 +289,6 @@ public class ControllerTest {
             controller14.getPlayer().addCard(cards.get(i));
         }
         assertEquals(controller14.getTotalValue(controller14.getPlayer().getHand()), 14);
-
     }
 
     /**
@@ -323,8 +308,6 @@ public class ControllerTest {
         assertEquals(controller15.getTotalValue(controller15.getPlayer().getHand()), 16);
         controller15.getPlayer().addCard(new Card(11,0));
         assertEquals(controller15.getTotalValue(controller15.getPlayer().getHand()), 16);
-
-
     }
 
     /**
@@ -361,7 +344,6 @@ public class ControllerTest {
         assertEquals(controller17.dealerTotal(), 8);
     }
 
-
     /**
      * Test that the boolean blackJack is false when naturalBlackJack is called when neither the player or getDealer()'s total is 21
      */
@@ -377,7 +359,6 @@ public class ControllerTest {
             controller18.getPlayer().addCard(cards.get(i));
         }
         assertFalse(controller18.naturalBlackJack());
-
     }
     /**
      * Test that the boolean blackJack is true when naturalBlackJack is called when just the player has blackJack and the deal does not
@@ -390,9 +371,7 @@ public class ControllerTest {
         controller19.getDealer().addCard(new Card(5,2));
         controller19.getPlayer().addCard(new Card(1,0));
         controller19.getPlayer().addCard(new Card(11,0));
-
         assertTrue(controller19.naturalBlackJack());
-
     }
 
     /**
@@ -407,9 +386,7 @@ public class ControllerTest {
         controller20.getDealer().addCard(new Card(11,2));
         controller20.getPlayer().addCard(new Card(5,0));
         controller20.getPlayer().addCard(new Card(3,0));
-
         assertTrue(controller20.naturalBlackJack());
-
     }
 
     /**
@@ -423,9 +400,7 @@ public class ControllerTest {
         controller21.getDealer().addCard(new Card(11,2));
         controller21.getPlayer().addCard(new Card(1,0));
         controller21.getPlayer().addCard(new Card(12,0));
-
         assertTrue(controller21.naturalBlackJack());
-
     }
 
     /**
@@ -443,7 +418,6 @@ public class ControllerTest {
         controller22.getPlayer().addCard(new Card(11,1));
         controller22.getPlayer().addCard(new Card(2,0));
         assertFalse(controller22.ableToDouble());
-
     }
 
     /**
@@ -461,7 +435,6 @@ public class ControllerTest {
         controller23.getPlayer().addCard(new Card(5,1));
         controller23.getPlayer().addCard(new Card(3,0));
         assertFalse(controller23.ableToDouble());
-
     }
 
     /**
@@ -476,7 +449,6 @@ public class ControllerTest {
         Controller controller24 = new Controller(TestView);
         controller24.buyChips();
         controller24.askBet();
-
         assertFalse(controller24.ableToDouble());
     }
 
@@ -494,7 +466,6 @@ public class ControllerTest {
         controller25.getPlayer().addCard(new Card(5,1));
         controller25.getPlayer().addCard(new Card(4,0));
         assertTrue(controller25.ableToDouble());
-
     }
 
 
@@ -561,7 +532,6 @@ public class ControllerTest {
         assertEquals(controller28.getPlayer().getChips(), 200, .0001);
         assertEquals(controller28.getBet(), 200, .0001);
         assertEquals(controller28.getPlayer().getHand().size(), 3);
-
     }
 
 
@@ -680,7 +650,6 @@ public class ControllerTest {
         controller34.getDealer().addCard(new Card(6,0));
         controller34.postPlayerActions();
         assertEquals(controller34.getDealer().getHand().size(), 3);
-
     }
 
     /**
@@ -733,7 +702,6 @@ public class ControllerTest {
         controller37.endHandFunctions();
         assertFalse(controller37.isPlyBust());
         assertEquals(controller37.getPlayer().getHand().size(),0);
-
     }
 
 
@@ -753,7 +721,6 @@ public class ControllerTest {
         controller38.endHandFunctions();
         assertFalse(controller38.isDlrBust());
         assertEquals(controller38.getDealer().getHand().size(),0);
-
     }
 
 
@@ -777,7 +744,6 @@ public class ControllerTest {
         controller39.getDealer().addCard(new Card(8,1));
         controller39.results();
         assertEquals(controller39.getPlayer().getChips(), 100, .0001);
-
     }
 
 
@@ -796,7 +762,6 @@ public class ControllerTest {
         controller40.getDealer().addCard(new Card(8,1));
         controller40.getDealer().addCard(new Card(9,1));
         controller40.postPlayerActions();    //set dlrBust to true
-
         controller40.results();
         assertEquals(controller40.getPlayer().getChips(),  125, .0001);
     }
@@ -818,7 +783,6 @@ public class ControllerTest {
         controller41.postPlayerActions(); //set plyBust to true
         controller41.results();
         assertEquals(controller41.getPlayer().getChips(), 75, .0001);
-
     }
 
     /**
@@ -859,8 +823,6 @@ public class ControllerTest {
         controller43.naturalBlackJack();
         controller43.results();
         assertEquals(controller43.getPlayer().getChips(), 137.5, .0001);
-
-
     }
 
     /**
@@ -881,7 +843,6 @@ public class ControllerTest {
         controller44.naturalBlackJack();
         controller44.results();
         assertEquals(controller44.getPlayer().getChips(), 100, .0001);
-
     }
 
     /**
@@ -975,7 +936,6 @@ public class ControllerTest {
         controller48.getPlayer().addCard(new Card(11, 0));
         controller48.softTotal();
         assertFalse(controller48.ableToDouble());
-
     }
 
 
@@ -995,6 +955,25 @@ public class ControllerTest {
     }
 
     /**
+     * Test that playBlackJack will correctly run through one play of the game and catch the illegal state exception thrown when user enters quit.
+     */
+    @Test (expected = IllegalStateException.class)
+    public void playBlackJack2() {
+        TestView testView = new TestView();
+        testView.add(10);
+        testView.add(10);
+        testView.add("n");
+        testView.add("h");
+        testView.add("p");
+        Controller controller49 = new Controller(testView);
+        controller49.getPlayer().getHand().add(new Card(11,3));
+        controller49.getPlayer().getHand().add(new Card(11,3));
+        controller49.playBlackjack();
+
+    }
+
+
+    /**
      * Test that endGameActions correctly exits the game when user enters q
      */
     @Test (expected = IllegalStateException.class)
@@ -1003,7 +982,6 @@ public class ControllerTest {
         testView.add("q");
         Controller controller50 = new Controller(testView);
         controller50.endGameActions();
-
     }
 
 
@@ -1019,7 +997,5 @@ public class ControllerTest {
         Controller controller51 = new Controller(testView);
         controller51.endGameActions();
         assertEquals(controller51.getPlayer().getChips(), 100,.0001);
-
-
     }
 }
