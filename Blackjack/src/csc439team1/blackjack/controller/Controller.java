@@ -24,12 +24,12 @@ public class Controller {
     /**
      * Player type object to store current player information
      */
-    Player player = new Player();
+    private Player player = new Player();
 
     /**
      * Dealer type object to store current dealer information
      */
-    Dealer dealer = new Dealer();
+    private Dealer dealer = new Dealer();
     /**
      * double variable cut that holds amount for cut of shoe, so that shoe may be repopulated during gameplay; and
      * double variable bet which stores the amount of the player's bet.
@@ -61,6 +61,13 @@ public class Controller {
         this.view = view;
     }
 
+    public Player getPlayer() {
+        return player;
+    }
+
+    public Dealer getDealer() {
+        return dealer;
+    }
 
     /**
      * Getter method for dlrBust
