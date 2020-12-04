@@ -57,14 +57,96 @@ public class Controller {
      * @param view accepts View object as parameter.
      */
     public Controller(View view) {
+        logger.entering(getClass().getName(), "Controller");
+        logger.severe("Unexpected error with Controller constructor");
         this.view = view;
+        logger.exiting(getClass().getName(), "Controller");
     }
 
+    /**
+     * getter method for Player data member
+     * @return this.player
+     */
+    public Player getPlayer() {
+        logger.entering(getClass().getName(), "getPlayer");
+        logger.severe("Unexpected error with getPlayer method " + player);
+        logger.exiting(getClass().getName(), "getPlayer");
+        return player;
+    }
+
+    /**
+     * getter method for Dealer data member
+     * @return this.dealer
+     */
+    public Dealer getDealer() {
+        logger.entering(getClass().getName(), "getDealer");
+        logger.severe("Unexpected error with getDealer method " + dealer);
+        logger.exiting(getClass().getName(), "getDealer");
+        return dealer;
+    }
+
+    /**
+     * getter method for bet data member
+     * @return this.bet
+     */
+    public double getBet() {
+        logger.entering(getClass().getName(), "getBet");
+        logger.severe("Unexpected error with getBet method " + bet);
+        logger.exiting(getClass().getName(), "getBet");
+        return bet;
+    }
+
+    /**
+     * setter method for cut
+     * @param cut is double variable for number of cards to initiate a cut.
+     */
+    public void setCut(double cut) {
+        logger.entering(getClass().getName(), "setCut");
+        logger.severe("Unexpected error with setCut method " + cut);
+        this.cut = cut;
+        logger.exiting(getClass().getName(), "setCut");
+    }
+
+    /**
+     * getter method for shoe
+     * @return this.shoe
+     */
+    public Shoe getShoe() {
+        logger.entering(getClass().getName(), "getShoe");
+        logger.severe("Unexpected error with getShoe method " + shoe);
+        logger.exiting(getClass().getName(), "getShoe");
+        return shoe;
+    }
+
+    /**
+     * setter method for shoe
+     */
+    public void setShoe(Shoe shoe) {
+        logger.entering(getClass().getName(), "setShoe");
+        logger.severe("Unexpected error with setShoe method " + shoe);
+        this.shoe = shoe;
+        logger.exiting(getClass().getName(), "setShoe");
+    }
+
+    /**
+     * Method to return dlrBust, shows if the dealer has gone bust (over 21).
+     * @return boolean dlrBust
+     */
     public boolean isDlrBust() {
+        logger.entering(getClass().getName(), "isDlrBust");
+        logger.severe("Unexpected error with isDlrBust method" + dlrBust);
+        logger.exiting(getClass().getName(), "isDlrBust");
         return dlrBust;
     }
 
+    /**
+     * Method to return plyBust, used for methods that need to check for player total over 21.
+     * @return plyBust which is boolean variable for weather the player has gone bust or not.
+     */
     public boolean isPlyBust() {
+        logger.entering(getClass().getName(), "isPlyBust");
+        logger.severe("Unexpected error with isPlyBust method" + plyBust);
+        logger.exiting(getClass().getName(), "isPlyBust");
         return plyBust;
     }
 

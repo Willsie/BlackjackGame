@@ -1,6 +1,5 @@
 package csc439team1.blackjack.controller;
 
-
 import csc439team1.blackjack.model.Card;
 import csc439team1.blackjack.model.Shoe;
 import csc439team1.blackjack.view.TestView;
@@ -59,7 +58,7 @@ public class ControllerTest {
         assertEquals("Game is starting.....how much chips do you want to buy (between $10 to $5000): " +
                 "Please enter a number between 10 and 5000!: " +
                 "Please enter a number between 10 and 5000!: ", out.toString());
-        assertEquals(controller0.player.getChips(), 50, .0001);
+        assertEquals(controller0.getPlayer().getChips(), 50, .0001);
 
     }
 
@@ -78,7 +77,7 @@ public class ControllerTest {
         TestView.add(75);
         Controller controller1 = new Controller(TestView);
         controller1.buyChips();
-        assertEquals(controller1.player.getChips(), 50, .0001);
+        assertEquals(controller1.getPlayer().getChips(), 50, .0001);
     }
 
 
@@ -112,10 +111,10 @@ public class ControllerTest {
         TestView.add(25);
         Controller controller3 = new Controller(TestView);
         controller3.buyChips();
-        assertEquals(controller3.player.getChips(), 400, .0001);
+        assertEquals(controller3.getPlayer().getChips(), 400, .0001);
 
         controller3.askBet();
-        assertEquals(controller3.player.getChips(), 375, .0001);
+        assertEquals(controller3.getPlayer().getChips(), 375, .0001);
 
     }
 
@@ -133,10 +132,10 @@ public class ControllerTest {
         TestView.add(75);
         Controller controller4 = new Controller(TestView);
         controller4.buyChips();
-        assertEquals(controller4.player.getChips(), 600, .0001);
+        assertEquals(controller4.getPlayer().getChips(), 600, .0001);
 
         controller4.askBet();
-        assertEquals(controller4.player.getChips(), 525, .0001);
+        assertEquals(controller4.getPlayer().getChips(), 525, .0001);
 
     }
 
@@ -221,9 +220,9 @@ public class ControllerTest {
         cards.add(new Card(2, 2));
         cards.add(new Card(2,3));
         for(int i = 0; i <=2 ; i ++){
-            controller9.player.addCard(cards.get(i));
+            controller9.getPlayer().addCard(cards.get(i));
         }
-        assertEquals(controller9.getTotalValue(controller9.player.getHand()), 6);
+        assertEquals(controller9.getTotalValue(controller9.getPlayer().getHand()), 6);
     }
 
     /**
@@ -233,7 +232,7 @@ public class ControllerTest {
     public void getTotalValue1() {
         TestView<Integer> TestView = new TestView<>();
         Controller controller10 = new Controller(TestView);
-        assertEquals(controller10.getTotalValue(controller10.player.getHand()), 0);
+        assertEquals(controller10.getTotalValue(controller10.getPlayer().getHand()), 0);
 
     }
 
@@ -249,9 +248,9 @@ public class ControllerTest {
         cards.add(new Card(11,1));
         cards.add(new Card(5, 2));
         for(int i = 0; i <=1 ; i ++){
-            controller11.player.addCard(cards.get(i));
+            controller11.getPlayer().addCard(cards.get(i));
         }
-        assertEquals(controller11.getTotalValue(controller11.player.getHand()), 15);
+        assertEquals(controller11.getTotalValue(controller11.getPlayer().getHand()), 15);
 
     }
 
@@ -267,9 +266,9 @@ public class ControllerTest {
         cards.add(new Card(1,1));
         cards.add(new Card(11, 2));
         for(int i = 0; i <=1 ; i ++){
-            controller12.player.addCard(cards.get(i));
+            controller12.getPlayer().addCard(cards.get(i));
         }
-        assertEquals(controller12.getTotalValue(controller12.player.getHand()), 21);
+        assertEquals(controller12.getTotalValue(controller12.getPlayer().getHand()), 21);
     }
     /**
      * Test getTotalValue with two aces and one face card, total should equal 12.
@@ -283,9 +282,9 @@ public class ControllerTest {
         cards.add(new Card(1,2));
         cards.add(new Card(11, 2));
         for(int i = 0; i <= 2 ; i ++){
-            controller13.player.addCard(cards.get(i));
+            controller13.getPlayer().addCard(cards.get(i));
         }
-        assertEquals(controller13.getTotalValue(controller13.player.getHand()), 12);
+        assertEquals(controller13.getTotalValue(controller13.getPlayer().getHand()), 12);
     }
 
     /**
@@ -301,9 +300,9 @@ public class ControllerTest {
         cards.add(new Card(1, 3));
         cards.add(new Card(1,0));
         for(int i = 0; i <= 3 ; i ++){
-            controller14.player.addCard(cards.get(i));
+            controller14.getPlayer().addCard(cards.get(i));
         }
-        assertEquals(controller14.getTotalValue(controller14.player.getHand()), 14);
+        assertEquals(controller14.getTotalValue(controller14.getPlayer().getHand()), 14);
 
     }
 
@@ -319,11 +318,11 @@ public class ControllerTest {
         cards.add(new Card(1,1));
         cards.add(new Card(5,2));
         for(int i = 0; i <= 1 ; i ++){
-            controller15.player.addCard(cards.get(i));
+            controller15.getPlayer().addCard(cards.get(i));
         }
-        assertEquals(controller15.getTotalValue(controller15.player.getHand()), 16);
-        controller15.player.addCard(new Card(11,0));
-        assertEquals(controller15.getTotalValue(controller15.player.getHand()), 16);
+        assertEquals(controller15.getTotalValue(controller15.getPlayer().getHand()), 16);
+        controller15.getPlayer().addCard(new Card(11,0));
+        assertEquals(controller15.getTotalValue(controller15.getPlayer().getHand()), 16);
 
 
     }
@@ -333,38 +332,38 @@ public class ControllerTest {
      */
 
     @Test
-    public void playerTotal() {
+    public void getPlayerTotal() {
         TestView<Integer> TestView = new TestView<>();
         Controller controller16 = new Controller(TestView);
         ArrayList<Card> cards = new ArrayList<>();
         cards.add(new Card(2,1));
         cards.add(new Card(5,2));
         for(int i = 0; i <= 1 ; i ++){
-            controller16.player.addCard(cards.get(i));
+            controller16.getPlayer().addCard(cards.get(i));
         }
         assertEquals(controller16.playerTotal(), 7);
     }
 
 
     /**
-     * dealerTotal just calls getTotalValue, so just test that return value is equal to 8 on a hand with 3 and 5.
+     * getDealer()Total just calls getTotalValue, so just test that return value is equal to 8 on a hand with 3 and 5.
      */
     @Test
-    public void dealerTotal() {
+    public void getDealerTotal() {
         TestView<Integer> TestView = new TestView<>();
         Controller controller17 = new Controller(TestView);
         ArrayList<Card> cards = new ArrayList<>();
         cards.add(new Card(3,1));
         cards.add(new Card(5,2));
         for(int i = 0; i <= 1 ; i ++){
-            controller17.dealer.addCard(cards.get(i));
+            controller17.getDealer().addCard(cards.get(i));
         }
         assertEquals(controller17.dealerTotal(), 8);
     }
 
 
     /**
-     * Test that the boolean blackJack is false when naturalBlackJack is called when neither the player or dealer's total is 21
+     * Test that the boolean blackJack is false when naturalBlackJack is called when neither the player or getDealer()'s total is 21
      */
     @Test
     public void naturalBlackJack() {
@@ -374,8 +373,8 @@ public class ControllerTest {
         cards.add(new Card(3,1));
         cards.add(new Card(5,2));
         for(int i = 0; i <= 1 ; i ++){
-            controller18.dealer.addCard(cards.get(i));
-            controller18.player.addCard(cards.get(i));
+            controller18.getDealer().addCard(cards.get(i));
+            controller18.getPlayer().addCard(cards.get(i));
         }
         assertFalse(controller18.naturalBlackJack());
 
@@ -387,27 +386,27 @@ public class ControllerTest {
     public void naturalBlackJack1() {
         TestView<Integer> TestView = new TestView<>();
         Controller controller19 = new Controller(TestView);
-        controller19.dealer.addCard(new Card(3,1));
-        controller19.dealer.addCard(new Card(5,2));
-        controller19.player.addCard(new Card(1,0));
-        controller19.player.addCard(new Card(11,0));
+        controller19.getDealer().addCard(new Card(3,1));
+        controller19.getDealer().addCard(new Card(5,2));
+        controller19.getPlayer().addCard(new Card(1,0));
+        controller19.getPlayer().addCard(new Card(11,0));
 
         assertTrue(controller19.naturalBlackJack());
 
     }
 
     /**
-     * Test that naturalBlackJack returns true when dealer has blackJack and player does not.
+     * Test that naturalBlackJack returns true when getDealer() has blackJack and player does not.
      */
     @Test
     public void naturalBlackJack2() {
         TestView<Integer> TestView = new TestView<>();
         Controller controller20 = new Controller(TestView);
         controller20.naturalBlackJack();
-        controller20.dealer.addCard(new Card(1,1));
-        controller20.dealer.addCard(new Card(11,2));
-        controller20.player.addCard(new Card(5,0));
-        controller20.player.addCard(new Card(3,0));
+        controller20.getDealer().addCard(new Card(1,1));
+        controller20.getDealer().addCard(new Card(11,2));
+        controller20.getPlayer().addCard(new Card(5,0));
+        controller20.getPlayer().addCard(new Card(3,0));
 
         assertTrue(controller20.naturalBlackJack());
 
@@ -420,10 +419,10 @@ public class ControllerTest {
     public void naturalBlackJack3() {
         TestView<Integer> TestView = new TestView<>();
         Controller controller21 = new Controller(TestView);
-        controller21.dealer.addCard(new Card(1,1));
-        controller21.dealer.addCard(new Card(11,2));
-        controller21.player.addCard(new Card(1,0));
-        controller21.player.addCard(new Card(12,0));
+        controller21.getDealer().addCard(new Card(1,1));
+        controller21.getDealer().addCard(new Card(11,2));
+        controller21.getPlayer().addCard(new Card(1,0));
+        controller21.getPlayer().addCard(new Card(12,0));
 
         assertTrue(controller21.naturalBlackJack());
 
@@ -441,8 +440,8 @@ public class ControllerTest {
         Controller controller22 = new Controller(TestView);
         controller22.buyChips();
         controller22.askBet();
-        controller22.player.addCard(new Card(11,1));
-        controller22.player.addCard(new Card(2,0));
+        controller22.getPlayer().addCard(new Card(11,1));
+        controller22.getPlayer().addCard(new Card(2,0));
         assertFalse(controller22.ableToDouble());
 
     }
@@ -459,8 +458,8 @@ public class ControllerTest {
         Controller controller23 = new Controller(TestView);
         controller23.buyChips();
         controller23.askBet();
-        controller23.player.addCard(new Card(5,1));
-        controller23.player.addCard(new Card(3,0));
+        controller23.getPlayer().addCard(new Card(5,1));
+        controller23.getPlayer().addCard(new Card(3,0));
         assertFalse(controller23.ableToDouble());
 
     }
@@ -492,8 +491,8 @@ public class ControllerTest {
         Controller controller25 = new Controller(TestView);
         controller25.buyChips();
         controller25.askBet();
-        controller25.player.addCard(new Card(5,1));
-        controller25.player.addCard(new Card(4,0));
+        controller25.getPlayer().addCard(new Card(5,1));
+        controller25.getPlayer().addCard(new Card(4,0));
         assertTrue(controller25.ableToDouble());
 
     }
@@ -510,8 +509,8 @@ public class ControllerTest {
         Controller controller = new Controller(TestView);
         controller.buyChips();
         controller.askBet();
-        controller.player.addCard(new Card(5,1));
-        controller.player.addCard(new Card(4,0));
+        controller.getPlayer().addCard(new Card(5,1));
+        controller.getPlayer().addCard(new Card(4,0));
         assertFalse(controller.ableToDouble());
     }
 
@@ -519,7 +518,7 @@ public class ControllerTest {
      * Test playerDouble. As there is no bet amount or cards in the player's hand, the call to ableToDouble in playerDouble should leave the boolean double value as false, thus causing playerDouble to return false as well.
      */
     @Test
-    public void playerDouble() {
+    public void getPlayerDouble() {
         TestView<Integer> testView = new TestView<>();
         Controller controller26 = new Controller(testView);
         assertFalse(controller26.playerDouble());
@@ -529,39 +528,39 @@ public class ControllerTest {
      * Verify that a call to playerDouble while ableToDouble is true but the user inputs "N" results in no change to the players hand, bet amount, or chip amount.
      */
     @Test
-    public void playerDouble1() {
+    public void getPlayerDouble1() {
         TestView testView = new TestView();
         testView.add(100);
         testView.add("N");
         Controller controller27 = new Controller(testView);
-        controller27.player.addCard(new Card(5,0));
-        controller27.player.addCard(new Card(4,0));
-        controller27.player.setChips(400);
+        controller27.getPlayer().addCard(new Card(5,0));
+        controller27.getPlayer().addCard(new Card(4,0));
+        controller27.getPlayer().setChips(400);
         controller27.askBet();
         controller27.playerDouble();
-        assertEquals(controller27.player.getChips(), 300, .0001);
-        assertEquals(controller27.bet, 100, .0001);
-        assertEquals(controller27.player.getHand().size(), 2);
+        assertEquals(controller27.getPlayer().getChips(), 300, .0001);
+        assertEquals(controller27.getBet(), 100, .0001);
+        assertEquals(controller27.getPlayer().getHand().size(), 2);
     }
 
     /**
      * Verify that a call to playerDouble while ableToDouble is true and the user inputs "Y" correctly updates the player's chip, the bet amount, and adds one card to the players hand.
      */
     @Test
-    public void playerDouble2() {
+    public void getPlayerDouble2() {
         TestView testView = new TestView();
         testView.add(100);
         testView.add("Y");
         Controller controller28 = new Controller(testView);
-        controller28.shoe = new Shoe(1);
-        controller28.player.addCard(new Card(5,0));
-        controller28.player.addCard(new Card(5, 1));
-        controller28.player.setChips(400);
+        controller28.setShoe(new Shoe(1));
+        controller28.getPlayer().addCard(new Card(5,0));
+        controller28.getPlayer().addCard(new Card(5, 1));
+        controller28.getPlayer().setChips(400);
         controller28.askBet();
         assertTrue(controller28.playerDouble());
-        assertEquals(controller28.player.getChips(), 200, .0001);
-        assertEquals(controller28.bet, 200, .0001);
-        assertEquals(controller28.player.getHand().size(), 3);
+        assertEquals(controller28.getPlayer().getChips(), 200, .0001);
+        assertEquals(controller28.getBet(), 200, .0001);
+        assertEquals(controller28.getPlayer().getHand().size(), 3);
 
     }
 
@@ -620,17 +619,17 @@ public class ControllerTest {
      * the total over 20. The means that after the call to playerAction, the player's hand should only have 3 cards.
      */
     @Test
-    public void playerAction() {
+    public void getPlayerAction() {
         TestView<String> testView = new TestView<>();
         testView.add("h");
         testView.add("h");
         testView.add("h");
         Controller controller31 = new Controller(testView);
-        controller31.shoe = new Shoe(1);
-        controller31.player.addCard(new Card(11,0));
-        controller31.player.addCard(new Card(11,1));
+        controller31.setShoe(new Shoe(1));
+        controller31.getPlayer().addCard(new Card(11,0));
+        controller31.getPlayer().addCard(new Card(11,1));
         controller31.playerAction();
-        assertEquals(controller31.player.getHand().size(), 3);
+        assertEquals(controller31.getPlayer().getHand().size(), 3);
     }
 
 
@@ -640,16 +639,16 @@ public class ControllerTest {
      * Then the stand command is given, meaning the loop should exit and the player's hand should only have two cards, as the final hit is never executed.
      */
     @Test
-    public void playerAction1() {
+    public void getPlayerAction1() {
         TestView<String> testView =  new TestView<>();
         testView.add("h");
         testView.add("s");
         testView.add("h");
         Controller controller32 = new Controller(testView);
-        controller32.shoe = new Shoe(1);
-        controller32.player.addCard(new Card(2,0));
+        controller32.setShoe(new Shoe(1));
+        controller32.getPlayer().addCard(new Card(2,0));
         controller32.playerAction();
-        assertEquals(controller32.player.getHand().size(), 2);
+        assertEquals(controller32.getPlayer().getHand().size(), 2);
     }
 
 
@@ -660,42 +659,42 @@ public class ControllerTest {
     public void postPlayerActions() {
         TestView<Integer> testView = new TestView<>();
         Controller controller33 = new Controller(testView);
-        controller33.player.addCard(new Card(11,0));
-        controller33.player.addCard(new Card(11,1));
-        controller33.player.addCard(new Card(11,2));
+        controller33.getPlayer().addCard(new Card(11,0));
+        controller33.getPlayer().addCard(new Card(11,1));
+        controller33.getPlayer().addCard(new Card(11,2));
         controller33.postPlayerActions();
         assertEquals("You have busted and lost the hand!\n", out.toString());
     }
 
 
     /**
-     * Test postPlayerActions control flow by ensuring that only one card is added when the dealer's total is at 16 prior to the call.
+     * Test postPlayerActions control flow by ensuring that only one card is added when the getDealer()'s total is at 16 prior to the call.
      */
     @Test
     public void postPlayerActions1() {
         TestView<Integer> testView = new TestView<>();
         Controller controller34 = new Controller(testView);
-        controller34.player.addCard(new Card(11,0));
-        controller34.shoe = new Shoe(1);
-        controller34.dealer.addCard(new Card(11,0));
-        controller34.dealer.addCard(new Card(6,0));
+        controller34.getPlayer().addCard(new Card(11,0));
+        controller34.setShoe(new Shoe(1));
+        controller34.getDealer().addCard(new Card(11,0));
+        controller34.getDealer().addCard(new Card(6,0));
         controller34.postPlayerActions();
-        assertEquals(controller34.dealer.getHand().size(), 3);
+        assertEquals(controller34.getDealer().getHand().size(), 3);
 
     }
 
     /**
-     * This verifys that postPlayerActions correctly sets dlrBust to true when dealer's hand is greater than 21.
+     * This verifys that postPlayerActions correctly sets dlrBust to true when getDealer()'s hand is greater than 21.
      *
      */
     @Test
     public void postPlayerActions2() {
         TestView<Integer> testView = new TestView<>();
         Controller controller35 = new Controller(testView);
-        controller35.player.addCard(new Card(2,0));
-        controller35.dealer.addCard(new Card(11,0));
-        controller35.dealer.addCard(new Card(12,0));
-        controller35.dealer.addCard(new Card(5,0));
+        controller35.getPlayer().addCard(new Card(2,0));
+        controller35.getDealer().addCard(new Card(11,0));
+        controller35.getDealer().addCard(new Card(12,0));
+        controller35.getDealer().addCard(new Card(5,0));
         controller35.postPlayerActions();
         assertTrue(controller35.isDlrBust());
     }
@@ -709,9 +708,9 @@ public class ControllerTest {
     public void postPlayerActions3() {
         TestView<Integer> testView = new TestView<>();
         Controller controller36 = new Controller(testView);
-        controller36.player.addCard(new Card(11,0));
-        controller36.player.addCard(new Card(12,0));
-        controller36.player.addCard(new Card(5,0));
+        controller36.getPlayer().addCard(new Card(11,0));
+        controller36.getPlayer().addCard(new Card(12,0));
+        controller36.getPlayer().addCard(new Card(5,0));
         controller36.postPlayerActions();
         assertTrue(controller36.isPlyBust());
     }
@@ -725,35 +724,35 @@ public class ControllerTest {
     public void endHandFunctions() {
         TestView<Integer> testView = new TestView<>();
         Controller controller37 = new Controller(testView);
-        controller37.shoe = new Shoe(1);
-        controller37.player.addCard(new Card(11, 0));
-        controller37.player.addCard(new Card(12, 0));
-        controller37.player.addCard(new Card(13, 0));
+        controller37.setShoe(new Shoe(1));
+        controller37.getPlayer().addCard(new Card(11, 0));
+        controller37.getPlayer().addCard(new Card(12, 0));
+        controller37.getPlayer().addCard(new Card(13, 0));
         controller37.postPlayerActions();
         assertTrue(controller37.isPlyBust());
         controller37.endHandFunctions();
         assertFalse(controller37.isPlyBust());
-        assertEquals(controller37.player.getHand().size(),0);
+        assertEquals(controller37.getPlayer().getHand().size(),0);
 
     }
 
 
     /**
-     * Same test as above but instead with dealer having a busting hand, and then checking that the relevant values have been set correctly
+     * Same test as above but instead with getDealer() having a busting hand, and then checking that the relevant values have been set correctly
      */
     @Test
     public void endHandFunctions1() {
         TestView<Integer> testView = new TestView<>();
         Controller controller38 = new Controller(testView);
-        controller38.shoe = new Shoe(1);
-        controller38.dealer.addCard(new Card(11, 0));
-        controller38.dealer.addCard(new Card(12, 0));
-        controller38.dealer.addCard(new Card(13, 0));
+        controller38.setShoe(new Shoe(1));
+        controller38.getDealer().addCard(new Card(11, 0));
+        controller38.getDealer().addCard(new Card(12, 0));
+        controller38.getDealer().addCard(new Card(13, 0));
         controller38.postPlayerActions();
         assertTrue(controller38.isDlrBust());
         controller38.endHandFunctions();
         assertFalse(controller38.isDlrBust());
-        assertEquals(controller38.dealer.getHand().size(),0);
+        assertEquals(controller38.getDealer().getHand().size(),0);
 
     }
 
@@ -771,13 +770,13 @@ public class ControllerTest {
         Controller controller39 = new Controller(testView);
         controller39.buyChips();
         controller39.askBet();
-        assertEquals(controller39.player.getChips(), 75, .0001);
-        controller39.player.addCard(new Card(11,0));
-        controller39.player.addCard(new Card(8,0));
-        controller39.dealer.addCard(new Card(11,1));
-        controller39.dealer.addCard(new Card(8,1));
+        assertEquals(controller39.getPlayer().getChips(), 75, .0001);
+        controller39.getPlayer().addCard(new Card(11,0));
+        controller39.getPlayer().addCard(new Card(8,0));
+        controller39.getDealer().addCard(new Card(11,1));
+        controller39.getDealer().addCard(new Card(8,1));
         controller39.results();
-        assertEquals(controller39.player.getChips(), 100, .0001);
+        assertEquals(controller39.getPlayer().getChips(), 100, .0001);
 
     }
 
@@ -793,13 +792,13 @@ public class ControllerTest {
         Controller controller40 = new Controller(testView);
         controller40.buyChips();
         controller40.askBet();
-        controller40.dealer.addCard(new Card(11,1));
-        controller40.dealer.addCard(new Card(8,1));
-        controller40.dealer.addCard(new Card(9,1));
+        controller40.getDealer().addCard(new Card(11,1));
+        controller40.getDealer().addCard(new Card(8,1));
+        controller40.getDealer().addCard(new Card(9,1));
         controller40.postPlayerActions();    //set dlrBust to true
 
         controller40.results();
-        assertEquals(controller40.player.getChips(),  125, .0001);
+        assertEquals(controller40.getPlayer().getChips(),  125, .0001);
     }
 
     /**
@@ -813,12 +812,12 @@ public class ControllerTest {
         Controller controller41 = new Controller(testView);
         controller41.buyChips();
         controller41.askBet();
-        controller41.player.addCard(new Card(11,0));
-        controller41.player.addCard(new Card(8,1));
-        controller41.player.addCard(new Card(9,2));
+        controller41.getPlayer().addCard(new Card(11,0));
+        controller41.getPlayer().addCard(new Card(8,1));
+        controller41.getPlayer().addCard(new Card(9,2));
         controller41.postPlayerActions(); //set plyBust to true
         controller41.results();
-        assertEquals(controller41.player.getChips(), 75, .0001);
+        assertEquals(controller41.getPlayer().getChips(), 75, .0001);
 
     }
 
@@ -833,12 +832,12 @@ public class ControllerTest {
         Controller controller42 = new Controller(testView);
         controller42.buyChips();
         controller42.askBet();
-        controller42.player.addCard(new Card(11,0));
-        controller42.player.addCard(new Card(8,1));
-        controller42.dealer.addCard(new Card(11,1));
-        controller42.dealer.addCard(new Card(7,2));
+        controller42.getPlayer().addCard(new Card(11,0));
+        controller42.getPlayer().addCard(new Card(8,1));
+        controller42.getDealer().addCard(new Card(11,1));
+        controller42.getDealer().addCard(new Card(7,2));
         controller42.results();
-        assertEquals(controller42.player.getChips(), 125, .0001);
+        assertEquals(controller42.getPlayer().getChips(), 125, .0001);
     }
 
 
@@ -853,13 +852,13 @@ public class ControllerTest {
         Controller controller43 = new Controller(testView);
         controller43.buyChips();
         controller43.askBet();
-        controller43.player.addCard(new Card(11,0));
-        controller43.player.addCard(new Card(1,1));
-        controller43.dealer.addCard(new Card(11,1));
-        controller43.dealer.addCard(new Card(7,2));
+        controller43.getPlayer().addCard(new Card(11,0));
+        controller43.getPlayer().addCard(new Card(1,1));
+        controller43.getDealer().addCard(new Card(11,1));
+        controller43.getDealer().addCard(new Card(7,2));
         controller43.naturalBlackJack();
         controller43.results();
-        assertEquals(controller43.player.getChips(), 137.5, .0001);
+        assertEquals(controller43.getPlayer().getChips(), 137.5, .0001);
 
 
     }
@@ -875,13 +874,13 @@ public class ControllerTest {
         Controller controller44 = new Controller(testView);
         controller44.buyChips();
         controller44.askBet();
-        controller44.player.addCard(new Card(11,0));
-        controller44.player.addCard(new Card(1,1));
-        controller44.dealer.addCard(new Card(11,1));
-        controller44.dealer.addCard(new Card(1,2));
+        controller44.getPlayer().addCard(new Card(11,0));
+        controller44.getPlayer().addCard(new Card(1,1));
+        controller44.getDealer().addCard(new Card(11,1));
+        controller44.getDealer().addCard(new Card(1,2));
         controller44.naturalBlackJack();
         controller44.results();
-        assertEquals(controller44.player.getChips(), 100, .0001);
+        assertEquals(controller44.getPlayer().getChips(), 100, .0001);
 
     }
 
@@ -896,12 +895,12 @@ public class ControllerTest {
         Controller controller = new Controller(testView);
         controller.buyChips();
         controller.askBet();
-        controller.player.addCard(new Card(4,0));
-        controller.player.addCard(new Card(1,1));
-        controller.dealer.addCard(new Card(11,1));
-        controller.dealer.addCard(new Card(8,2));
+        controller.getPlayer().addCard(new Card(4,0));
+        controller.getPlayer().addCard(new Card(1,1));
+        controller.getDealer().addCard(new Card(11,1));
+        controller.getDealer().addCard(new Card(8,2));
         controller.results();
-        assertEquals(controller.player.getChips(), 75, .0001);
+        assertEquals(controller.getPlayer().getChips(), 75, .0001);
     }
 
 
@@ -912,13 +911,13 @@ public class ControllerTest {
     public void checkCut() {
         TestView<Integer> testView =  new TestView<>();
         Controller controller45 = new Controller(testView);
-        controller45.shoe = new Shoe(1);
-        controller45.cut = controller45.shoe.size() * .2; // cut determined the same way in playBlackJack()
+        controller45.setShoe(new Shoe(1));
+        controller45.setCut(controller45.getShoe().size() * .2);// cut determined the same way in playBlackJack()
         for(int i = 0; i <= 45; i++){
-            controller45.shoe.pick();
+            controller45.getShoe().pick();
         }
         controller45.checkCut();
-        assertEquals(controller45.shoe.size(), 52);
+        assertEquals(controller45.getShoe().size(), 52);
     }
 
     /**
@@ -928,13 +927,13 @@ public class ControllerTest {
     public void checkCut1() {
         TestView<Integer> testView =  new TestView<>();
         Controller controller46 = new Controller(testView);
-        controller46.shoe = new Shoe(1);
-        controller46.cut = controller46.shoe.size() * .2; // cut determined the same way in playBlackJack()
+        controller46.setShoe(new Shoe(1));
+        controller46.setCut(controller46.getShoe().size() * .2); // cut determined the same way in playBlackJack()
         for(int i = 0; i < 20; i++){
-            controller46.shoe.pick();
+            controller46.getShoe().pick();
         }
         controller46.checkCut();
-        assertEquals(controller46.shoe.size(), 32);
+        assertEquals(controller46.getShoe().size(), 32);
     }
 
 
@@ -948,15 +947,15 @@ public class ControllerTest {
         testView.add(25);
         testView.add("y");
         Controller controller47 = new Controller(testView);
-        controller47.shoe = new Shoe(1);
+        controller47.setShoe(new Shoe(1));
         controller47.buyChips();
         controller47.askBet();
-        controller47.player.addCard(new Card(1, 1));
-        controller47.player.addCard(new Card(8,1));
+        controller47.getPlayer().addCard(new Card(1, 1));
+        controller47.getPlayer().addCard(new Card(8,1));
         controller47.softTotal();
         controller47.playerDouble();
-        assertEquals(controller47.bet, 50, .0001);
-        assertEquals(controller47.player.getHand().size(), 3);
+        assertEquals(controller47.getBet(), 50, .0001);
+        assertEquals(controller47.getPlayer().getHand().size(), 3);
 
     }
 
@@ -972,8 +971,8 @@ public class ControllerTest {
         Controller controller48 = new Controller(testView);
         controller48.buyChips();
         controller48.askBet();
-        controller48.player.addCard(new Card(1, 0));
-        controller48.player.addCard(new Card(11, 0));
+        controller48.getPlayer().addCard(new Card(1, 0));
+        controller48.getPlayer().addCard(new Card(11, 0));
         controller48.softTotal();
         assertFalse(controller48.ableToDouble());
 
@@ -1019,7 +1018,7 @@ public class ControllerTest {
         testView.add("quit");
         Controller controller51 = new Controller(testView);
         controller51.endGameActions();
-        assertEquals(controller51.player.getChips(), 100,.0001);
+        assertEquals(controller51.getPlayer().getChips(), 100,.0001);
 
 
     }
