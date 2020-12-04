@@ -3,8 +3,6 @@ package csc439team1.blackjack;
 import csc439team1.blackjack.controller.Controller;
 import csc439team1.blackjack.model.Card;
 import csc439team1.blackjack.view.CLIView;
-
-import java.util.logging.ConsoleHandler;
 import java.util.logging.Logger;
 
 /**
